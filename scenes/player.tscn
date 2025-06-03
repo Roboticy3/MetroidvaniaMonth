@@ -1,0 +1,403 @@
+[gd_scene load_steps=33 format=3 uid="uid://luwvohrk0cnq"]
+
+[ext_resource type="Script" uid="uid://dssggiqvkb7bf" path="res://scripts/player_actions/player_character_body_3d.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://dj1mvo2la10dt" path="res://scripts/player.gd" id="1_fjrip"]
+[ext_resource type="Script" uid="uid://uccrh7oveh08" path="res://scripts/player_actions/vertical_look.gd" id="2_g2els"]
+[ext_resource type="ArrayMesh" uid="uid://wm27j7jm3dvr" path="res://obj/Gun.obj" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://bsmnje1x1cxj0" path="res://scripts/player_animations/character_gun_anims.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://dhg2pmop85g06" path="res://scripts/player_actions/gun_controller.gd" id="4_qlg0r"]
+[ext_resource type="Script" uid="uid://gkthcxywpb02" path="res://scripts/player_animations/particle_explosion.gd" id="4_tuyoq"]
+[ext_resource type="Script" uid="uid://dr1wskeuyo43t" path="res://scripts/ui/modal_auth.gd" id="8_ur7pv"]
+[ext_resource type="Script" uid="uid://thhqqlwhc3p3" path="res://scripts/ui/fuel.gd" id="10_y4r1p"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qlg0r"]
+lifetime_randomness = 0.46
+particle_flag_rotate_y = true
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+direction = Vector3(0, 0, -1)
+spread = 23.824
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 1.0
+
+[sub_resource type="SystemFont" id="SystemFont_qlg0r"]
+subpixel_positioning = 0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qlg0r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlg0r"]
+albedo_texture = SubResource("PlaceholderTexture2D_qlg0r")
+
+[sub_resource type="TextMesh" id="TextMesh_tuyoq"]
+material = SubResource("StandardMaterial3D_qlg0r")
+text = "Muzzle Flash"
+font = SubResource("SystemFont_qlg0r")
+depth = 0.1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tuyoq"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="Animation" id="Animation_qlg0r"]
+resource_name = "Fire"
+length = 0.25
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/Camera3D/Gun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.286587, -0.513043, -0.647119), Vector3(0.347723, -0.402139, -0.563114), Vector3(0.286587, -0.513043, -0.647119)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Camera3D/Gun:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.298539, -0.125716, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qhqgy"]
+resource_name = "Idle"
+length = 3.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/Camera3D/Gun:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.4, 3.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.279543, -0.390498, -0.653957), Vector3(0.317445, -0.469347, -0.638102), Vector3(0.279543, -0.390498, -0.653957)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Camera3D/Gun:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.4, 3.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.660555, -0.486528, 0), Vector3(-0.788458, -0.551242, 0.0974002), Vector3(-0.660555, -0.486528, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tuyoq"]
+resource_name = "Move"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/Camera3D/Gun:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.306634, -0.542645, -0.555682), Vector3(0.404718, -0.450141, -0.555682), Vector3(0.35872, -0.66652, -0.555682), Vector3(0.270929, -0.379085, -0.555682)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Camera3D/Gun:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.28226, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dqkch"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/Camera3D/Gun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.254139, -0.400065, -0.431697)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Camera3D/Gun:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dqkch"]
+_data = {
+&"Fire": SubResource("Animation_qlg0r"),
+&"Idle": SubResource("Animation_qhqgy"),
+&"Move": SubResource("Animation_tuyoq"),
+&"RESET": SubResource("Animation_dqkch")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_fjrip"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Camera3D:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:velocity_sync")
+properties/3/spawn = true
+properties/3/replication_mode = 2
+properties/4/path = NodePath(".:health")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_smehm"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.881937, 0.881937, 0.881937, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ur7pv"]
+gradient = SubResource("Gradient_smehm")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ur7pv"]
+properties/0/path = NodePath(".:level")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:efficiency")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:value")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_y4r1p"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(2.40654e-06, 0.729485, 0.729485, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y4r1p"]
+gradient = SubResource("Gradient_y4r1p")
+
+[sub_resource type="Gradient" id="Gradient_ur7pv"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1.44392e-07, 0.535117, 0.535117, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_smehm"]
+gradient = SubResource("Gradient_ur7pv")
+
+[sub_resource type="Gradient" id="Gradient_d2wvv"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.511851, 0.566403, 0.520855, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3v2ag"]
+gradient = SubResource("Gradient_d2wvv")
+
+[node name="Player" type="Node3D" groups=["Player"]]
+script = ExtResource("1_fjrip")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." groups=["Entity"]]
+collision_layer = 2
+script = ExtResource("1_3vyb7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_u8vuu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_u8vuu")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("2_g2els")
+
+[node name="Gun" type="MeshInstance3D" parent="CharacterBody3D/Camera3D"]
+transform = Transform3D(0.1, 0, 0, 0, 0.0999999, 0, 0, 0, 0.1, 0.254139, -0.400065, -0.431697)
+mesh = ExtResource("3_qhqgy")
+skeleton = NodePath("../../..")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="CharacterBody3D/Camera3D/Gun"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19178, -6.32793)
+emitting = false
+amount = 16
+lifetime = 10.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+collision_base_size = 0.1
+process_material = SubResource("ParticleProcessMaterial_qlg0r")
+draw_pass_1 = SubResource("TextMesh_tuyoq")
+script = ExtResource("4_tuyoq")
+
+[node name="BulletEmitter" type="Node3D" parent="CharacterBody3D/Camera3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("4_qlg0r")
+
+[node name="Kickback" type="ShapeCast3D" parent="CharacterBody3D/Camera3D/BulletEmitter"]
+shape = SubResource("BoxShape3D_tuyoq")
+target_position = Vector3(0, 0, 1000)
+collision_mask = 2
+
+[node name="PistonAnims" type="AnimationPlayer" parent="CharacterBody3D"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_dqkch")
+}
+script = ExtResource("4_dqkch")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="CharacterBody3D"]
+replication_config = SubResource("SceneReplicationConfig_fjrip")
+
+[node name="Hud" type="CanvasLayer" parent="."]
+script = ExtResource("8_ur7pv")
+
+[node name="Container" type="MarginContainer" parent="Hud"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HUD" type="Control" parent="Hud/Container"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Meters" type="Control" parent="Hud/Container/HUD"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 1
+anchors_preset = 0
+offset_right = 335.0
+offset_bottom = 117.0
+
+[node name="Meters" type="VBoxContainer" parent="Hud/Container/HUD/Meters"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthWrapper" type="Control" parent="Hud/Container/HUD/Meters/Meters"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Health" type="TextureProgressBar" parent="Hud/Container/HUD/Meters/Meters/HealthWrapper" groups=["Health"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+max_value = 5.0
+value = 3.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture1D_ur7pv")
+tint_progress = Color(0.875293, 0.247958, 0.274396, 1)
+script = ExtResource("10_y4r1p")
+efficiency = 1.0
+fuel_unit_visual_aspect = 1.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Hud/Container/HUD/Meters/Meters/HealthWrapper/Health"]
+replication_config = SubResource("SceneReplicationConfig_ur7pv")
+
+[node name="FuelWrapper" type="Control" parent="Hud/Container/HUD/Meters/Meters"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Fuel" type="TextureProgressBar" parent="Hud/Container/HUD/Meters/Meters/FuelWrapper" groups=["Fuel"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+min_value = -1.0
+max_value = 7.0
+step = 0.0
+value = 2.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture1D_y4r1p")
+script = ExtResource("10_y4r1p")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Hud/Container/HUD/Meters/Meters/FuelWrapper/Fuel"]
+replication_config = SubResource("SceneReplicationConfig_ur7pv")
+
+[node name="FuelBottom" type="TextureProgressBar" parent="Hud/Container/HUD/Meters/Meters/FuelWrapper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+min_value = -1.0
+max_value = 7.0
+step = 0.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture1D_smehm")
+
+[node name="Screws" type="Control" parent="Hud/Container/HUD/Meters/Meters"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Screws" type="TextureProgressBar" parent="Hud/Container/HUD/Meters/Meters/Screws" groups=["Health"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+max_value = 3.0
+value = 1.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture1D_3v2ag")
+tint_progress = Color(0.875293, 0.247958, 0.274396, 1)
+script = ExtResource("10_y4r1p")
+efficiency = 1.0
+fuel_unit_visual_aspect = 1.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Hud/Container/HUD/Meters/Meters/Screws/Screws"]
+replication_config = SubResource("SceneReplicationConfig_ur7pv")
+
+[connection signal="look" from="CharacterBody3D" to="CharacterBody3D/Camera3D" method="_on_look"]
+[connection signal="shoot" from="CharacterBody3D/Camera3D/BulletEmitter" to="CharacterBody3D/Camera3D/Gun/GPUParticles3D" method="_on_shoot"]
+[connection signal="shoot" from="CharacterBody3D/Camera3D/BulletEmitter" to="CharacterBody3D/PistonAnims" method="_on_shoot"]
+[connection signal="value_changed" from="Hud/Container/HUD/Meters/Meters/HealthWrapper/Health" to="." method="check_health"]
+[connection signal="value_changed" from="Hud/Container/HUD/Meters/Meters/Screws/Screws" to="." method="check_health"]

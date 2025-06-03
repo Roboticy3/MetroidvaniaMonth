@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://sq7nktteejbi"]
+
+[ext_resource type="Script" uid="uid://ba3hqglxwpvw2" path="res://scripts/ui/readout.gd" id="1_dj8aq"]
+
+[node name="Ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -221.0
+offset_right = 70.0
+grow_vertical = 0
+
+[node name="Velocity" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Velocity: "
+script = ExtResource("1_dj8aq")
+
+[node name="Velocity2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Velocity: "
+script = ExtResource("1_dj8aq")
+property = "time_falling"
+
+[node name="Velocity3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Velocity: "
+script = ExtResource("1_dj8aq")
+property = "time_hovering"
+
+[node name="Velocity4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Velocity: "
+script = ExtResource("1_dj8aq")
+property = "position"
+
+[node name="Velocity5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Velocity: "
+script = ExtResource("1_dj8aq")
+property = "rotation"
+
+[node name="Velocity6" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Velocity: "
+script = ExtResource("1_dj8aq")
+property = "value"
+target_group = "Fuel"
+
+[node name="Velocity7" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Velocity: "
+script = ExtResource("1_dj8aq")
+property = "value"
+target_group = "Health"

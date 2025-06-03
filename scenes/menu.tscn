@@ -1,0 +1,101 @@
+[gd_scene load_steps=4 format=3 uid="uid://cusvwc7xul344"]
+
+[ext_resource type="Script" uid="uid://e2r5jmdul2vr" path="res://scripts/ui/modal_layer.gd" id="1_con2f"]
+[ext_resource type="Script" uid="uid://bkdd8pbtxyrju" path="res://scripts/ui/client_state_name.gd" id="2_mhnvy"]
+[ext_resource type="Script" uid="uid://cl3vv3ryxw0bn" path="res://scripts/ui/client_state_numeric.gd" id="3_4ytvr"]
+
+[node name="Menu" type="CanvasLayer"]
+layer = 128
+script = ExtResource("1_con2f")
+
+[node name="Container" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="Panel" type="Panel" parent="Container"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Container/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/Panel/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Volume" type="Label" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Volume:"
+
+[node name="HSlider" type="HSlider" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+value = 100.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="Container/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Container/Panel/HBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Multiplayer" type="Label" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2"]
+layout_mode = 2
+text = "Multiplayer Options:"
+
+[node name="Join" type="Button" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2"]
+layout_mode = 2
+text = "Join"
+
+[node name="Text" type="VBoxContainer" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Name" type="HBoxContainer" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Name"]
+layout_mode = 2
+text = "Name: "
+
+[node name="Spacer" type="Control" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Name"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Name"]
+layout_mode = 2
+placeholder_text = "Enter player name"
+expand_to_text_length = true
+script = ExtResource("2_mhnvy")
+
+[node name="Port" type="HBoxContainer" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text"]
+layout_mode = 2
+
+[node name="Port" type="Label" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Port"]
+layout_mode = 2
+text = "Port: "
+
+[node name="Spacer" type="Control" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Port"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpinBox" type="SpinBox" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Port"]
+layout_mode = 2
+max_value = 65535.0
+value = 55555.0
+script = ExtResource("3_4ytvr")
+
+[node name="Error" type="Label" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text"]
+layout_mode = 2

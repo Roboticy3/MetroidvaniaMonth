@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://lflopx50nk2t"]
+
+[ext_resource type="Script" uid="uid://cqnwj6wga2hyd" path="res://scripts/level/arena.gd" id="1_uch3s"]
+[ext_resource type="PackedScene" uid="uid://luwvohrk0cnq" path="res://scenes/player.tscn" id="2_ghy8g"]
+[ext_resource type="PackedScene" uid="uid://cusvwc7xul344" path="res://scenes/menu.tscn" id="6_ghy8g"]
+
+[node name="Arena" type="Node3D"]
+script = ExtResource("1_uch3s")
+player_scene = ExtResource("2_ghy8g")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://luwvohrk0cnq")
+spawn_path = NodePath("..")
+
+[node name="Menu" parent="." instance=ExtResource("6_ghy8g")]
+visible = false
+
+[connection signal="pressed" from="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Join" to="." method="_on_join_pressed"]
+
+[editable path="Menu"]

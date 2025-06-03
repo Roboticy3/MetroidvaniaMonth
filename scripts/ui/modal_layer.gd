@@ -1,0 +1,22 @@
+extends CanvasLayer
+
+@export var control_mouse_mode := true
+
+func _ready():
+	if control_mouse_mode:
+		update_mouse_mode()
+		visibility_changed.connect(update_mouse_mode)
+
+# Called when the node enters the scene tree for the first time.
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		toggle()
+
+func toggle():
+	visible = !visible
+
+func update_mouse_mode():
+	if visible:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

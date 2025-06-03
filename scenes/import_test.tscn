@@ -1,0 +1,141 @@
+[gd_scene load_steps=11 format=4 uid="uid://bmqhmf7s8djwk"]
+
+[ext_resource type="PackedScene" uid="uid://lflopx50nk2t" path="res://scenes/Arena.tscn" id="1_8xgfm"]
+[ext_resource type="PackedScene" uid="uid://dnfbu6cnjq2l1" path="res://glb/Level1.glb" id="2_ncfef"]
+[ext_resource type="Script" uid="uid://iuus6x584bd4" path="res://scripts/level/tool_adjust_import.gd" id="3_g843x"]
+[ext_resource type="PackedScene" uid="uid://cyg2ghx0047nj" path="res://glb/Level1-props.glb" id="4_hpt72"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w34lt"]
+size = Vector3(0.6, 4.9, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hpt72"]
+size = Vector3(8.46804, 2.66525, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xiatb"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_njeg3"]
+_surfaces = [{
+"aabb": AABB(-0.3, -4, -2, 4.8, 7.5, 4),
+"format": 34896613377,
+"index_count": 288,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYACAAJAAoACAALAAkADAAKAAkACwAMAAkADQAIAAoACwAIAA0ADAAOAAoADQAKAA4ACwAPAAwACwANAA8ADwAOAAwADwANAA4AEAARABIAEAATABEAFAASABEAEwAUABEAFQAQABIAEwAQABUAFAAWABIAFQASABYAEwAXABQAEwAVABcAFwAWABQAFwAVABYAGAAZABoAGAAbABkAHAAaABkAGwAcABkAHQAYABoAGwAYAB0AHAAeABoAHQAaAB4AGwAfABwAGwAdAB8AHwAeABwAHwAdAB4AIAAhACIAIAAjACEAJAAiACEAIwAkACEAJQAgACIAIwAgACUAJAAmACIAJQAiACYAIwAnACQAIwAlACcAJwAmACQAJwAlACYAKAApACoAKAArACkALAAqACkAKwAsACkALQAoACoAKwAoAC0ALAAuACoALQAqAC4AKwAvACwAKwAtAC8ALwAuACwALwAtAC4AMAAxADIAMAAzADEANAAyADEAMwA0ADEANQAwADIAMwAwADUANAA2ADIANQAyADYAMwA3ADQAMwA1ADcANwA2ADQANwA1ADYAOAA5ADoAOAA7ADkAPAA6ADkAOwA8ADkAPQA4ADoAOwA4AD0APAA+ADoAPQA6AD4AOwA/ADwAOwA9AD8APwA+ADwAPwA9AD4A"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 64,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAIiIAAAAAAAAiIj//wAAAAAAAAAAAAD/H4iIAAAAAP8fAAD//wAA/x+IiP//AAD/HwAAAAAAAP8fERH//wAA/x+ZmQAAAAD/H5mZ//8AAP8fEREAAAAA/z+ZmQAAAAD/PxER//8AAP8/mZn//wAA/z8REQAAAAD/PyIi//8AAP8/qqoAAAAA/z+qqv//AAD/PyIiAAAAAP9fqqoAAAAA/18iIv//AAD/X6qq//8AAP9fIiIAAAAA/18zM///AAD/X7u7AAAAAP9fu7v//wAA/18zMwAAAAD/f7u7AAAAAP9/MzP//wAA/3+7u///AAD/fzMzAAAAAP9/RET//wAA/3/MzAAAAAD/f8zM//8AAP9/REQAAAAA/5/MzAAAAAD/n0RE//8AAP+fzMz//wAA/59ERAAAAAD/n1VV//8AAP+f3d0AAAAA/5/d3f//AAD/n1VVAAAAAP+/3d0AAAAA/79VVf//AAD/v93d//8AAP+/VVUAAAAA/79mZv//AAD/v+7uAAAAAP+/7u7//wAA/79mZgAAAAD/3+7uAAAAAP/fZmb//wAA/9/u7v//AAD/32ZmAAAAAP/fd3f//wAA/9///wAAAAD/3/////8AAP/fd3cAAAAA/////wAAAAD//3d3//8AAP///////wAA//93dwAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_cvaj7"]
+resource_name = "Level1-props_Cube"
+_surfaces = [{
+"aabb": AABB(-0.3, -4, -2, 4.8, 7.5, 4),
+"attribute_data": PackedByteArray("/1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8//1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8//1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8//1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8//1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8//1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8//1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8//1////+f/7//n////1//v/9f/7//n/9//5//v/9f/3//X/9//5//P/+f/3//X/8//1//P/+fAAD/n/8//18AAP8f/3//X/8//1//f/8f/z//n/9//9//P//f/3//n/8/"),
+"format": 34896613399,
+"index_count": 288,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGAAbABkAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0AMAAxADIAMAAzADEANAA1ADYANAA3ADUAOAA5ADoAOAA7ADkAPAA9AD4APAA/AD0AQABBAEIAQABDAEEARABFAEYARABHAEUASABJAEoASABLAEkATABNAE4ATABPAE0AUABRAFIAUABTAFEAVABVAFYAVABXAFUAWABZAFoAWABbAFkAXABdAF4AXABfAF0AYABhAGIAYABjAGEAZABlAGYAZABnAGUAaABpAGoAaABrAGkAbABtAG4AbABvAG0AcABxAHIAcABzAHEAdAB1AHYAdAB3AHUAeAB5AHoAeAB7AHkAfAB9AH4AfAB/AH0AgACBAIIAgACDAIEAhACFAIYAhACHAIUAiACJAIoAiACLAIkAjACNAI4AjACPAI0AkACRAJIAkACTAJEAlACVAJYAlACXAJUAmACZAJoAmACbAJkAnACdAJ4AnACfAJ0AoAChAKIAoACjAKEApAClAKYApACnAKUAqACpAKoAqACrAKkArACtAK4ArACvAK0AsACxALIAsACzALEAtAC1ALYAtAC3ALUAuAC5ALoAuAC7ALkAvAC9AL4AvAC/AL0A"),
+"material": SubResource("StandardMaterial3D_xiatb"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 192,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAIiIAABU1QAAiIj//1TVAAAAAAAAVNUAAAAAAAD///8fiIgAAP//AACIiAAA////HwAAAAD///8fAAAAAFTV/x+IiP//VNX/H4iIAABU1f8fAAD//1TV/x8AAP///78AAIiI////v/8fiIj///+/AAAAAP///78AAAAAAAD/v/8fAAD///+//x8AAAAA/78AAAAA////v/8fiIgAAP//AACIiP////8AAIiIAAD///8fiIj//////x8REf//VNX/H5mZAABU1f8fmZn//1TV/x8REQAAVNX/HxERAAD///8/mZkAAP///x+ZmQAA////PxERAAD///8/EREAAFTV/z+Zmf//VNX/P5mZAABU1f8/ERH//1TV/z8REf///7//H5mZ////v/8/mZn///+//x8REf///7//HxERAAD/v/8/ERH///+//z8REQAA/7//HxER////v/8/mZkAAP///x+Zmf//////H5mZAAD///8/mZn//////z8iIv//VNX/P6qqAABU1f8/qqr//1TV/z8iIgAAVNX/PyIiAAD///9fqqoAAP///z+qqgAA////XyIiAAD///9fIiIAAFTV/1+qqv//VNX/X6qqAABU1f9fIiL//1TV/18iIv///7//P6qq////v/9fqqr///+//z8iIv///7//PyIiAAD/v/9fIiL///+//18iIgAA/7//PyIi////v/9fqqoAAP///z+qqv//////P6qqAAD///9fqqr//////18zM///VNX/X7u7AABU1f9fu7v//1TV/18zMwAAVNX/XzMzAAD///9/u7sAAP///1+7uwAA////fzMzAAD///9/MzMAAFTV/3+7u///VNX/f7u7AABU1f9/MzP//1TV/38zM////7//X7u7////v/9/u7v///+//18zM////7//XzMzAAD/v/9/MzP///+//38zMwAA/7//XzMz////v/9/u7sAAP///1+7u///////X7u7AAD///9/u7v//////39ERP//VNX/f8zMAABU1f9/zMz//1TV/39ERAAAVNX/f0REAAD///+fzMwAAP///3/MzAAA////n0REAAD///+fREQAAFTV/5/MzP//VNX/n8zMAABU1f+fRET//1TV/59ERP///7//f8zM////v/+fzMz///+//39ERP///7//f0REAAD/v/+fRET///+//59ERAAA/7//f0RE////v/+fzMwAAP///3/MzP//////f8zMAAD///+fzMz//////59VVf//VNX/n93dAABU1f+f3d3//1TV/59VVQAAVNX/n1VVAAD///+/3d0AAP///5/d3QAA////v1VVAAD///+/VVUAAFTV/7/d3f//VNX/v93dAABU1f+/VVX//1TV/79VVf///7//n93d////v/+/3d3///+//59VVf///7//n1VVAAD/v/+/VVX///+//79VVQAA/7//n1VV////v/+/3d0AAP///5/d3f//////n93dAAD///+/3d3//////79mZv//VNX/v+7uAABU1f+/7u7//1TV/79mZgAAVNX/v2ZmAAD////f7u4AAP///7/u7gAA////32ZmAAD////fZmYAAFTV/9/u7v//VNX/3+7uAABU1f/fZmb//1TV/99mZv///7//v+7u////v//f7u7///+//79mZv///7//v2ZmAAD/v//fZmb///+//99mZgAA/7//v2Zm////v//f7u4AAP///7/u7v//////v+7uAAD////f7u7//////993d///VNX/3///AABU1f/f/////1TV/993dwAAVNX/33d3AAD///////8AAP///9///wAA/////3d3AAD/////d3cAAFTV////////VNX/////AABU1f//d3f//1TV//93d////7//3///////v/////////+//993d////7//33d3AAD/v///d3f///+///93dwAA/7//33d3////v/////8AAP///9//////////3///AAD/////////////VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/VNVU1VTVVNVU1VTVVNVU1f+//7//v/+//7//v/+//7+qKqoqqiqqKqoqqiqqKqoq/////////////////////wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_njeg3")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hpt72"]
+radius = 3.0
+height = 14.0
+
+[node name="Arena" instance=ExtResource("1_8xgfm")]
+
+[node name="Level1" parent="." index="2" instance=ExtResource("2_ncfef")]
+script = ExtResource("3_g843x")
+
+[node name="Window-skylight" parent="Level1/Scene Collection/Terrain" index="1" groups=["Window"]]
+
+[node name="Window-skylight_001" parent="Level1/Scene Collection/Terrain" index="2" groups=["Window"]]
+
+[node name="Window-skylight_002" parent="Level1/Scene Collection/Terrain" index="3" groups=["Window"]]
+
+[node name="Window-skylight_003" parent="Level1/Scene Collection/Terrain" index="4" groups=["Window"]]
+
+[node name="Window-tunnel" parent="Level1/Scene Collection/Terrain" index="5" groups=["Window"]]
+
+[node name="Window-tunnel_001" parent="Level1/Scene Collection/Terrain" index="6" groups=["Window"]]
+
+[node name="Window-tunnel_002" parent="Level1/Scene Collection/Terrain" index="7" groups=["Window"]]
+
+[node name="Window-001" parent="Level1/Scene Collection/Terrain" index="9" groups=["Window"]]
+
+[node name="Window" parent="Level1/Scene Collection/Terrain" index="10" groups=["Window"]]
+
+[node name="Window-002" parent="Level1/Scene Collection/Terrain" index="11" groups=["Window"]]
+
+[node name="Window-003" parent="Level1/Scene Collection/Terrain" index="12" groups=["Window"]]
+
+[node name="Window-004" parent="Level1/Scene Collection/Terrain" index="13" groups=["Window"]]
+
+[node name="Window-grate" parent="Level1/Scene Collection/Terrain" index="15" groups=["Window"]]
+
+[node name="Tunnel" parent="Level1/Scene Collection/Lights" index="0"]
+light_energy = 1.0
+
+[node name="Tunnel_001" parent="Level1/Scene Collection/Lights" index="1"]
+light_energy = 1.0
+
+[node name="Tunnel_002" parent="Level1/Scene Collection/Lights" index="2"]
+light_energy = 1.0
+
+[node name="Shadow-Sun" parent="Level1/Scene Collection/Ambient" index="1"]
+shadow_enabled = true
+
+[node name="Level1-props" parent="." index="3" instance=ExtResource("4_hpt72")]
+
+[node name="Gate" parent="Level1-props/Scene Collection/Props" index="1"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 4, -12.4)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level1-props/Scene Collection/Props/Gate" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level1-props/Scene Collection/Props/Gate/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55, 0)
+shape = SubResource("BoxShape3D_w34lt")
+
+[node name="Stairs" parent="Level1-props/Scene Collection/Props" index="2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6, 0.5, -5.5)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level1-props/Scene Collection/Props/Stairs" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level1-props/Scene Collection/Props/Stairs/StaticBody3D" index="0"]
+transform = Transform3D(0.766044, -0.642788, -1.02265e-08, 0.642788, 0.766044, 2.80971e-08, -1.02265e-08, -2.80971e-08, 1, 2.09714, -0.250624, -4.76837e-07)
+shape = SubResource("BoxShape3D_hpt72")
+
+[node name="Stairs2" type="MeshInstance3D" parent="Level1-props/Scene Collection/Props" index="3"]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 0, 0.5, 5.5)
+mesh = SubResource("ArrayMesh_cvaj7")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level1-props/Scene Collection/Props/Stairs2" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level1-props/Scene Collection/Props/Stairs2/StaticBody3D" index="0"]
+transform = Transform3D(0.766044, -0.642788, -1.02265e-08, 0.642788, 0.766044, 2.80971e-08, -1.02265e-08, -2.80971e-08, 1, 2.09714, -0.250624, -4.76837e-07)
+shape = SubResource("BoxShape3D_hpt72")
+
+[node name="Player for scale" parent="Level1-props/Scene Collection/Props/Characters" index="0"]
+visible = false
+
+[node name="Statue" parent="Level1-props/Scene Collection/Props/Characters" index="1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 5.8, 22.1)
+
+[node name="StatueBase" parent="Level1-props/Scene Collection/Props/Characters/Statue/StatueSkeleton/Skeleton3D/StatueBase" index="0"]
+transform = Transform3D(1, 0, -3.55271e-15, 0, 1, 0, 3.55271e-15, 0, 1, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Level1-props/Scene Collection/Props/Characters/Statue" index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level1-props/Scene Collection/Props/Characters/Statue/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("CapsuleShape3D_hpt72")
+
+[editable path="Menu"]
+[editable path="Level1"]
+[editable path="Level1-props"]
