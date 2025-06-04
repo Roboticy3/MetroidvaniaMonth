@@ -1,0 +1,75 @@
+[gd_scene load_steps=8 format=3 uid="uid://dv83l4nq14nt3"]
+
+[ext_resource type="PackedScene" uid="uid://chwi83yaq60wx" path="res://fbx/statue.tscn" id="1_xdwst"]
+[ext_resource type="Script" uid="uid://b0d1fxwhexfyg" path="res://scripts/level/show_anim_names.gd" id="2_6nrga"]
+[ext_resource type="PackedScene" uid="uid://cjcy8xm7n5hca" path="res://scenes/gun_target.tscn" id="2_ae8tc"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6nrga"]
+radius = 3.0
+height = 14.0
+
+[sub_resource type="Animation" id="Animation_v0ngf"]
+resource_name = "MoveBack"
+length = 4.0
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 2.3)]
+}
+
+[sub_resource type="Animation" id="Animation_6nm83"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_23y7u"]
+_data = {
+&"MoveBack": SubResource("Animation_v0ngf"),
+&"RESET": SubResource("Animation_6nm83")
+}
+
+[node name="Statue" instance=ExtResource("1_xdwst")]
+
+[node name="AnimationPlayer" parent="." index="2"]
+script = ExtResource("2_6nrga")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+shape = SubResource("CapsuleShape3D_6nrga")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="StaticBody3D" index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_23y7u")
+}
+
+[node name="GunTarget" parent="." index="5" instance=ExtResource("2_ae8tc")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 6.05, 0.8)
+
+[connection signal="trigger" from="GunTarget" to="AnimationPlayer" method="play" binds= [&"StatueSkeleton|Unguard"]]
+[connection signal="trigger" from="GunTarget" to="StaticBody3D/AnimationPlayer" method="play" binds= [&"MoveBack"]]

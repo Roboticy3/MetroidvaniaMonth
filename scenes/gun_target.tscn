@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjcy8xm7n5hca"]
+
+[ext_resource type="Script" uid="uid://c013iqgismud" path="res://scripts/other_entities/gun_target.gd" id="1_2eatg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vee6b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vee6b"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.414737, 0.821091, 0.278515, 1)
+emission_energy_multiplier = 5.0
+
+[node name="GunTarget" type="StaticBody3D" groups=["Entity"]]
+collision_layer = 2
+script = ExtResource("1_2eatg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_vee6b")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+material = SubResource("StandardMaterial3D_vee6b")

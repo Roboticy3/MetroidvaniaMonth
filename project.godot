@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Shooter Tutorial"
-run/main_scene="uid://bmqhmf7s8djwk"
+run/main_scene="uid://divm3hfp84v1n"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -30,6 +30,8 @@ Entity="An entity is expected to have host authority and rpc methods for effecti
 Health=""
 Fuel=""
 Window=""
+Ladder=""
+Sun=""
 
 [gui]
 

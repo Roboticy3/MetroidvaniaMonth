@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://sanhcg0d8exj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aftwv"]
+albedo_color = Color(0.637843, 0.637843, 0.637843, 1)
+metallic = 1.0
+metallic_specular = 0.34
+roughness = 0.42
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ywnc1"]
+transparency = 1
+albedo_color = Color(0.6336, 0.88, 0.85536, 0.65098)
+metallic = 0.85
+roughness = 0.44
+refraction_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8fb4w"]
+albedo_color = Color(0.249756, 0.188572, 0.0330251, 1)
+metallic_specular = 0.51
+rim_enabled = true
+rim = 0.12
+rim_tint = 0.33
+clearcoat_roughness = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yoynd"]
+transparency = 1
+albedo_color = Color(0.97, 0.50828, 0.4753, 0.694118)
+roughness = 0.31
+refraction_enabled = true
+
+[node name="MasteringspatialmaterialsTutorial" type="Node3D"]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -1)
+material = SubResource("StandardMaterial3D_aftwv")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+material = SubResource("StandardMaterial3D_ywnc1")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
+material = SubResource("StandardMaterial3D_8fb4w")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -1)
+material = SubResource("StandardMaterial3D_yoynd")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
+size = Vector3(9, 0.4, 7)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1)
+light_color = Color(1, 0, 0, 1)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 1)
+light_color = Color(0, 1, 0.05, 1)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1)
+light_color = Color(0.0666666, 0, 1, 1)

@@ -12,6 +12,8 @@ extends Node
 
 @export_tool_button("Adjust Import") var adjust_import = _on_adjust_import_pressed
 
+const window_mat_override := preload("res://Window-override.tres")
+
 func _on_adjust_import_pressed():
 	print("setting groups in hierarchy")
 	
@@ -28,11 +30,15 @@ func correct_children(of:Node):
 		if c is Light3D:
 			print("attempting to correct lightsource")
 			if c.light_energy >= 1000.0:
-				c.light_energy /= 1000
+				c.light_energy = 1
 			if c.name.containsn("shadow"):
 				c.shadow_enabled = true
+			
+			if c is OmniLight3D:
+				c.omni_range = 5
 		
 		var proposed_group := c.name.split("-",true)[0]
 		if get_tree().has_group(proposed_group):
 			print("added ", c, " to group ", proposed_group)
+			if proposed_group == "Window": c.set("surface_material_override/0", window_mat_override)
 			c.add_to_group(proposed_group, true)

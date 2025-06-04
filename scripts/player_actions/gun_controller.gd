@@ -31,11 +31,18 @@ signal shoot(caster, id:int)
 @onready var shooter_owner = get_node(shooter_owner_path)
 
 const PUSH_FORCE := 50.0
-func _on_shoot(p:ShapeCast3D, _id:int):
-	
+var push_list:Array[Node] = []
+func _physics_process(delta: float) -> void:
+	push_list = []
+	var p:ShapeCast3D = $Kickback
 	for i in p.get_collision_count():
 		
 		var collider := p.get_collider(i)
 		#print(collider)
-		if collider.is_in_group("Entity") and collider != shooter_owner:
-			collider.apply_central_impulse_rpc.rpc(global_basis.z * PUSH_FORCE)
+		if collider and collider.is_in_group("Entity") and collider != shooter_owner:
+			push_list.append(collider)
+
+func _on_shoot(p:ShapeCast3D, _id:int):
+	for c in push_list:
+		c.apply_central_impulse_rpc.rpc(-global_basis.z * PUSH_FORCE)
+	

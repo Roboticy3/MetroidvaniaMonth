@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ha7ayschigmb"]
+
+[ext_resource type="Script" uid="uid://dai304atsh6k6" path="res://scripts/level/environment_changer.gd" id="1_pbwkv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_38jxg"]
+
+[node name="EnvironmentChanger" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_pbwkv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_38jxg")
+debug_color = Color(0.976783, 0.143704, 0.122041, 0.42)

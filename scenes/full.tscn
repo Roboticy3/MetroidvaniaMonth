@@ -1,0 +1,356 @@
+[gd_scene load_steps=11 format=3 uid="uid://divm3hfp84v1n"]
+
+[ext_resource type="PackedScene" uid="uid://lflopx50nk2t" path="res://scenes/Arena.tscn" id="1_8xgfm"]
+[ext_resource type="PackedScene" uid="uid://dnfbu6cnjq2l1" path="res://glb/Level1.glb" id="2_ncfef"]
+[ext_resource type="Script" uid="uid://iuus6x584bd4" path="res://scripts/level/tool_adjust_import.gd" id="3_g843x"]
+[ext_resource type="Material" uid="uid://crgh52ri0jp2y" path="res://Window-override.tres" id="4_w34lt"]
+[ext_resource type="PackedScene" uid="uid://dv83l4nq14nt3" path="res://fbx/statue_with_triggers.tscn" id="6_6nm83"]
+[ext_resource type="PackedScene" uid="uid://cysgqnkwdgnga" path="res://glb/Shaft.glb" id="7_emn5n"]
+[ext_resource type="PackedScene" uid="uid://b7n4iotn5khu0" path="res://glb/Stairs.glb" id="7_nk028"]
+[ext_resource type="PackedScene" uid="uid://ha7ayschigmb" path="res://scenes/EnvironmentChanger.tscn" id="8_nk028"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nk028"]
+size = Vector3(102, 66, 103)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_emn5n"]
+size = Vector3(1.54248, 139, 0.6)
+
+[node name="Arena" instance=ExtResource("1_8xgfm")]
+
+[node name="Hub" parent="." index="2" instance=ExtResource("2_ncfef")]
+script = ExtResource("3_g843x")
+
+[node name="Window-skylight" parent="Hub/Scene Collection/Terrain" index="1" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Window-skylight_001" parent="Hub/Scene Collection/Terrain" index="2" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Window-skylight_002" parent="Hub/Scene Collection/Terrain" index="3" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Window-skylight_003" parent="Hub/Scene Collection/Terrain" index="4" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Window-tunnel" parent="Hub/Scene Collection/Terrain" index="5" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Window-tunnel_001" parent="Hub/Scene Collection/Terrain" index="6" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Window-tunnel_002" parent="Hub/Scene Collection/Terrain" index="7" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Window-001" parent="Hub/Scene Collection/Terrain" index="9" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Window" parent="Hub/Scene Collection/Terrain" index="10" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Window-002" parent="Hub/Scene Collection/Terrain" index="11" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Window-003" parent="Hub/Scene Collection/Terrain" index="12" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Window-004" parent="Hub/Scene Collection/Terrain" index="13" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Window-grate" parent="Hub/Scene Collection/Terrain" index="15" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Tunnel" parent="Hub/Scene Collection/Lights" index="0"]
+light_energy = 1.0
+shadow_enabled = true
+
+[node name="Tunnel_001" parent="Hub/Scene Collection/Lights" index="1"]
+light_energy = 1.0
+
+[node name="Tunnel_002" parent="Hub/Scene Collection/Lights" index="2"]
+light_energy = 1.0
+
+[node name="Sun" parent="Hub/Scene Collection/Ambient" index="0" groups=["Sun"]]
+
+[node name="Shadow-Sun" parent="Hub/Scene Collection/Ambient" index="1" groups=["Sun"]]
+transform = Transform3D(-0.268567, -0.438436, -0.857698, -0.856624, -0.298506, 0.42082, -0.440531, 0.847743, -0.295406, 0.836031, 8.00051, 20.5934)
+light_color = Color(0.373721, 0.713961, 0.673368, 1)
+light_energy = 0.706
+light_angular_distance = 1.88
+shadow_enabled = true
+
+[node name="Stairs2" parent="Hub" index="1" instance=ExtResource("7_nk028")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 0.5, 5.5)
+
+[node name="Stairs3" parent="Hub" index="2" instance=ExtResource("7_nk028")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.5, 0.5, -5.5)
+
+[node name="Shaft" type="Node3D" parent="." index="3"]
+script = ExtResource("3_g843x")
+
+[node name="Shaft2" parent="Shaft" index="0" instance=ExtResource("7_emn5n")]
+
+[node name="Ladder" parent="Shaft/Shaft2/Scene Collection/Shaft" index="0" groups=["Ladder"]]
+
+[node name="Window-Shaft" parent="Shaft/Shaft2/Scene Collection/Shaft" index="2" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Window-Shaft_001" parent="Shaft/Shaft2/Scene Collection/Shaft" index="4" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_w34lt")
+
+[node name="Tunnel_003" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="0"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_004" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="1"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_005" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="2"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_006" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="3"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_007" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="4"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_008" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="5"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_009" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="6"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_010" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="7"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_011" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="8"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_012" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="9"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_013" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="10"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_014" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="11"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_015" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="12"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_016" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="13"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_017" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="14"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_018" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="15"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_019" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="16"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_020" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="17"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_021" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="18"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_022" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="19"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_023" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="20"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_024" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="21"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_025" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="22"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_026" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="23"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_027" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="24"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_028" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="25"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_029" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="26"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_030" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="27"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_031" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="28"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_032" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="29"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_033" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="30"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_034" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="31"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_035" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="32"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_036" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="33"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_037" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="34"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnel_038" parent="Shaft/Shaft2/Scene Collection/Shaft/Lights_001" index="35"]
+light_energy = 54.3514
+light_size = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="EnvironmentChanger" parent="Shaft" index="1" instance=ExtResource("8_nk028")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.1, 2, -22.7)
+sun_color = Color(0.372549, 0.713726, 0.67451, 1)
+
+[node name="CollisionShape3D" parent="Shaft/EnvironmentChanger" index="0"]
+debug_color = Color(0.976783, 0.143704, 0.122041, 0.42)
+
+[node name="EnvironmentChanger2" parent="Shaft" index="2" instance=ExtResource("8_nk028")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.1, -7, -22.7)
+sun_color = Color(0.759767, 0.630471, 0.216884, 1)
+
+[node name="CollisionShape3D" parent="Shaft/EnvironmentChanger2" index="0"]
+debug_color = Color(0.976783, 0.143704, 0.122041, 0.42)
+
+[node name="_Area3D_93721" type="Area3D" parent="Shaft" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -128, -80.05)
+
+[node name="_CollisionShape3D_93722" type="CollisionShape3D" parent="Shaft/_Area3D_93721" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -8.5, -6)
+shape = SubResource("BoxShape3D_nk028")
+debug_color = Color(0.72298, 0.245551, 1, 0.42)
+
+[node name="Area3D" type="Area3D" parent="Shaft" index="4" groups=["Ladder"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, -26)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Shaft/Area3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.22876, -67, 2.8)
+shape = SubResource("BoxShape3D_emn5n")
+
+[node name="StatueContainer" type="Node3D" parent="." index="4"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 6, 22)
+
+[node name="Statue" parent="StatueContainer" index="0" instance=ExtResource("6_6nm83")]
+
+[editable path="Menu"]
+[editable path="Hub"]
+[editable path="Hub/Stairs2"]
+[editable path="Hub/Stairs3"]
+[editable path="Shaft/Shaft2"]
+[editable path="Shaft/EnvironmentChanger"]
+[editable path="Shaft/EnvironmentChanger2"]

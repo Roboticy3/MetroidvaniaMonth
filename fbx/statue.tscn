@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://chwi83yaq60wx"]
+
+[ext_resource type="PackedScene" uid="uid://dxe5d24aqrlmi" path="res://fbx/Statue.fbx" id="1_v0ngf"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_v0ngf"]
+data = PackedVector3Array(-0.0218, 0.0218, 0.0018, -0.0218, -0.0218, 0.0018, -0.0218, -0.0218, -0.02, -0.0218, -0.0218, -0.02, -0.0218, 0.0218, -0.02, -0.0218, 0.0218, 0.0018, 0.0218, 0.0218, 0.0018, -0.0218, 0.0218, 0.0018, -0.0218, 0.0218, -0.02, -0.0218, 0.0218, -0.02, 0.0218, 0.0218, -0.02, 0.0218, 0.0218, 0.0018, 0.0218, -0.0218, 0.0018, 0.0218, 0.0218, 0.0018, 0.0218, 0.0218, -0.02, 0.0218, 0.0218, -0.02, 0.0218, -0.0218, -0.02, 0.0218, -0.0218, 0.0018, -0.0218, -0.0218, 0.0018, 0.0218, -0.0218, 0.0018, 0.0218, -0.0218, -0.02, 0.0218, -0.0218, -0.02, -0.0218, -0.0218, -0.02, -0.0218, -0.0218, 0.0018, 0.0218, -0.0218, -0.02, 0.0218, 0.0218, -0.02, -0.0218, 0.0218, -0.02, -0.0218, 0.0218, -0.02, -0.0218, -0.0218, -0.02, 0.0218, -0.0218, -0.02, -0.0157, -0.0157, 0.0062, -0.0157, 0.0157, 0.0062, 0.0157, 0.0157, 0.0062, 0.0157, 0.0157, 0.0062, 0.0157, -0.0157, 0.0062, -0.0157, -0.0157, 0.0062, -0.0218, 0.0218, 0.0018, -0.0157, 0.0157, 0.0062, -0.0157, -0.0157, 0.0062, -0.0157, -0.0157, 0.0062, -0.0218, -0.0218, 0.0018, -0.0218, 0.0218, 0.0018, 0.0218, 0.0218, 0.0018, 0.0157, 0.0157, 0.0062, -0.0157, 0.0157, 0.0062, -0.0157, 0.0157, 0.0062, -0.0218, 0.0218, 0.0018, 0.0218, 0.0218, 0.0018, 0.0218, -0.0218, 0.0018, 0.0157, -0.0157, 0.0062, 0.0157, 0.0157, 0.0062, 0.0157, 0.0157, 0.0062, 0.0218, 0.0218, 0.0018, 0.0218, -0.0218, 0.0018, -0.0218, -0.0218, 0.0018, -0.0157, -0.0157, 0.0062, 0.0157, -0.0157, 0.0062, 0.0157, -0.0157, 0.0062, 0.0218, -0.0218, 0.0018, -0.0218, -0.0218, 0.0018)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v0ngf"]
+
+[node name="Statue" instance=ExtResource("1_v0ngf")]
+
+[node name="Skeleton3D" parent="StatueSkeleton" index="0"]
+bones/4/rotation = Quaternion(0.0587902, 0.0607373, 0.900284, 0.427018)
+bones/5/rotation = Quaternion(-0.402364, 0.272783, 0.0956867, 0.868641)
+bones/6/rotation = Quaternion(-0.341163, -0.554936, 0.594, 0.472036)
+bones/7/rotation = Quaternion(0.301899, 0.0277142, 0.0871126, 0.948947)
+bones/8/rotation = Quaternion(-1.01053e-07, -2.12383e-07, 0.468242, 0.8836)
+bones/10/rotation = Quaternion(0.0556093, 0.0503774, 0.0605225, 0.995343)
+bones/12/rotation = Quaternion(0.0587902, -0.0607373, -0.900284, 0.427018)
+bones/13/rotation = Quaternion(-0.394929, -0.18212, -0.13831, 0.889794)
+bones/14/rotation = Quaternion(-0.488062, 0.300378, -0.445478, 0.687836)
+bones/15/rotation = Quaternion(2.15105e-08, -6.17257e-08, -0.0914149, 0.995813)
+bones/16/rotation = Quaternion(-1.02239e-07, 2.04478e-07, -0.468242, 0.8836)
+bones/18/rotation = Quaternion(-0.248764, -0.029658, -0.072947, 0.965358)
+
+[node name="StatueBase" parent="StatueSkeleton/Skeleton3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bone_idx = 1
+
+[node name="StaticBody3D" type="StaticBody3D" parent="StatueSkeleton/Skeleton3D/StatueBase/StatueBase" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StatueSkeleton/Skeleton3D/StatueBase/StatueBase/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_v0ngf")
+
+[node name="AnimationPlayer" parent="." index="2"]
+autoplay = "StatueSkeleton|Guard"
+
+[node name="Area3D" type="Area3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -0.8)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("BoxShape3D_v0ngf")

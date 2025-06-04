@@ -3,6 +3,9 @@ extends CharacterBody3D
 var fuel:Range
 var health:Range
 
+@export_node_path("Area3D") var player_area_path := NodePath("PlayerArea")
+@onready var player_area:Area3D = get_node(player_area_path)
+
 func _ready():
 	fuel = get_meter("Fuel")
 	health = get_meter("Health")
@@ -47,6 +50,8 @@ const JUMP_START := 10.0
 const FALL_SUPER_TIME := 2.0
 const FALL_SUPER_SPEED := 50.0
 
+const LADDER_SPEED := 5.0
+
 var time_falling := 0.0
 var time_hovering := 0.0
 
@@ -74,7 +79,7 @@ func update_time_falling(delta:float) -> void:
 	
 func update_time_hovering(delta:float) -> void:
 	#Count time hovering
-	if is_on_floor():
+	if is_on_floor() or is_on_ladder():
 		if fuel: fuel.fill(delta)
 		time_hovering = 0.0
 	elif is_flying():
@@ -95,6 +100,8 @@ func fly_and_fall(delta:float) -> void:
 	#More of a jetpack now >:)
 	if is_flying():
 		velocity -= signf(JUMP_SPEED - velocity.y) * get_gravity() * delta
+	elif is_on_ladder():
+		velocity += signf(LADDER_SPEED + velocity.y) * get_gravity() * delta
 	elif is_falling():
 		if time_falling >= FALL_SUPER_TIME:
 			velocity += signf(FALL_SUPER_SPEED - velocity.y) * get_gravity() * delta
@@ -146,6 +153,12 @@ func get_horizontal_movement_axis() -> Vector2:
 	if !is_multiplayer_authority():
 		return Vector2.ZERO
 	return Input.get_vector("Left", "Right", "Up", "Down")
+
+func is_on_ladder() -> bool:
+	for a in player_area.get_overlapping_areas():
+		if a.is_in_group("Ladder"): return true
+	
+	return false
 
 func _on_shoot(_p, _id):
 	pass
