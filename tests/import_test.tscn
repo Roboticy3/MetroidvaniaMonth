@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=4 uid="uid://bmqhmf7s8djwk"]
+[gd_scene load_steps=12 format=4 uid="uid://bmqhmf7s8djwk"]
 
 [ext_resource type="PackedScene" uid="uid://lflopx50nk2t" path="res://scenes/Arena.tscn" id="1_r43oo"]
 [ext_resource type="PackedScene" uid="uid://dnfbu6cnjq2l1" path="res://glb/Level1.glb" id="2_s3opf"]
 [ext_resource type="Script" uid="uid://iuus6x584bd4" path="res://scripts/level/tool_adjust_import.gd" id="3_2u8s4"]
-[ext_resource type="Material" uid="uid://crgh52ri0jp2y" path="res://Window-override.tres" id="4_vqv1g"]
 [ext_resource type="PackedScene" uid="uid://cyg2ghx0047nj" path="res://glb/Level1-props.glb" id="5_ynxwu"]
 [ext_resource type="PackedScene" uid="uid://cjcy8xm7n5hca" path="res://scenes/gun_target.tscn" id="6_s3opf"]
 
@@ -83,63 +82,12 @@ skeleton = NodePath("")
 
 [node name="Level1-props_Scene Collection_Props_Gate#StaticBody3D" type="StaticBody3D" parent="." index="9"]
 
+[node name="LineEdit" parent="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Name" index="2"]
+caret_blink = true
+caret_blink_interval = 0.5
+
 [node name="Hub" parent="." index="12" instance=ExtResource("2_s3opf")]
 script = ExtResource("3_2u8s4")
-
-[node name="Window-skylight" parent="Hub/Scene Collection/Terrain" index="1" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_vqv1g")
-
-[node name="Window-skylight_001" parent="Hub/Scene Collection/Terrain" index="2" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_vqv1g")
-
-[node name="Window-skylight_002" parent="Hub/Scene Collection/Terrain" index="3" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_vqv1g")
-
-[node name="Window-skylight_003" parent="Hub/Scene Collection/Terrain" index="4" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_vqv1g")
-
-[node name="Window-tunnel" parent="Hub/Scene Collection/Terrain" index="5" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_vqv1g")
-
-[node name="Window-tunnel_001" parent="Hub/Scene Collection/Terrain" index="6" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_vqv1g")
-
-[node name="Window-tunnel_002" parent="Hub/Scene Collection/Terrain" index="7" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_vqv1g")
-
-[node name="Window-001" parent="Hub/Scene Collection/Terrain" index="9" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_vqv1g")
-
-[node name="Window" parent="Hub/Scene Collection/Terrain" index="10" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_vqv1g")
-
-[node name="Window-002" parent="Hub/Scene Collection/Terrain" index="11" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_vqv1g")
-
-[node name="Window-003" parent="Hub/Scene Collection/Terrain" index="12" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_vqv1g")
-
-[node name="Window-004" parent="Hub/Scene Collection/Terrain" index="13" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_vqv1g")
-
-[node name="Window-grate" parent="Hub/Scene Collection/Terrain" index="15" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_vqv1g")
-
-[node name="Tunnel" parent="Hub/Scene Collection/Lights" index="0"]
-light_energy = 1.0
-shadow_enabled = true
-
-[node name="Tunnel_001" parent="Hub/Scene Collection/Lights" index="1"]
-light_energy = 1.0
-
-[node name="Tunnel_002" parent="Hub/Scene Collection/Lights" index="2"]
-light_energy = 1.0
-
-[node name="Shadow-Sun" parent="Hub/Scene Collection/Ambient" index="1"]
-transform = Transform3D(-0.268567, -0.438436, -0.857698, -0.856624, -0.298506, 0.42082, -0.440531, 0.847743, -0.295406, 0.836031, 8.00051, 20.5934)
-light_color = Color(0.373721, 0.713961, 0.673368, 1)
-light_angular_distance = 1.88
-shadow_enabled = true
 
 [node name="Level1-props" parent="." index="13" instance=ExtResource("5_ynxwu")]
 

@@ -5,6 +5,13 @@ extends Node3D
 @export_node_path("Node") var emitter_path := NodePath("..")
 @onready var emitter = get_node(emitter_path)
 
+func _ready():
+	#Technically a ui element
+	if !is_multiplayer_authority():
+		set_process(false)
+		visible = false
+		return
+
 var frame_count := 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

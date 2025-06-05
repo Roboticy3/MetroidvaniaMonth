@@ -24,7 +24,6 @@ bones/16/rotation = Quaternion(-1.02239e-07, 2.04478e-07, -0.468242, 0.8836)
 bones/18/rotation = Quaternion(-0.248764, -0.029658, -0.072947, 0.965358)
 
 [node name="StatueBase" parent="StatueSkeleton/Skeleton3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 bone_idx = 1
 
 [node name="StaticBody3D" type="StaticBody3D" parent="StatueSkeleton/Skeleton3D/StatueBase/StatueBase" index="0"]

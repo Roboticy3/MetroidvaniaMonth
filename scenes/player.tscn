@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://luwvohrk0cnq"]
+[gd_scene load_steps=33 format=3 uid="uid://luwvohrk0cnq"]
 
 [ext_resource type="Script" uid="uid://dssggiqvkb7bf" path="res://scripts/player_actions/player_character_body_3d.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dj1mvo2la10dt" path="res://scripts/player.gd" id="1_fjrip"]
@@ -15,8 +15,6 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u8vuu"]
 
-[sub_resource type="Environment" id="Environment_y4r1p"]
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qlg0r"]
 lifetime_randomness = 0.46
 particle_flag_rotate_y = true
@@ -24,25 +22,18 @@ angle_min = 1.07288e-05
 angle_max = 1.07288e-05
 direction = Vector3(0, 0, -1)
 spread = 23.824
-initial_velocity_min = 50.0
-initial_velocity_max = 100.0
-collision_mode = 1
-collision_friction = 0.0
-collision_bounce = 1.0
+initial_velocity_min = 500.0
+initial_velocity_max = 1000.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+orbit_velocity_min = 0.747
+orbit_velocity_max = 0.747
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = 343.9
+collision_mode = 2
 
-[sub_resource type="SystemFont" id="SystemFont_qlg0r"]
-subpixel_positioning = 0
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qlg0r"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qlg0r"]
-albedo_texture = SubResource("PlaceholderTexture2D_qlg0r")
-
-[sub_resource type="TextMesh" id="TextMesh_tuyoq"]
-material = SubResource("StandardMaterial3D_qlg0r")
-text = "Muzzle Flash"
-font = SubResource("SystemFont_qlg0r")
-depth = 0.1
+[sub_resource type="BoxMesh" id="BoxMesh_y4r1p"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tuyoq"]
 size = Vector3(5, 5, 5)
@@ -253,7 +244,6 @@ mesh = SubResource("CapsuleMesh_u8vuu")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-environment = SubResource("Environment_y4r1p")
 script = ExtResource("2_g2els")
 
 [node name="Gun" type="MeshInstance3D" parent="CharacterBody3D/Camera3D"]
@@ -265,13 +255,13 @@ skeleton = NodePath("../../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19178, -6.32793)
 emitting = false
 amount = 16
-lifetime = 10.0
+lifetime = 0.25
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
-collision_base_size = 0.1
+collision_base_size = 0.05
 process_material = SubResource("ParticleProcessMaterial_qlg0r")
-draw_pass_1 = SubResource("TextMesh_tuyoq")
+draw_pass_1 = SubResource("BoxMesh_y4r1p")
 script = ExtResource("4_tuyoq")
 
 [node name="BulletEmitter" type="Node3D" parent="CharacterBody3D/Camera3D"]

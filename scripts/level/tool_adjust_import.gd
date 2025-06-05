@@ -26,10 +26,9 @@ func correct_children_recursive(of:Node):
 
 func correct_children(of:Node):
 	for c in of.get_children():
-		
 		if c is Light3D:
 			print("attempting to correct lightsource")
-			if c.light_energy >= 1000.0:
+			if c.light_energy >= 50.0:
 				c.light_energy = 1
 			if c.name.containsn("shadow"):
 				c.shadow_enabled = true

@@ -6,7 +6,6 @@ func _ready():
 	body_entered.connect(_on_body_entered)
 	
 func _on_body_entered(b) -> void:
-	print(b)
 	if b.get_parent().is_in_group("Player"):
 		print("changing env")
 		change_environment()
