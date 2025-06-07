@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b0ydpbvs5h33h"]
+[gd_scene load_steps=33 format=3 uid="uid://b0ydpbvs5h33h"]
 
 [ext_resource type="Script" uid="uid://bydwvyv1segis" path="res://scripts/other_entities/creature_body_3d.gd" id="1_k15pb"]
 [ext_resource type="PackedScene" uid="uid://cfyv47q16mhkw" path="res://fbx/Creature.fbx" id="1_upmfi"]
@@ -8,20 +8,23 @@
 [ext_resource type="Texture2D" uid="uid://b2bfk0iur1hx2" path="res://texture/ScalesDark.png" id="4_ygqry"]
 [ext_resource type="Texture2D" uid="uid://c7vtycfvrfw0x" path="res://texture/mouth.png" id="5_0s51c"]
 [ext_resource type="Script" uid="uid://c12c5nsy54wfk" path="res://scripts/other_entities/wound_tracker.gd" id="5_2b8l4"]
-[ext_resource type="Texture2D" uid="uid://dqs1x6xudxigv" path="res://texture/Wound.png" id="5_k15pb"]
 [ext_resource type="Texture2D" uid="uid://pcoy71nkwoso" path="res://texture/ScalesDarke.png" id="6_k15pb"]
+[ext_resource type="Shader" uid="uid://cv66ia2qbdh0j" path="res://tests/dissolve_shader_tutorial.gdshader" id="8_h6uyy"]
+[ext_resource type="Script" uid="uid://bg0cwdc0rvulc" path="res://scripts/other_entities/entity_attacker.gd" id="8_jdfpr"]
+[ext_resource type="Script" uid="uid://b5r8jq4kghcgs" path="res://scripts/other_entities/creature_anim.gd" id="10_30bw7"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_upmfi"]
-points = PackedVector3Array(-2.78546, 1, -2.78546, -2.78546, 1, 2.78546, 2.78546, 1, -2.78546, -0.010361, -0.01, -0.010361, -0.010361, -0.01, 0.00981545, 2.78546, 1, 2.78546, 0.00981545, -0.01, -0.010361, 0.00981545, -0.01, 0.00981545)
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dun2m"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7obff"]
-points = PackedVector3Array(-0.0100127, -0.01, -0.0101881, -0.460764, 0.999901, -2.26263, 0.0099225, -0.01, -0.0101881, -0.0100127, -0.01, 0.00974512, 0.460764, 1, -2.26263, -0.460764, 0.999901, 2.26263, 0.460674, 1, 2.26263, 0.0099225, -0.01, 0.00974512)
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_atrna"]
+seamless = true
+noise = SubResource("FastNoiseLite_dun2m")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30bw7"]
-albedo_texture = ExtResource("4_ygqry")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_en6n0"]
-albedo_texture = ExtResource("5_k15pb")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6dq67"]
+render_priority = 0
+shader = ExtResource("8_h6uyy")
+shader_parameter/base_texture = ExtResource("4_ygqry")
+shader_parameter/dissolve_threshold = 0.0
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_atrna")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jdfpr"]
 albedo_texture = ExtResource("5_0s51c")
@@ -30,7 +33,10 @@ albedo_texture = ExtResource("5_0s51c")
 albedo_texture = ExtResource("6_k15pb")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_upmfi"]
-radius = 0.0264374
+radius = 0.0399016
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_30bw7"]
+size = Vector3(0.05, 0.090918, 0.0720391)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bvms0"]
 radius = 0.0377245
@@ -38,21 +44,244 @@ radius = 0.0377245
 [sub_resource type="SphereShape3D" id="SphereShape3D_7obff"]
 radius = 0.0152276
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dun2m"]
-albedo_texture = ExtResource("4_ygqry")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atrna"]
+transparency = 1
+cull_mode = 2
 albedo_texture = ExtResource("5_0s51c")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dq67"]
 albedo_texture = ExtResource("6_k15pb")
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_h6uyy"]
+properties/0/path = NodePath(".:current_animation")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="Animation" id="Animation_jdfpr"]
+resource_name = "MaterialEffects|Death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton3D/Limbs:surface_material_override/0:shader_parameter/dissolve_threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton3D/Hand_R/OmniLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.4, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 20.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton3D/Hand_L/OmniLight3D:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.4, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 20.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton3D/Tail/OmniLight3D2:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.4, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 20.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton3D/Tail/OmniLight3D:light_energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.18, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 20.0, 0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton3D/Base-Armor:transparency")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.19),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Skeleton3D/Limbs-Armor:transparency")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.19),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Skeleton3D/Limbs:surface_material_override/1:albedo_color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_h6uyy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Skeleton3D/Limbs:surface_material_override/0:shader_parameter/dissolve_threshold")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skeleton3D/Hand_R/OmniLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skeleton3D/Hand_L/OmniLight3D:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skeleton3D/Tail/OmniLight3D2:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skeleton3D/Tail/OmniLight3D:light_energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Skeleton3D/Base-Armor:transparency")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Skeleton3D/Limbs-Armor:transparency")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Skeleton3D/Limbs:surface_material_override/1:albedo_color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dun2m"]
+_data = {
+&"MaterialEffects|Death": SubResource("Animation_jdfpr"),
+&"RESET": SubResource("Animation_h6uyy")
+}
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_upmfi"]
+points = PackedVector3Array(-2.78546, 1, -2.78546, -2.78546, 1, 2.78546, 2.78546, 1, -2.78546, -0.010361, -0.01, -0.010361, -0.010361, -0.01, 0.00981545, 2.78546, 1, 2.78546, 0.00981545, -0.01, -0.010361, 0.00981545, -0.01, 0.00981545)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7obff"]
+points = PackedVector3Array(-0.0100127, -0.01, -0.0101881, -0.460764, 0.999901, -2.26263, 0.0099225, -0.01, -0.0101881, -0.0100127, -0.01, 0.00974512, 0.460764, 1, -2.26263, -0.460764, 0.999901, 2.26263, 0.460674, 1, 2.26263, 0.0099225, -0.01, 0.00974512)
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0s51c"]
 height = 7.0
 radius = 5.4
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jdfpr"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_k15pb"]
-size = Vector3(100, 50, 100)
+size = Vector3(109, 50, 99)
 
 [node name="Creature" type="Node3D"]
 
@@ -64,13 +293,17 @@ axis_lock_angular_y = true
 script = ExtResource("1_k15pb")
 
 [node name="Creature" parent="CharacterBody3D" instance=ExtResource("1_upmfi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.666667, 0)
 
 [node name="Skeleton3D" parent="CharacterBody3D/Creature/Armature" index="0"]
 modifier_callback_mode_process = 0
+bones/3/position = Vector3(-0.0305749, 0.0191013, 0.000114983)
 bones/3/rotation = Quaternion(0.259023, -0.570463, -0.195869, 0.754397)
 bones/3/scale = Vector3(1, 1, 1)
+bones/5/position = Vector3(0.0305749, 0.0191013, 0.000114983)
 bones/5/rotation = Quaternion(0.259023, 0.570463, 0.195869, 0.754397)
 bones/5/scale = Vector3(1, 1, 1)
+bones/7/position = Vector3(-0.0107738, 0.00204232, -0.131146)
 bones/7/rotation = Quaternion(0, -0.537668, 0, 0.843157)
 bones/9/rotation = Quaternion(0, 0.537668, 0, 0.843157)
 bones/11/rotation = Quaternion(0.985465, 2.02512e-08, 1.17477e-07, 0.16988)
@@ -78,28 +311,28 @@ bones/12/position = Vector3(-6.7377e-16, 0.0164653, 1.60313e-09)
 bones/12/rotation = Quaternion(0.14228, 1.2338e-14, 3.39222e-08, 0.989826)
 bones/12/scale = Vector3(1, 1, 1)
 bones/13/position = Vector3(7.67574e-17, 0.0112797, 1.65334e-09)
-bones/13/rotation = Quaternion(0.0277527, -1.22206e-07, -0.0666918, 0.997388)
+bones/13/rotation = Quaternion(0.0277527, -1.21697e-07, -0.0666917, 0.997388)
 bones/13/scale = Vector3(1, 1, 1)
 bones/14/position = Vector3(5.87408e-10, 0.0170494, -6.07393e-09)
-bones/14/rotation = Quaternion(-0.140797, -0.0133092, 0.059977, 0.98813)
+bones/14/rotation = Quaternion(0.164775, 0.00180418, 0.0101858, 0.986277)
 bones/14/scale = Vector3(1, 1, 1)
 bones/15/position = Vector3(4.81528e-10, 0.00844674, -1.43772e-09)
-bones/15/rotation = Quaternion(-0.160492, -0.014482, -0.0155835, 0.986808)
+bones/15/rotation = Quaternion(0.17482, -0.0357541, -0.126918, 0.975731)
 bones/15/scale = Vector3(1, 1, 1)
 bones/16/position = Vector3(-8.91863e-10, 0.00932982, 2.12374e-09)
-bones/16/rotation = Quaternion(0.0571379, -0.207574, -0.102339, 0.971172)
+bones/16/rotation = Quaternion(0.0960321, -0.163431, -0.254359, 0.948351)
 bones/16/scale = Vector3(1, 1, 1)
 bones/17/position = Vector3(-6.3082e-10, 0.0120924, 3.07775e-09)
-bones/17/rotation = Quaternion(-0.0380651, -0.105914, 0.0891243, 0.989641)
+bones/17/rotation = Quaternion(0.0259897, -0.0844681, 0.0166578, 0.995948)
+bones/17/scale = Vector3(1, 1, 1)
 bones/19/position = Vector3(-0.00194308, 0.0284788, 0.000962192)
-bones/19/rotation = Quaternion(0.180318, -0.0965723, 0.208563, 0.956379)
+bones/19/rotation = Quaternion(0.401156, -0.00767281, 0.187913, 0.896495)
 bones/19/scale = Vector3(1, 1, 1)
 bones/20/position = Vector3(4.7248e-10, 0.0112005, -1.29925e-10)
-bones/20/rotation = Quaternion(-0.209658, 0.0577702, 0.159969, 0.962869)
+bones/20/rotation = Quaternion(0.0700327, 0.103772, 0.102562, 0.986817)
 bones/20/scale = Vector3(1, 1, 1)
 bones/21/position = Vector3(-1.29718e-09, 0.0105098, 1.45184e-09)
-bones/21/rotation = Quaternion(-0.197409, 0.0858536, 0.130441, 0.967804)
-bones/21/scale = Vector3(1, 1, 1)
+bones/21/rotation = Quaternion(0.108527, 0.110934, 0.0829672, 0.984394)
 bones/23/position = Vector3(-0.01007, 0.00338224, -0.00218273)
 bones/23/rotation = Quaternion(-0.0156439, -0.0456919, 0.0668406, 0.996594)
 bones/23/scale = Vector3(1, 1, 1)
@@ -111,6 +344,7 @@ bones/27/rotation = Quaternion(-0.13979, -1.53191e-08, -5.80646e-08, 0.990181)
 bones/27/scale = Vector3(1, 1, 1)
 bones/28/position = Vector3(1.80934e-15, 0.00957621, -1.2961e-09)
 bones/28/rotation = Quaternion(-0.215752, -1.16402e-07, -2.57196e-08, 0.976448)
+bones/28/scale = Vector3(1, 1, 1)
 bones/29/position = Vector3(-3.82352e-16, 0.00934943, 1.31751e-09)
 bones/29/rotation = Quaternion(-0.216428, 6.94453e-14, 9.41097e-15, 0.976299)
 bones/30/position = Vector3(-9.20337e-17, 0.00515536, -6.12904e-11)
@@ -118,7 +352,6 @@ bones/30/rotation = Quaternion(-0.322128, -2.11769e-15, 4.10205e-17, 0.946696)
 bones/30/scale = Vector3(1, 1, 1)
 bones/31/position = Vector3(1.27949e-18, 0.00763664, 4.95848e-10)
 bones/31/rotation = Quaternion(-7.53074e-08, 0.92812, -0.372282, 1.73678e-07)
-bones/31/scale = Vector3(1, 1, 1)
 bones/32/position = Vector3(-2.27039e-15, 0.00951677, -4.90243e-09)
 bones/32/rotation = Quaternion(0.179397, 1.78269e-13, -6.98599e-08, 0.983777)
 bones/32/scale = Vector3(1, 1, 1)
@@ -132,7 +365,7 @@ bones/36/position = Vector3(-1.95892e-09, 0.0200616, 7.43353e-09)
 bones/36/rotation = Quaternion(0.295974, -0.183522, 0.0532051, 0.935889)
 bones/36/scale = Vector3(1, 1, 1)
 bones/37/position = Vector3(2.77981e-10, 0.0171826, 1.40056e-09)
-bones/37/rotation = Quaternion(0.0722805, 0.0133006, -0.265953, 0.96118)
+bones/37/rotation = Quaternion(0.0704741, 0.00677819, -0.266438, 0.961248)
 bones/37/scale = Vector3(1, 1, 1)
 bones/39/position = Vector3(0.01007, 0.00338224, -0.00218272)
 bones/39/rotation = Quaternion(-0.0156438, 0.0456916, -0.0668406, 0.996594)
@@ -147,122 +380,74 @@ bones/42/position = Vector3(-3.34992e-09, 0.0200616, 1.92791e-09)
 bones/42/rotation = Quaternion(0.295973, 0.183522, -0.0532049, 0.935889)
 bones/42/scale = Vector3(1, 1, 1)
 bones/43/position = Vector3(1.93053e-09, 0.0171826, 2.21168e-09)
-bones/43/rotation = Quaternion(0.0722809, -0.0133008, 0.265953, 0.96118)
+bones/43/rotation = Quaternion(0.0704745, -0.00677806, 0.266438, 0.961248)
 bones/43/scale = Vector3(1, 1, 1)
 bones/45/position = Vector3(-0.0166333, 0.0229755, 0.00816388)
-bones/45/rotation = Quaternion(0.914955, -0.212875, -0.342451, -0.0164152)
+bones/45/rotation = Quaternion(0.876647, -0.214612, -0.416954, -0.107621)
 bones/45/scale = Vector3(1, 1, 1)
 bones/46/position = Vector3(9.3559e-09, 0.017907, 3.33889e-09)
-bones/46/rotation = Quaternion(-0.187113, 0.188235, 0.0431431, 0.963169)
+bones/46/rotation = Quaternion(-0.221715, 0.21834, 0.0570275, 0.94864)
 bones/46/scale = Vector3(1, 1, 1)
 bones/47/position = Vector3(3.96344e-09, 0.0196382, -5.63065e-09)
-bones/47/rotation = Quaternion(0.089903, 0.0271628, -0.138728, 0.985867)
+bones/47/rotation = Quaternion(0.0644812, 0.0537952, -0.133838, 0.987439)
 bones/47/scale = Vector3(1, 1, 1)
 bones/48/position = Vector3(-9.68898e-09, 0.012017, -2.59008e-09)
-bones/48/rotation = Quaternion(0.153531, 0.00191994, -0.17914, 0.971768)
+bones/48/rotation = Quaternion(0.127879, 0.0172019, -0.182071, 0.974783)
 bones/48/scale = Vector3(1, 1, 1)
 bones/49/position = Vector3(3.98638e-09, 0.0157091, 4.6747e-09)
-bones/49/rotation = Quaternion(0.0222221, -0.000220856, -0.0363063, 0.999094)
+bones/49/rotation = Quaternion(0.000677382, 0.00508455, -0.0399186, 0.99919)
 bones/49/scale = Vector3(1, 1, 1)
 bones/50/position = Vector3(-6.83244e-10, 0.0171338, -1.83924e-10)
-bones/50/rotation = Quaternion(-0.0900149, 0.00476852, -0.017663, 0.995772)
+bones/50/rotation = Quaternion(-0.105803, 0.00657861, -0.0193182, 0.994178)
 bones/50/scale = Vector3(1, 1, 1)
 bones/51/position = Vector3(2.10011e-09, 0.020131, -6.72595e-09)
-bones/51/rotation = Quaternion(-0.0838599, -0.291505, -0.0569716, 0.951182)
+bones/51/rotation = Quaternion(-0.116533, -0.247722, -0.0264621, 0.961433)
 bones/51/scale = Vector3(1, 1, 1)
 bones/53/position = Vector3(0.0166332, 0.0229755, 0.00816389)
-bones/53/rotation = Quaternion(0.880423, 0.219657, 0.413627, -0.074286)
+bones/53/rotation = Quaternion(0.949737, 0.169932, 0.225124, 0.135805)
 bones/53/scale = Vector3(1, 1, 1)
 bones/54/position = Vector3(-5.36616e-09, 0.017907, 1.39579e-09)
-bones/54/rotation = Quaternion(-0.214787, -0.210991, -0.0583169, 0.951813)
+bones/54/rotation = Quaternion(-0.114824, -0.139194, -0.0107243, 0.983527)
 bones/54/scale = Vector3(1, 1, 1)
 bones/55/position = Vector3(-5.07631e-09, 0.0196382, -2.15637e-09)
-bones/55/rotation = Quaternion(0.0700239, -0.0462795, 0.135925, 0.987157)
 bones/55/scale = Vector3(1, 1, 1)
 bones/56/position = Vector3(7.5036e-09, 0.012017, 3.65926e-09)
-bones/56/rotation = Quaternion(0.135048, -0.0124829, 0.184043, 0.973516)
-bones/56/scale = Vector3(1, 1, 1)
+bones/56/rotation = Quaternion(0.186937, 0.0172682, 0.150158, 0.970675)
 bones/57/position = Vector3(-2.95811e-09, 0.0157091, -3.22038e-09)
-bones/57/rotation = Quaternion(0.00700359, -0.00310803, 0.0421758, 0.999081)
+bones/57/rotation = Quaternion(0.0511856, 0.00362654, 0.0073564, 0.998656)
 bones/57/scale = Vector3(1, 1, 1)
 bones/58/position = Vector3(1.60267e-09, 0.0171339, -1.16742e-09)
-bones/58/rotation = Quaternion(-0.101092, -0.00604302, 0.0219728, 0.994616)
+bones/58/rotation = Quaternion(-0.0637687, -0.00342982, -0.00577377, 0.997942)
 bones/58/scale = Vector3(1, 1, 1)
 bones/59/position = Vector3(-2.11113e-09, 0.020131, 2.65088e-09)
-bones/59/rotation = Quaternion(-0.0470775, -0.0186941, 0.0680512, 0.996395)
+bones/59/rotation = Quaternion(-0.0224702, 0.306537, 0.0960686, 0.946732)
 bones/59/scale = Vector3(1, 1, 1)
 
 [node name="BackRange" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, -6.82379e-08, 4.42381e-08, 9.56391e-08, 0.931975, -0.362522, -1.11277e-08, 0.362521, 0.931976, 1.06435e-09, 0.0411693, 0.0482842)
+transform = Transform3D(1, 2.35459e-08, 6.00297e-08, 2.50689e-09, 0.931975, -0.362521, -5.58311e-08, 0.362521, 0.931976, 4.37211e-10, 0.0411693, 0.0482842)
 bone_idx = 25
 
 [node name="BackRange" parent="CharacterBody3D/Creature/Armature/Skeleton3D/BackRange" index="0"]
 visible = false
 
-[node name="PartiallyExposed" type="Area3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D/BackRange" index="1"]
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("2_bvms0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D/BackRange/PartiallyExposed"]
-transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_upmfi")
-debug_color = Color(0.816632, 0.40307, 0.128993, 0.42)
-
-[node name="Label" type="Label" parent="CharacterBody3D/Creature/Armature/Skeleton3D/BackRange" index="2"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -11.5
-offset_right = 40.0
-offset_bottom = 11.5
-grow_vertical = 2
-size_flags_horizontal = 0
-script = ExtResource("3_7obff")
-property = "players_inside"
-target_group = "../PartiallyExposed"
-use_node_path_instead_of_group = true
-
 [node name="BackRangeInner" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, -6.82379e-08, 4.42381e-08, 9.56391e-08, 0.931975, -0.362522, -1.11277e-08, 0.362521, 0.931976, 1.06435e-09, 0.0411693, 0.0482842)
+transform = Transform3D(1, 2.35459e-08, 6.00297e-08, 2.50689e-09, 0.931975, -0.362521, -5.58311e-08, 0.362521, 0.931976, 4.37211e-10, 0.0411693, 0.0482842)
 visible = false
 bone_idx = 26
 
 [node name="BackRangeInner" parent="CharacterBody3D/Creature/Armature/Skeleton3D/BackRangeInner" index="0"]
 transform = Transform3D(1, -1.77636e-15, 8.88178e-16, 7.10543e-15, 1, 2.98023e-08, -8.88178e-16, 0, 1, 0, 0, 0)
 
-[node name="Exposed" type="Area3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D/BackRangeInner" index="1"]
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("2_bvms0")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D/BackRangeInner/Exposed"]
-transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_7obff")
-
-[node name="Label" type="Label" parent="CharacterBody3D/Creature/Armature/Skeleton3D/BackRangeInner" index="2"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = 28.0
-offset_right = 40.0
-offset_bottom = 51.0
-grow_vertical = 2
-script = ExtResource("3_7obff")
-property = "players_inside"
-target_group = "../Exposed"
-use_node_path_instead_of_group = true
-
 [node name="Base2" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="2"]
-surface_material_override/0 = SubResource("StandardMaterial3D_30bw7")
-surface_material_override/1 = SubResource("StandardMaterial3D_en6n0")
+surface_material_override/0 = SubResource("ShaderMaterial_6dq67")
+surface_material_override/1 = SubResource("ShaderMaterial_6dq67")
 surface_material_override/2 = SubResource("StandardMaterial3D_jdfpr")
 
 [node name="Base-Armor" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="3"]
 surface_material_override/0 = SubResource("StandardMaterial3D_h6uyy")
 
 [node name="Center" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, -2.8777e-13, 2.3842e-07, 7.98276e-08, -0.942282, -0.334822, 2.24658e-07, 0.334821, -0.942282, -7.33799e-18, 0.0521755, 0.0430473)
+transform = Transform3D(1, 3.55271e-15, 2.38419e-07, 7.98275e-08, -0.942282, -0.334821, 2.24658e-07, 0.334821, -0.942282, -7.33799e-18, 0.0521755, 0.0430473)
 bone_name = "Center"
 bone_idx = 11
 
@@ -272,12 +457,25 @@ collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D/Center/StaticBody3D"]
-transform = Transform3D(1, 0, 2.4869e-14, 2.06057e-13, 1, 5.96046e-08, 1.19584e-11, 0, 1, -5.32907e-15, 0.015, 0.00190677)
+transform = Transform3D(1, -7.10543e-15, 4.08562e-14, 1.98952e-13, 1, 2.98023e-08, 1.19726e-11, 2.98023e-08, 1, 2.99094e-09, 0.0194643, -0.010657)
 shape = SubResource("SphereShape3D_upmfi")
 debug_color = Color(0.744138, 0.211514, 1, 0.42)
 
+[node name="AttackBox" type="Area3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D/Center"]
+transform = Transform3D(1, 0, -1.86264e-09, 0, 1, -5.96046e-08, -1.86262e-09, 0, 1, 0.00216363, 0.0986959, 0.0457682)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("8_jdfpr")
+force = Vector3(0, 100, -100)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D/Center/AttackBox"]
+transform = Transform3D(1, -1.49012e-08, 0, 0, 1, 0, 1.86265e-09, -3.27826e-07, 1, 9.8953e-10, -0.0308105, 0.00819728)
+shape = SubResource("BoxShape3D_30bw7")
+disabled = true
+debug_color = Color(0.632962, 0.528333, 1.92523e-07, 0.42)
+
 [node name="Tail" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, 2.11354e-09, -2.45955e-08, 3.59475e-08, 0.51812, 0.855308, 1.99146e-08, -0.855308, 0.518119, -1.48611e-09, 0.0665878, 0.0297376)
+transform = Transform3D(1, 2.42045e-09, 6.85363e-08, -5.71847e-08, 0.518119, 0.855308, -2.47888e-08, -0.855309, 0.518119, -9.74527e-10, 0.0665878, 0.0297376)
 bone_name = "Bone.003"
 bone_idx = 27
 
@@ -290,8 +488,20 @@ transform = Transform3D(1, 0, 2.4869e-14, 2.06057e-13, 1, 5.96046e-08, 1.19584e-
 shape = SubResource("SphereShape3D_bvms0")
 debug_color = Color(0.744138, 0.211514, 1, 0.42)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D/Tail"]
+transform = Transform3D(1, 0, 0, 0, 1, -3.49246e-08, 0, 3.49246e-08, 1, 0.0133204, -0.000472035, -0.000350975)
+light_energy = 0.0
+shadow_enabled = true
+omni_range = 20.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D/Tail"]
+transform = Transform3D(1, 0, 0, 0, 1, -3.49246e-08, 0, 3.49246e-08, 1, -0.013, 0, 0)
+light_energy = 0.0
+shadow_enabled = true
+omni_range = 20.0
+
 [node name="Hand_L" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.998604, 0.0343162, 0.0401649, -0.0385211, -0.0472892, 0.998138, 0.0361517, -0.998292, -0.0459009, 0.0305749, -9.35278e-05, 0.0196168)
+transform = Transform3D(0.997967, 0.0343157, 0.0537135, -0.0520636, -0.0472887, 0.997524, 0.0367708, -0.998292, -0.0454055, 0.0305749, -9.35181e-05, 0.0196167)
 bone_name = "Tentacle.L.004"
 bone_idx = 43
 
@@ -305,8 +515,13 @@ transform = Transform3D(1, -2.56114e-09, 0, 3.49246e-10, 1, 3.72529e-09, 3.72529
 shape = SubResource("SphereShape3D_7obff")
 debug_color = Color(0.744138, 0.211514, 1, 0.42)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D/Hand_L"]
+light_energy = 0.0
+shadow_enabled = true
+omni_range = 20.0
+
 [node name="Hand_R" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.998604, -0.0343162, -0.0401642, 0.0385205, -0.0472865, 0.998138, -0.0361515, -0.998292, -0.0458982, -0.0305749, -9.34291e-05, 0.0196167)
+transform = Transform3D(0.997967, -0.0343156, -0.0537125, 0.0520627, -0.0472871, 0.997524, -0.0367706, -0.998293, -0.045404, -0.0305749, -9.34433e-05, 0.0196167)
 bone_name = "Tentacle.R.004"
 bone_idx = 37
 
@@ -320,15 +535,20 @@ transform = Transform3D(1, -2.56114e-09, 0, 3.49246e-10, 1, 3.72529e-09, 3.72529
 shape = SubResource("SphereShape3D_7obff")
 debug_color = Color(0.744138, 0.211514, 1, 0.42)
 
+[node name="OmniLight3D" type="OmniLight3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D/Hand_R"]
+light_energy = 0.0
+shadow_enabled = true
+omni_range = 20.0
+
 [node name="Limbs" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="8"]
-surface_material_override/0 = SubResource("StandardMaterial3D_dun2m")
+surface_material_override/0 = SubResource("ShaderMaterial_6dq67")
 surface_material_override/1 = SubResource("StandardMaterial3D_atrna")
 
 [node name="Limbs-Armor" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="9"]
 surface_material_override/0 = SubResource("StandardMaterial3D_6dq67")
 
 [node name="WoundTargets" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="10"]
-transform = Transform3D(1, -1.15484e-07, 2.23517e-08, 8.56817e-08, 0.734649, 0.678447, -8.9407e-08, -0.678447, 0.734649, -9.31323e-10, 0.0521754, 0.0430473)
+transform = Transform3D(1, -8.9407e-08, 1.11759e-07, -7.45058e-09, 0.734649, 0.678447, -1.3411e-07, -0.678447, 0.734649, -9.31323e-10, 0.0521754, 0.0430473)
 bone_name = "Bone.004"
 bone_idx = 24
 
@@ -339,20 +559,87 @@ transform = Transform3D(0.0035967, 0.00281706, 0.00203173, 1.36197e-12, 0.002924
 transform = Transform3D(0.0035967, 0.00281706, 0.00203173, -1.22297e-11, 0.00292479, -0.00405532, -0.00347329, 0.00291715, 0.00210392, 1.02532e-09, 0.014131, -0.00056202)
 
 [node name="WoundTargets2" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="11"]
-transform = Transform3D(1, 2.11354e-09, -2.45955e-08, 3.59475e-08, 0.51812, 0.855308, 1.99146e-08, -0.855308, 0.518119, -1.48611e-09, 0.0665878, 0.0297376)
+transform = Transform3D(1, 2.42045e-09, 6.85363e-08, -5.71847e-08, 0.518119, 0.855308, -2.47888e-08, -0.855309, 0.518119, -9.74527e-10, 0.0665878, 0.0297376)
 bone_name = "Bone.003"
 bone_idx = 27
 
 [node name="GunTarget3" parent="CharacterBody3D/Creature/Armature/Skeleton3D/WoundTargets2" groups=["Wound"] instance=ExtResource("4_rl551")]
 transform = Transform3D(0.0035967, 0.00281706, 0.00203173, 3.23205e-10, 0.00292479, -0.00405532, -0.00347329, 0.00291715, 0.00210392, -5.85236e-10, 0.00706293, -0.00125308)
 
+[node name="AnimationPlayer" parent="CharacterBody3D/Creature" index="1"]
+autoplay = "Armature|Walk"
+playback_default_blend_time = 0.2
+speed_scale = 0.8
+script = ExtResource("10_30bw7")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="CharacterBody3D/Creature/AnimationPlayer" index="0"]
+replication_config = SubResource("SceneReplicationConfig_h6uyy")
+
+[node name="MaterialEffects" type="AnimationPlayer" parent="CharacterBody3D/Creature"]
+root_node = NodePath("../Armature")
+libraries = {
+&"": SubResource("AnimationLibrary_dun2m")
+}
+
+[node name="PartiallyExposed" type="Area3D" parent="CharacterBody3D/Creature"]
+transform = Transform3D(100, 4.52911e-06, 3.27309e-07, -1.94694e-06, 36.2521, 93.1976, 4.10236e-06, -93.1976, 36.2521, -1.38694e-07, 4.82842, -4.11693)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_bvms0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Creature/PartiallyExposed"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_upmfi")
+debug_color = Color(0.816632, 0.40307, 0.128993, 0.42)
+
+[node name="Label" type="Label" parent="CharacterBody3D/Creature"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 40.0
+offset_bottom = 11.5
+grow_vertical = 2
+size_flags_horizontal = 0
+script = ExtResource("3_7obff")
+property = "players_inside"
+target_group = "../PartiallyExposed"
+use_node_path_instead_of_group = true
+
+[node name="Exposed" type="Area3D" parent="CharacterBody3D/Creature"]
+transform = Transform3D(100, 4.52911e-06, 3.27309e-07, -1.94694e-06, 36.2521, 93.1976, 4.10236e-06, -93.1976, 36.2521, -1.38694e-07, 4.82842, -4.11693)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("2_bvms0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Creature/Exposed"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_7obff")
+
+[node name="Label2" type="Label" parent="CharacterBody3D/Creature"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = 28.0
+offset_right = 40.0
+offset_bottom = 51.0
+grow_vertical = 2
+script = ExtResource("3_7obff")
+property = "players_inside"
+target_group = "../Exposed"
+use_node_path_instead_of_group = true
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -2)
 shape = SubResource("CylinderShape3D_0s51c")
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="CharacterBody3D"]
+replication_config = SubResource("SceneReplicationConfig_jdfpr")
+visibility_update_mode = 1
+
 [node name="WoundTracker" type="Node" parent="."]
 script = ExtResource("5_2b8l4")
-player_detector_path = NodePath("../CharacterBody3D/Creature/Armature/Skeleton3D/BackRangeInner/Exposed")
+player_detector_path = NodePath("../CharacterBody3D/Creature/Exposed")
 
 [node name="Range" type="Area3D" parent="."]
 collision_layer = 0
@@ -376,7 +663,13 @@ property = "players_inside"
 target_group = "../Range"
 use_node_path_instead_of_group = true
 
-[connection signal="player_entered" from="CharacterBody3D/Creature/Armature/Skeleton3D/BackRange/PartiallyExposed" to="CharacterBody3D" method="_on_partially_exposed_player_entered"]
+[connection signal="started_jump" from="CharacterBody3D" to="CharacterBody3D/Creature/AnimationPlayer" method="_on_character_body_3d_started_jump"]
+[connection signal="attack_disabled_set" from="CharacterBody3D/Creature/AnimationPlayer" to="CharacterBody3D/Creature/Armature/Skeleton3D/Center/AttackBox/CollisionShape3D" method="set_disabled"]
+[connection signal="finished_death" from="CharacterBody3D/Creature/AnimationPlayer" to="." method="queue_free"]
+[connection signal="player_entered" from="CharacterBody3D/Creature/PartiallyExposed" to="CharacterBody3D" method="_on_partially_exposed_player_entered"]
+[connection signal="wounds_depleted" from="WoundTracker" to="CharacterBody3D/Creature/AnimationPlayer" method="_on_wound_tracker_wounds_depleted"]
+[connection signal="wounds_depleted" from="WoundTracker" to="CharacterBody3D" method="set_physics_process" binds= [false]]
+[connection signal="wounds_depleted" from="WoundTracker" to="CharacterBody3D/Creature/MaterialEffects" method="play" binds= [&"MaterialEffects|Death"]]
 [connection signal="player_entered" from="Range" to="CharacterBody3D" method="_on_range_player_entered"]
 [connection signal="player_exited" from="Range" to="CharacterBody3D" method="_on_range_player_exited"]
 

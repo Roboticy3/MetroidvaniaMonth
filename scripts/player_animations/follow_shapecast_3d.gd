@@ -12,24 +12,28 @@ func _ready():
 		visible = false
 		return
 
-var frame_count := 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# Only set a position if there is a valid list of objects the gun wants to
 	#	push.
-	var push_list:Array[Node] = emitter.push_list
+	var push_list:Array[Node3D] = emitter.push_list
 	if push_list.is_empty(): 
 		visible = false
 		return
 	
 	visible = true
+	var viewer := get_viewport().get_camera_3d()
 	
-	var target = frame_count % push_list.size()
-	#Since gun targets often disappear, check they still exist before reading
-	#	information from them.
-	if !is_instance_valid(push_list[target]):
-		return
+	var candidate_distance := INF
+	var candidate:Node3D = null
+	for p in push_list:
+		if !is_instance_valid(p): continue
+		var screen_pos := viewer.unproject_position(p.global_position)
+		var center_distance := screen_pos.distance_to(Vector2(.5,.5))
+		if center_distance < candidate_distance:
+			candidate = p
+			candidate_distance = center_distance
 	
-	frame_count += 1
+	if candidate == null: return
 	
-	global_transform = push_list[target].global_transform
+	global_transform = candidate.global_transform

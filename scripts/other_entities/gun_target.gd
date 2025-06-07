@@ -7,6 +7,5 @@ signal trigger()
 
 @rpc("any_peer", "call_local", "reliable")
 func apply_central_impulse_rpc(_impulse:Vector3):
-	print("recieved impulse")
 	trigger.emit()
 	queue_free()

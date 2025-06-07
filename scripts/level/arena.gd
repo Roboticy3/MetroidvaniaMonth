@@ -30,6 +30,7 @@ func host() -> void:
 	multiplayer.peer_disconnected.connect(remove_player)
 	
 	add_player(1)
+	print("successfully created server")
 
 func _on_join_pressed() -> void:
 	print("joining game. Reloading...")
@@ -72,5 +73,6 @@ func remove_player(id:int) -> void:
 	player.queue_free()
 
 func _on_server_disconnected():
+	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	ClientState.should_host = true
 	get_tree().reload_current_scene()

@@ -17,12 +17,18 @@ const JUMP_HORIZONTAL_VELOCITY = 15.0
 const MIN_TARGET_DISTANCE := 5.0
 const MIN_FAST_ROTATE_DISTANCE := 150.0
 
-const AERIAL_ROTATION_BOOST := 15.0
+const GROUND_ROTATION_BOOST := 20.0
+const AERIAL_ROTATION_BOOST := 25.0
+
+func _ready():
+	if !is_multiplayer_authority():
+		set_physics_process(false)
+		return
 
 # functions for setting target based off of player detector triggers
 var target:Node3D
 func _on_range_player_entered(new_target:Node3D):
-	if !new_target.multiplayer.is_server(): return
+	if new_target.get_multiplayer_authority() != get_multiplayer_authority(): return
 	target = new_target
 func _on_range_player_exited(old_target:Node3D):
 	if target == old_target:
@@ -32,15 +38,21 @@ var last_jump_dir := 0
 #The boss's weak spot is from behind. This area fires a warning telling the boss
 #	to jump out of the way.
 func _on_partially_exposed_player_entered(b: Node) -> void:
+	
+	#Crucial to the puzzle is that the boss only jumps out of the way if the 
+	#	*host* is in this zone.
+	if b.get_multiplayer_authority() != get_multiplayer_authority(): return
+	#print("I should jump now. Lol.")
+	
+	jump()
+
+signal started_jump(direction:int)
+func jump():
+	if !is_multiplayer_authority(): return
 	#Don't double jump. This may give the player an opening but that's ok
 	#	because its funny
 	if !is_on_floor():
 		return
-	
-	#Crucial to the puzzle is that the boss only jumps out of the way if the 
-	#	*host* is in this zone.
-	if !b.multiplayer.is_server(): return
-	print("I should jump now. Lol.")
 	
 	#Now, goal is to maximize distance from `b` without crashing into something.
 	velocity -= get_gravity().normalized() * JUMP_VELOCITY
@@ -49,7 +61,9 @@ func _on_partially_exposed_player_entered(b: Node) -> void:
 	
 	#Determine the sidedness of the jump to choose which animation to play
 	# 1 => Right, -1 => Left. Default 0 to Right
-	last_jump_dir = signf(get_motion_direction().x)
+	last_jump_dir = int(signf(get_motion_direction().x))
+	
+	started_jump.emit(last_jump_dir)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -60,6 +74,7 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	#Only do this on ground to not interfere with jumps.
 	if is_on_floor():
+		
 		var input_dir := get_motion_direction()
 		var direction := (global_transform.basis * input_dir).normalized()
 		if direction:
@@ -102,7 +117,9 @@ func is_too_close():
 
 func get_rotation_proportion():
 	var x := get_target_distance()
-	if !is_on_floor():
+	if is_on_floor():
+		x += GROUND_ROTATION_BOOST
+	else:
 		x += AERIAL_ROTATION_BOOST
 	var y := (x - MIN_TARGET_DISTANCE) / \
 		(MIN_FAST_ROTATE_DISTANCE - MIN_TARGET_DISTANCE)

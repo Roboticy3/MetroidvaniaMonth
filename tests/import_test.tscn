@@ -82,10 +82,6 @@ skeleton = NodePath("")
 
 [node name="Level1-props_Scene Collection_Props_Gate#StaticBody3D" type="StaticBody3D" parent="." index="9"]
 
-[node name="LineEdit" parent="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Name" index="2"]
-caret_blink = true
-caret_blink_interval = 0.5
-
 [node name="Hub" parent="." index="12" instance=ExtResource("2_s3opf")]
 script = ExtResource("3_2u8s4")
 
@@ -94,6 +90,10 @@ script = ExtResource("3_2u8s4")
 [node name="AnimationPlayer" parent="Level1-props" index="4"]
 autoplay = "Guard"
 
-[editable path="Menu"]
+[node name="LineEdit" parent="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Name" index="2"]
+caret_blink = true
+caret_blink_interval = 0.5
+
 [editable path="Hub"]
 [editable path="Level1-props"]
+[editable path="Menu"]

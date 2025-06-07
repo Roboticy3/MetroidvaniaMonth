@@ -1,0 +1,141 @@
+[gd_scene load_steps=11 format=3 uid="uid://x3fod0fcnr2b"]
+
+[ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="1_4nios"]
+[ext_resource type="ArrayMesh" uid="uid://l8nvrimbk3s5" path="res://obj/Screw.obj" id="1_x1fnu"]
+[ext_resource type="Texture2D" uid="uid://cwbdy3lf7xw5b" path="res://texture/Screw3D.png" id="2_uiku5"]
+[ext_resource type="Script" uid="uid://cys5kcuis8xxu" path="res://scripts/other_entities/bobber.gd" id="3_uiku5"]
+[ext_resource type="Script" uid="uid://btplcopvm0brp" path="res://scripts/other_entities/item_collector.gd" id="5_tdcoo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4nios"]
+albedo_texture = ExtResource("2_uiku5")
+metallic = 1.0
+metallic_specular = 0.54
+clearcoat_enabled = true
+
+[sub_resource type="Animation" id="Animation_tdcoo"]
+resource_name = "Collect"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Screw/Mesh:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.64),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OmniLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Screw:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wm3ex"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Screw/Mesh:transparency")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OmniLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Screw:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nh8b0"]
+_data = {
+&"Collect": SubResource("Animation_tdcoo"),
+&"RESET": SubResource("Animation_wm3ex")
+}
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_tdcoo"]
+radius = 4.0
+
+[node name="ScrewCollectable" type="Node3D"]
+script = ExtResource("5_tdcoo")
+
+[node name="ScrewArea" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_4nios")
+
+[node name="Screw" type="Node3D" parent="ScrewArea"]
+
+[node name="Mesh" type="MeshInstance3D" parent="ScrewArea/Screw"]
+layers = 2
+mesh = ExtResource("1_x1fnu")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_4nios")
+script = ExtResource("3_uiku5")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="ScrewArea"]
+light_size = 1.0
+light_cull_mask = 4294967293
+shadow_enabled = true
+shadow_caster_mask = 4294967293
+distance_fade_enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScrewArea"]
+libraries = {
+&"": SubResource("AnimationLibrary_nh8b0")
+}
+autoplay = "RESET"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ScrewArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_tdcoo")
+debug_color = Color(0.370692, 0.61534, 0, 0.42)
+
+[node name="Collect" type="Node" parent="."]
+script = ExtResource("5_tdcoo")
+
+[connection signal="any_player_entered" from="ScrewArea" to="." method="collect"]
+[connection signal="any_player_entered" from="ScrewArea" to="ScrewArea/AnimationPlayer" method="play" flags=3 binds= [&"Collect"]]

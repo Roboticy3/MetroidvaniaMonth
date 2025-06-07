@@ -1,9 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://luwvohrk0cnq"]
+[gd_scene load_steps=32 format=3 uid="uid://luwvohrk0cnq"]
 
 [ext_resource type="Script" uid="uid://dssggiqvkb7bf" path="res://scripts/player_actions/player_character_body_3d.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dj1mvo2la10dt" path="res://scripts/player.gd" id="1_fjrip"]
 [ext_resource type="Script" uid="uid://uccrh7oveh08" path="res://scripts/player_actions/vertical_look.gd" id="2_g2els"]
 [ext_resource type="ArrayMesh" uid="uid://wm27j7jm3dvr" path="res://obj/Gun.obj" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://dagpiu4kco0v0" path="res://scripts/ui/collectable_flag.gd" id="4_d2wvv"]
 [ext_resource type="Script" uid="uid://bsmnje1x1cxj0" path="res://scripts/player_animations/character_gun_anims.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://dhg2pmop85g06" path="res://scripts/player_actions/gun_controller.gd" id="4_qlg0r"]
 [ext_resource type="Script" uid="uid://gkthcxywpb02" path="res://scripts/player_animations/particle_explosion.gd" id="4_tuyoq"]
@@ -52,7 +53,7 @@ step = 0.02
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Camera3D/Gun:position")
+tracks/0/path = NodePath("CharacterBody3D/Camera3D/Gun/GunMesh:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -64,7 +65,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Camera3D/Gun:rotation")
+tracks/1/path = NodePath("CharacterBody3D/Camera3D/Gun/GunMesh:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -82,7 +83,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Camera3D/Gun:position")
+tracks/0/path = NodePath("CharacterBody3D/Camera3D/Gun/GunMesh:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -94,7 +95,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Camera3D/Gun:rotation")
+tracks/1/path = NodePath("CharacterBody3D/Camera3D/Gun/GunMesh:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -112,7 +113,7 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Camera3D/Gun:position")
+tracks/0/path = NodePath("CharacterBody3D/Camera3D/Gun/GunMesh:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -124,7 +125,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Camera3D/Gun:rotation")
+tracks/1/path = NodePath("CharacterBody3D/Camera3D/Gun/GunMesh:rotation")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -139,7 +140,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Camera3D/Gun:position")
+tracks/0/path = NodePath("CharacterBody3D/Camera3D/Gun/GunMesh:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -151,7 +152,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Camera3D/Gun:rotation")
+tracks/1/path = NodePath("CharacterBody3D/Camera3D/Gun/GunMesh:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -220,19 +221,12 @@ colors = PackedColorArray(1.44392e-07, 0.535117, 0.535117, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_smehm"]
 gradient = SubResource("Gradient_ur7pv")
 
-[sub_resource type="Gradient" id="Gradient_d2wvv"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.511851, 0.566403, 0.520855, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_3v2ag"]
-gradient = SubResource("Gradient_d2wvv")
-
 [node name="Player" type="Node3D" groups=["Player"]]
 script = ExtResource("1_fjrip")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." groups=["Entity"]]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 13
 script = ExtResource("1_3vyb7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
@@ -247,12 +241,16 @@ mesh = SubResource("CapsuleMesh_u8vuu")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 script = ExtResource("2_g2els")
 
-[node name="Gun" type="MeshInstance3D" parent="CharacterBody3D/Camera3D"]
+[node name="Gun" type="Node3D" parent="CharacterBody3D/Camera3D"]
+script = ExtResource("4_d2wvv")
+item_type = 2
+
+[node name="GunMesh" type="MeshInstance3D" parent="CharacterBody3D/Camera3D/Gun"]
 transform = Transform3D(0.1, 0, 0, 0, 0.0999999, 0, 0, 0, 0.1, 0.254139, -0.400065, -0.431697)
 mesh = ExtResource("3_qhqgy")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../../../..")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="CharacterBody3D/Camera3D/Gun"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="CharacterBody3D/Camera3D/Gun/GunMesh"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19178, -6.32793)
 emitting = false
 amount = 16
@@ -265,19 +263,20 @@ process_material = SubResource("ParticleProcessMaterial_qlg0r")
 draw_pass_1 = SubResource("BoxMesh_y4r1p")
 script = ExtResource("4_tuyoq")
 
-[node name="BulletEmitter" type="Node3D" parent="CharacterBody3D/Camera3D"]
+[node name="BulletEmitter" type="Node3D" parent="CharacterBody3D/Camera3D/Gun"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("4_qlg0r")
+shooter_owner_path = NodePath("../../..")
 
-[node name="Kickback" type="ShapeCast3D" parent="CharacterBody3D/Camera3D/BulletEmitter"]
+[node name="Kickback" type="ShapeCast3D" parent="CharacterBody3D/Camera3D/Gun/BulletEmitter"]
 shape = SubResource("BoxShape3D_tuyoq")
 target_position = Vector3(0, 0, 50)
 collision_mask = 2
 
-[node name="Reticle" type="Node3D" parent="CharacterBody3D/Camera3D/BulletEmitter"]
+[node name="Reticle" type="Node3D" parent="CharacterBody3D/Camera3D/Gun/BulletEmitter"]
 script = ExtResource("7_y4r1p")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CharacterBody3D/Camera3D/BulletEmitter/Reticle"]
+[node name="CSGBox3D" type="CSGBox3D" parent="CharacterBody3D/Camera3D/Gun/BulletEmitter/Reticle"]
 size = Vector3(1.5, 1.5, 1.5)
 material = SubResource("StandardMaterial3D_y4r1p")
 
@@ -389,32 +388,7 @@ step = 0.0
 nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture1D_smehm")
 
-[node name="Screws" type="Control" parent="Hud/Container/HUD/Meters/Meters"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Screws" type="TextureProgressBar" parent="Hud/Container/HUD/Meters/Meters/Screws" groups=["Health"]]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-max_value = 3.0
-value = 1.0
-nine_patch_stretch = true
-texture_progress = SubResource("GradientTexture1D_3v2ag")
-tint_progress = Color(0.875293, 0.247958, 0.274396, 1)
-script = ExtResource("10_y4r1p")
-efficiency = 1.0
-fuel_unit_visual_aspect = 1.0
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Hud/Container/HUD/Meters/Meters/Screws/Screws"]
-replication_config = SubResource("SceneReplicationConfig_ur7pv")
-
 [connection signal="look" from="CharacterBody3D" to="CharacterBody3D/Camera3D" method="_on_look"]
-[connection signal="shoot" from="CharacterBody3D/Camera3D/BulletEmitter" to="CharacterBody3D/Camera3D/Gun/GPUParticles3D" method="_on_shoot"]
-[connection signal="shoot" from="CharacterBody3D/Camera3D/BulletEmitter" to="CharacterBody3D/PistonAnims" method="_on_shoot"]
+[connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/Camera3D/Gun/GunMesh/GPUParticles3D" method="_on_shoot"]
+[connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/PistonAnims" method="_on_shoot"]
 [connection signal="value_changed" from="Hud/Container/HUD/Meters/Meters/HealthWrapper/Health" to="." method="check_health"]
-[connection signal="value_changed" from="Hud/Container/HUD/Meters/Meters/Screws/Screws" to="." method="check_health"]

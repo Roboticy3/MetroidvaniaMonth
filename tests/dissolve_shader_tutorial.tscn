@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5fhqg1ypd0cm"]
+
+[ext_resource type="Shader" uid="uid://cv66ia2qbdh0j" path="res://tests/dissolve_shader_tutorial.gdshader" id="1_q0wqk"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_q0wqk"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_ylrcp"]
+sky_material = SubResource("ProceduralSkyMaterial_q0wqk")
+
+[sub_resource type="Environment" id="Environment_u8jwt"]
+background_mode = 2
+sky = SubResource("Sky_ylrcp")
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0177
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q0wqk"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q0wqk"]
+seamless = true
+noise = SubResource("FastNoiseLite_q0wqk")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ylrcp"]
+render_priority = 0
+shader = ExtResource("1_q0wqk")
+shader_parameter/dissolve_threshold = 0.428
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_q0wqk")
+
+[node name="DissolveShaderTutorial" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_u8jwt")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_angular_distance = 9.14
+shadow_enabled = true
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+radius = 1.0
+radial_segments = 24
+rings = 12
+material = SubResource("ShaderMaterial_ylrcp")

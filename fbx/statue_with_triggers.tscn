@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv83l4nq14nt3"]
+[gd_scene load_steps=9 format=3 uid="uid://dv83l4nq14nt3"]
 
 [ext_resource type="PackedScene" uid="uid://chwi83yaq60wx" path="res://fbx/statue.tscn" id="1_xdwst"]
 [ext_resource type="Script" uid="uid://b0d1fxwhexfyg" path="res://scripts/level/show_anim_names.gd" id="2_6nrga"]
@@ -52,24 +52,35 @@ _data = {
 &"RESET": SubResource("Animation_6nm83")
 }
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_6nrga"]
+size = Vector3(2, 9.306, 1.2)
+
 [node name="Statue" instance=ExtResource("1_xdwst")]
 
 [node name="AnimationPlayer" parent="." index="2"]
 script = ExtResource("2_6nrga")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." index="4"]
+[node name="PlayerOccluder" type="StaticBody3D" parent="." index="3"]
+collision_layer = 8
+collision_mask = 8
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerOccluder" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 shape = SubResource("CapsuleShape3D_6nrga")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="StaticBody3D" index="1"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerOccluder" index="1"]
 libraries = {
 &"": SubResource("AnimationLibrary_23y7u")
 }
 
-[node name="GunTarget" parent="." index="5" instance=ExtResource("2_ae8tc")]
+[node name="GunTarget" parent="." index="4" instance=ExtResource("2_ae8tc")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 6.05, 0.8)
 
+[node name="GunOccluder" type="StaticBody3D" parent="." index="5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GunOccluder" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08616e-07, 4.15308, -0.1)
+shape = SubResource("BoxShape3D_6nrga")
+
 [connection signal="trigger" from="GunTarget" to="AnimationPlayer" method="play" binds= [&"StatueSkeleton|Unguard"]]
-[connection signal="trigger" from="GunTarget" to="StaticBody3D/AnimationPlayer" method="play" binds= [&"MoveBack"]]
+[connection signal="trigger" from="GunTarget" to="PlayerOccluder/AnimationPlayer" method="play" binds= [&"MoveBack"]]

@@ -5,3 +5,5 @@ func _ready():
 
 var should_host = true
 var port := 55555
+
+var save:SaveData = load("res://save.tres")
