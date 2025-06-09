@@ -1,5 +1,6 @@
 extends Area3D
 var players_inside:Array[Node3D] = []
+@export var require_multiplayer_auth := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -24,8 +25,10 @@ func _on_body_exited(b:Node) -> void:
 
 #redundantly check for players inside, so if multiple players are inside, and
 #	one exits, `player_inside` can still be relied on.
-func check_player_inside():
+func check_player_inside() -> void:
 	players_inside = get_overlapping_bodies().filter(is_player_component)
 
-func is_player_component(b:Node):
-	return b.get_parent().is_in_group("Player")
+func is_player_component(b:Node) -> bool:
+	if !require_multiplayer_auth or b.is_multiplayer_authority():
+		return b.get_parent().is_in_group("Player")
+	return false

@@ -424,14 +424,14 @@ bones/59/rotation = Quaternion(-0.0224702, 0.306537, 0.0960686, 0.946732)
 bones/59/scale = Vector3(1, 1, 1)
 
 [node name="BackRange" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, 2.35459e-08, 6.00297e-08, 2.50689e-09, 0.931975, -0.362521, -5.58311e-08, 0.362521, 0.931976, 4.37211e-10, 0.0411693, 0.0482842)
+transform = Transform3D(1, -6.82379e-08, 4.42381e-08, 9.56391e-08, 0.931975, -0.362522, -1.11277e-08, 0.362521, 0.931976, 1.06435e-09, 0.0411693, 0.0482842)
 bone_idx = 25
 
 [node name="BackRange" parent="CharacterBody3D/Creature/Armature/Skeleton3D/BackRange" index="0"]
 visible = false
 
 [node name="BackRangeInner" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, 2.35459e-08, 6.00297e-08, 2.50689e-09, 0.931975, -0.362521, -5.58311e-08, 0.362521, 0.931976, 4.37211e-10, 0.0411693, 0.0482842)
+transform = Transform3D(1, -6.82379e-08, 4.42381e-08, 9.56391e-08, 0.931975, -0.362522, -1.11277e-08, 0.362521, 0.931976, 1.06435e-09, 0.0411693, 0.0482842)
 visible = false
 bone_idx = 26
 
@@ -447,7 +447,7 @@ surface_material_override/2 = SubResource("StandardMaterial3D_jdfpr")
 surface_material_override/0 = SubResource("StandardMaterial3D_h6uyy")
 
 [node name="Center" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 3.55271e-15, 2.38419e-07, 7.98275e-08, -0.942282, -0.334821, 2.24658e-07, 0.334821, -0.942282, -7.33799e-18, 0.0521755, 0.0430473)
+transform = Transform3D(1, -2.8777e-13, 2.3842e-07, 7.98276e-08, -0.942282, -0.334822, 2.24658e-07, 0.334821, -0.942282, -7.33799e-18, 0.0521755, 0.0430473)
 bone_name = "Center"
 bone_idx = 11
 
@@ -475,7 +475,7 @@ disabled = true
 debug_color = Color(0.632962, 0.528333, 1.92523e-07, 0.42)
 
 [node name="Tail" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, 2.42045e-09, 6.85363e-08, -5.71847e-08, 0.518119, 0.855308, -2.47888e-08, -0.855309, 0.518119, -9.74527e-10, 0.0665878, 0.0297376)
+transform = Transform3D(1, 2.11354e-09, -2.45955e-08, 3.59475e-08, 0.51812, 0.855308, 1.99146e-08, -0.855308, 0.518119, -1.48611e-09, 0.0665878, 0.0297376)
 bone_name = "Bone.003"
 bone_idx = 27
 
@@ -501,7 +501,7 @@ shadow_enabled = true
 omni_range = 20.0
 
 [node name="Hand_L" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.997967, 0.0343157, 0.0537135, -0.0520636, -0.0472887, 0.997524, 0.0367708, -0.998292, -0.0454055, 0.0305749, -9.35181e-05, 0.0196167)
+transform = Transform3D(0.997967, 0.034315, 0.0537137, -0.0520638, -0.0472891, 0.997524, 0.0367701, -0.998292, -0.045406, 0.0305749, -9.35278e-05, 0.0196168)
 bone_name = "Tentacle.L.004"
 bone_idx = 43
 
@@ -521,7 +521,7 @@ shadow_enabled = true
 omni_range = 20.0
 
 [node name="Hand_R" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.997967, -0.0343156, -0.0537125, 0.0520627, -0.0472871, 0.997524, -0.0367706, -0.998293, -0.045404, -0.0305749, -9.34433e-05, 0.0196167)
+transform = Transform3D(0.997967, -0.0343148, -0.0537125, 0.0520626, -0.0472866, 0.997524, -0.0367697, -0.998292, -0.0454035, -0.0305749, -9.34291e-05, 0.0196167)
 bone_name = "Tentacle.R.004"
 bone_idx = 37
 
@@ -548,7 +548,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_atrna")
 surface_material_override/0 = SubResource("StandardMaterial3D_6dq67")
 
 [node name="WoundTargets" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="10"]
-transform = Transform3D(1, -8.9407e-08, 1.11759e-07, -7.45058e-09, 0.734649, 0.678447, -1.3411e-07, -0.678447, 0.734649, -9.31323e-10, 0.0521754, 0.0430473)
+transform = Transform3D(1, -1.15484e-07, 2.23517e-08, 8.56817e-08, 0.734649, 0.678447, -8.9407e-08, -0.678447, 0.734649, -9.31323e-10, 0.0521754, 0.0430473)
 bone_name = "Bone.004"
 bone_idx = 24
 
@@ -559,7 +559,7 @@ transform = Transform3D(0.0035967, 0.00281706, 0.00203173, 1.36197e-12, 0.002924
 transform = Transform3D(0.0035967, 0.00281706, 0.00203173, -1.22297e-11, 0.00292479, -0.00405532, -0.00347329, 0.00291715, 0.00210392, 1.02532e-09, 0.014131, -0.00056202)
 
 [node name="WoundTargets2" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="11"]
-transform = Transform3D(1, 2.42045e-09, 6.85363e-08, -5.71847e-08, 0.518119, 0.855308, -2.47888e-08, -0.855309, 0.518119, -9.74527e-10, 0.0665878, 0.0297376)
+transform = Transform3D(1, 2.11354e-09, -2.45955e-08, 3.59475e-08, 0.51812, 0.855308, 1.99146e-08, -0.855308, 0.518119, -1.48611e-09, 0.0665878, 0.0297376)
 bone_name = "Bone.003"
 bone_idx = 27
 

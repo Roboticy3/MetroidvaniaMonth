@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://divm3hfp84v1n"]
+[gd_scene load_steps=22 format=3 uid="uid://divm3hfp84v1n"]
 
 [ext_resource type="PackedScene" uid="uid://lflopx50nk2t" path="res://scenes/Arena.tscn" id="1_8xgfm"]
 [ext_resource type="PackedScene" uid="uid://dnfbu6cnjq2l1" path="res://glb/Level1.glb" id="2_emn5n"]
@@ -7,9 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://dv83l4nq14nt3" path="res://fbx/statue_with_triggers.tscn" id="6_6nm83"]
 [ext_resource type="PackedScene" uid="uid://cysgqnkwdgnga" path="res://glb/Shaft.glb" id="7_emn5n"]
 [ext_resource type="PackedScene" uid="uid://b7n4iotn5khu0" path="res://glb/Stairs.glb" id="7_nk028"]
+[ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="8_flmao"]
 [ext_resource type="PackedScene" uid="uid://ha7ayschigmb" path="res://scenes/EnvironmentChanger.tscn" id="8_nk028"]
 [ext_resource type="PackedScene" uid="uid://b0ydpbvs5h33h" path="res://scenes/creature.tscn" id="8_ryswq"]
 [ext_resource type="PackedScene" uid="uid://x3fod0fcnr2b" path="res://scenes/screw_collectable.tscn" id="10_j0jua"]
+[ext_resource type="Script" uid="uid://b504rmuos4of8" path="res://scripts/level/visibility_group_user.gd" id="11_pu7fq"]
+[ext_resource type="Script" uid="uid://c4qs2ck65apjb" path="res://scripts/level/VisibilityGroup.gd" id="12_7wgm6"]
+[ext_resource type="Script" uid="uid://uedccm82yn40" path="res://scripts/level/audio_stream_on_visible.gd" id="14_76qi3"]
+[ext_resource type="AudioStream" uid="uid://hoqys6x2esbh" path="res://freesound/269382__lwdickens__room-tone-hallway-ventilation.wav" id="14_w7j6y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_emn5n"]
 size = Vector3(1.54248, 139, 0.6)
@@ -28,6 +33,10 @@ sky = SubResource("Sky_nk028")
 ambient_light_source = 3
 sdfgi_use_occlusion = true
 volumetric_fog_enabled = true
+
+[sub_resource type="Resource" id="Resource_flmao"]
+script = ExtResource("12_7wgm6")
+metadata/_custom_type_script = "uid://c4qs2ck65apjb"
 
 [node name="Arena" instance=ExtResource("1_8xgfm")]
 
@@ -72,9 +81,6 @@ surface_material_override/0 = ExtResource("4_nk028")
 [node name="Window-004" parent="Hub/Level1/Scene Collection/Terrain" index="13" groups=["Window"]]
 surface_material_override/0 = ExtResource("4_nk028")
 
-[node name="Window-grate" parent="Hub/Level1/Scene Collection/Terrain" index="15" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_nk028")
-
 [node name="Tunnelshadow" parent="Hub/Level1/Scene Collection/Lights" index="0"]
 light_energy = 1.0
 shadow_enabled = true
@@ -90,12 +96,6 @@ light_energy = 1.0
 shadow_enabled = true
 omni_range = 5.0
 
-[node name="Sun" parent="Hub/Level1/Scene Collection/Ambient" index="0" groups=["Sun"]]
-
-[node name="Sun-Shadow" parent="Hub/Level1/Scene Collection/Ambient" index="1" groups=["Sun"]]
-transform = Transform3D(-0.225327, -0.453232, -0.862443, -0.822588, -0.385855, 0.417689, -0.522088, 0.803553, -0.28588, -3.16397, 9.24005, -11.4066)
-shadow_enabled = true
-
 [node name="StatueContainer" type="Node3D" parent="Hub" index="1"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 6, 22)
 
@@ -106,6 +106,11 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 0.
 
 [node name="Stairs3" parent="Hub" index="3" instance=ExtResource("7_nk028")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.5, 0.5, -5.5)
+
+[node name="EnvironmentChanger" parent="Hub" index="4" instance=ExtResource("8_nk028")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.1, 2, -22.7)
+script = ExtResource("8_flmao")
+require_multiplayer_auth = true
 
 [node name="Shaft" type="Node3D" parent="." index="3"]
 script = ExtResource("3_g843x")
@@ -330,15 +335,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, -26)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.22876, -67, 2.8)
 shape = SubResource("BoxShape3D_emn5n")
 
-[node name="EnvironmentChanger" parent="Shaft" index="2" instance=ExtResource("8_nk028")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.1, 2, -22.7)
-sun_color = Color(0.372549, 0.713726, 0.67451, 1)
-
-[node name="EnvironmentChanger2" parent="Shaft" index="3" instance=ExtResource("8_nk028")]
+[node name="EnvironmentChanger2" parent="Shaft" index="2" instance=ExtResource("8_nk028")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.1, -7, -22.7)
-sun_color = Color(0.759767, 0.630471, 0.216884, 1)
+script = ExtResource("8_flmao")
+require_multiplayer_auth = true
 
-[node name="_Area3D_93721" type="Area3D" parent="Shaft" index="4"]
+[node name="_Area3D_93721" type="Area3D" parent="Shaft" index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -128, -80.05)
 visible = false
 
@@ -347,7 +349,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -8.5, -6)
 shape = SubResource("BoxShape3D_nk028")
 debug_color = Color(0.72298, 0.245551, 1, 0.42)
 
-[node name="Creature" parent="Shaft" index="5" instance=ExtResource("8_ryswq")]
+[node name="Creature" parent="Shaft" index="4" instance=ExtResource("8_ryswq")]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 21, -150.9, -75)
 
 [node name="Skeleton3D" parent="Shaft/Creature/CharacterBody3D/Creature/Armature" index="0"]
@@ -400,11 +402,35 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, 4.3, 23)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 12.5, 22.1)
 item_flag = 1
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="7"]
+transform = Transform3D(0.09295, -0.488386, -0.867663, -0.427142, -0.806731, 0.40833, -0.899394, 0.332661, -0.283596, 0, 0, 0)
+light_color = Color(0.723498, 0.961027, 0.916198, 1)
+light_energy = 3.0
+shadow_enabled = true
+script = ExtResource("11_pu7fq")
+group = SubResource("Resource_flmao")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DirectionalLight3D" index="0"]
+stream = ExtResource("14_w7j6y")
+volume_db = -6.0
+script = ExtResource("14_76qi3")
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." index="8"]
+transform = Transform3D(0.09295, -0.488386, -0.867663, -0.427142, -0.806731, 0.40833, -0.899394, 0.332661, -0.283596, 0, 0, 0)
+visible = false
+light_color = Color(0.997893, 0.905219, 0.51334, 1)
+shadow_enabled = true
+script = ExtResource("11_pu7fq")
+group = SubResource("Resource_flmao")
+
+[connection signal="any_player_entered" from="Hub/EnvironmentChanger" to="DirectionalLight3D" method="set_visible" binds= [true]]
+[connection signal="any_player_entered" from="Shaft/EnvironmentChanger2" to="DirectionalLight3D2" method="set_visible" binds= [true]]
+
 [editable path="Hub/Level1"]
 [editable path="Hub/Stairs2"]
 [editable path="Hub/Stairs3"]
+[editable path="Hub/EnvironmentChanger"]
 [editable path="Shaft/Shaft2"]
-[editable path="Shaft/EnvironmentChanger"]
 [editable path="Shaft/EnvironmentChanger2"]
 [editable path="Shaft/Creature"]
 [editable path="Shaft/Creature/CharacterBody3D/Creature"]

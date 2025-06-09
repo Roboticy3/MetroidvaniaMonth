@@ -16,6 +16,3 @@ func set_enabled(to:bool):
 	set("visible", to)
 	set_process(to)
 	set_process_unhandled_input(to)
-	for c in get_children():
-		if c.has_method("set_enabled"):
-			c.set_enabled(to)
