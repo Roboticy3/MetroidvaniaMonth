@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://x3fod0fcnr2b"]
+[gd_scene load_steps=12 format=3 uid="uid://x3fod0fcnr2b"]
 
 [ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="1_4nios"]
 [ext_resource type="ArrayMesh" uid="uid://l8nvrimbk3s5" path="res://obj/Screw.obj" id="1_x1fnu"]
 [ext_resource type="Texture2D" uid="uid://cwbdy3lf7xw5b" path="res://texture/Screw3D.png" id="2_uiku5"]
 [ext_resource type="Script" uid="uid://cys5kcuis8xxu" path="res://scripts/other_entities/bobber.gd" id="3_uiku5"]
 [ext_resource type="Script" uid="uid://btplcopvm0brp" path="res://scripts/other_entities/item_collector.gd" id="5_tdcoo"]
+[ext_resource type="AudioStream" uid="uid://dkdiur0bihv1f" path="res://als/Shimmer.wav" id="6_wm3ex"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4nios"]
 albedo_texture = ExtResource("2_uiku5")
@@ -50,6 +51,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 2, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Screw/Mesh/Shimmer:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -50.0]
+}
 
 [sub_resource type="Animation" id="Animation_wm3ex"]
 length = 0.001
@@ -89,6 +114,30 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape3D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Screw/Mesh/Shimmer:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nh8b0"]
 _data = {
@@ -97,7 +146,7 @@ _data = {
 }
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_tdcoo"]
-radius = 4.0
+radius = 2.0
 
 [node name="ScrewCollectable" type="Node3D"]
 script = ExtResource("5_tdcoo")
@@ -115,6 +164,13 @@ mesh = ExtResource("1_x1fnu")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_4nios")
 script = ExtResource("3_uiku5")
+
+[node name="Shimmer" type="AudioStreamPlayer3D" parent="ScrewArea/Screw/Mesh"]
+stream = ExtResource("6_wm3ex")
+pitch_scale = 3.0
+autoplay = true
+max_distance = 10.0
+bus = &"LittleSounds"
 
 [node name="OmniLight3D" type="OmniLight3D" parent="ScrewArea"]
 light_size = 1.0

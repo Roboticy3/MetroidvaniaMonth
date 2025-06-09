@@ -15,10 +15,10 @@ const JUMP_HORIZONTAL_VELOCITY = 15.0
 ## MIN_TARGET is also the "attack range" of the boss. It will stop following in
 ## this range to attack.
 const MIN_TARGET_DISTANCE := 5.0
-const MIN_FAST_ROTATE_DISTANCE := 150.0
+const MIN_FAST_ROTATE_DISTANCE := 100.0
 
-const GROUND_ROTATION_BOOST := 20.0
-const AERIAL_ROTATION_BOOST := 25.0
+const GROUND_ROTATION_BOOST := 0.0
+const AERIAL_ROTATION_BOOST := 3.0
 
 func _ready():
 	if !is_multiplayer_authority():

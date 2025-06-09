@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=3 uid="uid://blvcurj6b7ggs"]
+
+[ext_resource type="Script" uid="uid://b504rmuos4of8" path="res://scripts/level/active_group_user.gd" id="1_nytd7"]
+[ext_resource type="Script" uid="uid://c4qs2ck65apjb" path="res://scripts/level/ActiveGroup.gd" id="2_tgsb7"]
+[ext_resource type="AudioStream" uid="uid://hoqys6x2esbh" path="res://freesound/269382__lwdickens__room-tone-hallway-ventilation.wav" id="3_si2jj"]
+
+[sub_resource type="Resource" id="Resource_76qi3"]
+script = ExtResource("2_tgsb7")
+active_key = "active"
+metadata/_custom_type_script = "uid://c4qs2ck65apjb"
+
+[sub_resource type="Animation" id="Animation_76qi3"]
+resource_name = "Enter"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Ambient:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0666667, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Ambient:volume_db")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-50.0, -6.0]
+}
+
+[sub_resource type="Animation" id="Animation_g36uf"]
+resource_name = "Exit"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Ambient:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.266667, 1.13333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Ambient:volume_db")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.21, 1.03333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-6.0, -50.0]
+}
+
+[sub_resource type="Animation" id="Animation_w7j6y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Ambient:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Ambient:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-80.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w7j6y"]
+_data = {
+&"Enter": SubResource("Animation_76qi3"),
+&"Exit": SubResource("Animation_g36uf"),
+&"RESET": SubResource("Animation_w7j6y")
+}
+
+[node name="HubEnvironment" type="Node"]
+script = ExtResource("1_nytd7")
+group = SubResource("Resource_76qi3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.09295, -0.488386, -0.867663, -0.427142, -0.806731, 0.408331, -0.899394, 0.332661, -0.283596, 0, 0, 0)
+light_color = Color(0.723498, 0.961027, 0.916198, 1)
+light_energy = 3.0
+shadow_enabled = true
+
+[node name="Ambient" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_si2jj")
+volume_db = -80.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../DirectionalLight3D")
+libraries = {
+&"": SubResource("AnimationLibrary_w7j6y")
+}
+
+[connection signal="activated" from="." to="AnimationPlayer" method="play" binds= [&"Enter"]]
+[connection signal="active_changed" from="." to="DirectionalLight3D" method="set_visible"]
+[connection signal="deactivated" from="." to="AnimationPlayer" method="play" binds= [&"Exit"]]

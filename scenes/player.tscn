@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://luwvohrk0cnq"]
+[gd_scene load_steps=41 format=3 uid="uid://luwvohrk0cnq"]
 
 [ext_resource type="Script" uid="uid://dssggiqvkb7bf" path="res://scripts/player_actions/player_character_body_3d.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dj1mvo2la10dt" path="res://scripts/player.gd" id="1_fjrip"]
@@ -8,12 +8,15 @@
 [ext_resource type="Script" uid="uid://bsmnje1x1cxj0" path="res://scripts/player_animations/character_gun_anims.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://dhg2pmop85g06" path="res://scripts/player_actions/gun_controller.gd" id="4_qlg0r"]
 [ext_resource type="Script" uid="uid://gkthcxywpb02" path="res://scripts/player_animations/particle_explosion.gd" id="4_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://di2750svyuocv" path="res://c78/Roland CR-78 Samples/BD/CR78 BD-01.wav" id="6_f1ej7"]
+[ext_resource type="AudioStream" uid="uid://hxsy2ykw45e8" path="res://aud/gunshot.wav" id="6_oprun"]
 [ext_resource type="Script" uid="uid://bgaoc6hjlc2ak" path="res://scripts/player_animations/follow_shapecast_3d.gd" id="7_y4r1p"]
 [ext_resource type="Script" uid="uid://dr1wskeuyo43t" path="res://scripts/ui/modal_auth.gd" id="8_ur7pv"]
 [ext_resource type="Script" uid="uid://bmkjfyajyj6ji" path="res://scripts/player_actions/multiplayer_auth_setter.gd" id="10_3v2ag"]
 [ext_resource type="Script" uid="uid://thhqqlwhc3p3" path="res://scripts/ui/fuel.gd" id="10_y4r1p"]
-[ext_resource type="AudioStream" uid="uid://brxmi2xyca3tn" path="res://aud/footstep.wav" id="11_jej6c"]
 [ext_resource type="Script" uid="uid://tof4pgh44jmp" path="res://scripts/player_animations/player_footstep_stream.gd" id="12_f1ej7"]
+[ext_resource type="AudioStream" uid="uid://5fslsnudsthm" path="res://aud/jetpack.wav" id="14_a8ls1"]
+[ext_resource type="Script" uid="uid://bfxb8y8fxoaki" path="res://scripts/player_animations/jetpack_stream.gd" id="15_qfm1y"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u8vuu"]
 
@@ -26,15 +29,10 @@ no_depth_test = true
 albedo_color = Color(0.033181, 0.033181, 0.033181, 1)
 metallic = 0.5
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tuyoq"]
-size = Vector3(5, 5, 5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4r1p"]
-no_depth_test = true
-albedo_color = Color(0, 0, 0, 1)
-emission_enabled = true
-emission = Color(1, 0.15, 0, 1)
-emission_energy_multiplier = 5.0
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_oprun"]
+random_pitch = 3.0
+streams_count = 1
+stream_0/stream = ExtResource("6_oprun")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qlg0r"]
 lifetime_randomness = 0.46
@@ -55,6 +53,16 @@ radial_accel_max = 343.9
 collision_mode = 2
 
 [sub_resource type="BoxMesh" id="BoxMesh_y4r1p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tuyoq"]
+size = Vector3(5, 5, 5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4r1p"]
+no_depth_test = true
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.15, 0, 1)
+emission_energy_multiplier = 5.0
 
 [sub_resource type="Animation" id="Animation_qlg0r"]
 resource_name = "Fire"
@@ -192,12 +200,17 @@ properties/2/spawn = true
 properties/2/replication_mode = 1
 properties/3/path = NodePath(".:velocity_sync")
 properties/3/spawn = true
-properties/3/replication_mode = 2
+properties/3/replication_mode = 1
 properties/4/path = NodePath(".:health")
 properties/4/spawn = true
 properties/4/replication_mode = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y4r1p"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4r5pv"]
+playback_mode = 2
+streams_count = 1
+stream_0/stream = ExtResource("6_f1ej7")
 
 [sub_resource type="Gradient" id="Gradient_smehm"]
 offsets = PackedFloat32Array(0)
@@ -237,6 +250,7 @@ script = ExtResource("1_fjrip")
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." groups=["Entity"]]
 collision_layer = 2
 collision_mask = 13
+floor_snap_length = 1.0
 script = ExtResource("1_3vyb7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
@@ -261,6 +275,24 @@ mesh = ExtResource("3_qhqgy")
 skeleton = NodePath("../../../..")
 surface_material_override/1 = SubResource("StandardMaterial3D_d2wvv")
 
+[node name="GunShot" type="AudioStreamPlayer3D" parent="CharacterBody3D/Camera3D/Gun/GunMesh"]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 1, -6)
+stream = SubResource("AudioStreamRandomizer_oprun")
+doppler_tracking = 1
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="CharacterBody3D/Camera3D/Gun/GunMesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32448, 1.32156, -6.17371)
+emitting = false
+amount = 16
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+collision_base_size = 0.05
+process_material = SubResource("ParticleProcessMaterial_qlg0r")
+draw_pass_1 = SubResource("BoxMesh_y4r1p")
+script = ExtResource("4_tuyoq")
+
 [node name="BulletEmitter" type="Node3D" parent="CharacterBody3D/Camera3D/Gun"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("4_qlg0r")
@@ -272,24 +304,16 @@ target_position = Vector3(0, 0, 50)
 collision_mask = 2
 
 [node name="Reticle" type="Node3D" parent="CharacterBody3D/Camera3D/Gun/BulletEmitter"]
+visible = false
 script = ExtResource("7_y4r1p")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CharacterBody3D/Camera3D/Gun/BulletEmitter/Reticle"]
 size = Vector3(1.5, 1.5, 1.5)
 material = SubResource("StandardMaterial3D_y4r1p")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="CharacterBody3D/Camera3D/Gun"]
-transform = Transform3D(0.1, 0, 0, 0, 0.0999999, 0, 0, 0, 0.1, 0.254139, -0.280887, -1.06449)
-emitting = false
-amount = 16
-lifetime = 0.25
-one_shot = true
-explosiveness = 1.0
-randomness = 1.0
-collision_base_size = 0.05
-process_material = SubResource("ParticleProcessMaterial_qlg0r")
-draw_pass_1 = SubResource("BoxMesh_y4r1p")
-script = ExtResource("4_tuyoq")
+[node name="AudioListener3D" type="AudioListener3D" parent="CharacterBody3D/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+script = ExtResource("10_3v2ag")
 
 [node name="PistonAnims" type="AnimationPlayer" parent="CharacterBody3D"]
 root_node = NodePath("../..")
@@ -307,14 +331,16 @@ replication_config = SubResource("SceneReplicationConfig_fjrip")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_y4r1p")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
-stream = ExtResource("11_jej6c")
-volume_db = 3.0
+[node name="Footsteps" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
+stream = SubResource("AudioStreamRandomizer_4r5pv")
+bus = &"LittleSounds"
 doppler_tracking = 1
 script = ExtResource("12_f1ej7")
 
-[node name="AudioListener3D" type="AudioListener3D" parent="CharacterBody3D"]
-script = ExtResource("10_3v2ag")
+[node name="Jetpack" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
+stream = ExtResource("14_a8ls1")
+bus = &"Jetpack"
+script = ExtResource("15_qfm1y")
 
 [node name="Hud" type="CanvasLayer" parent="."]
 script = ExtResource("8_ur7pv")
@@ -409,6 +435,7 @@ nine_patch_stretch = true
 texture_progress = SubResource("GradientTexture1D_smehm")
 
 [connection signal="look" from="CharacterBody3D" to="CharacterBody3D/Camera3D" method="_on_look"]
-[connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/Camera3D/Gun/GPUParticles3D" method="_on_shoot"]
+[connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/Camera3D/Gun/GunMesh/GPUParticles3D" method="_on_shoot"]
 [connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/PistonAnims" method="_on_shoot"]
+[connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/Camera3D/Gun/GunMesh/GunShot" method="play" unbinds=2]
 [connection signal="value_changed" from="Hud/Container/HUD/Meters/Meters/HealthWrapper/Health" to="." method="check_health"]

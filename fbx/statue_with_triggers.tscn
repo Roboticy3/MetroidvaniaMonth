@@ -57,6 +57,9 @@ size = Vector3(2, 9.306, 1.2)
 
 [node name="Statue" instance=ExtResource("1_xdwst")]
 
+[node name="StatueBase" parent="StatueSkeleton/Skeleton3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
 [node name="AnimationPlayer" parent="." index="2"]
 script = ExtResource("2_6nrga")
 

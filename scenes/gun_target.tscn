@@ -1,6 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjcy8xm7n5hca"]
+[gd_scene load_steps=8 format=3 uid="uid://cjcy8xm7n5hca"]
 
 [ext_resource type="Script" uid="uid://c013iqgismud" path="res://scripts/other_entities/gun_target.gd" id="1_2eatg"]
+[ext_resource type="AudioStream" uid="uid://lewi50jdfvdg" path="res://c78/Roland CR-78 Samples/HB/CR78 HB-01.wav" id="2_nb7h8"]
+[ext_resource type="AudioStream" uid="uid://b6xg06soyhwq1" path="res://c78/Roland CR-78 Samples/LB/CR78 LB-01.wav" id="3_iwqwh"]
+[ext_resource type="AudioStream" uid="uid://c3vavt0iei6au" path="res://c78/Roland CR-78 Samples/LC/CR78 LC-01.wav" id="4_njlqc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_vee6b"]
 
@@ -9,6 +12,12 @@ albedo_color = Color(0, 0, 0, 1)
 emission_enabled = true
 emission = Color(0.414737, 0.821091, 0.278515, 1)
 emission_energy_multiplier = 5.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v1snl"]
+streams_count = 3
+stream_0/stream = ExtResource("2_nb7h8")
+stream_1/stream = ExtResource("3_iwqwh")
+stream_2/stream = ExtResource("4_njlqc")
 
 [node name="GunTarget" type="StaticBody3D" groups=["Entity"]]
 collision_layer = 2
@@ -19,3 +28,11 @@ shape = SubResource("BoxShape3D_vee6b")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 material = SubResource("StandardMaterial3D_vee6b")
+
+[node name="TargetHit" type="AudioStreamPlayer3D" parent="."]
+stream = SubResource("AudioStreamRandomizer_v1snl")
+attenuation_model = 3
+bus = &"BigSounds"
+
+[connection signal="trigger" from="." to="CollisionShape3D" method="set_disabled" binds= [true]]
+[connection signal="trigger" from="." to="TargetHit" method="play" binds= [0.0]]

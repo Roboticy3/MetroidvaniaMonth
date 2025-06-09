@@ -8,11 +8,13 @@ extends Area3D
 func _ready():
 	body_entered.connect(_on_body_entered)
 
+signal attacked(target:Node)
 func _on_body_entered(b:Node):
 	if b.is_in_group("Entity"):
 		var rot := Basis.from_euler(global_rotation, rotation_order)
 		#Auto-applies damage on players
 		print("pushing ", b, " on ", rot * force)
 		b.apply_central_impulse_rpc.rpc(rot * force)
+		attacked.emit(b)
 	else: 
 		print("not pushing ", b)

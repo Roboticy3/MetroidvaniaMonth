@@ -1,8 +1,8 @@
-[gd_resource type="Resource" script_class="SaveData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="SaveData" load_steps=2 format=3 uid="uid://c3w2a7ymjxbkg"]
 
-[ext_resource type="Script" path="res://scripts/level/SaveData.gd" id="1_dvlvu"]
+[ext_resource type="Script" uid="uid://dfeer3430afyw" path="res://scripts/level/SaveData.gd" id="1_dvlvu"]
 
 [resource]
 script = ExtResource("1_dvlvu")
-collectables = Array[int]([3, 0, 1, 0])
+collectables = Array[int]([1, 0, 1, 0])
 metadata/_custom_type_script = "uid://dfeer3430afyw"
