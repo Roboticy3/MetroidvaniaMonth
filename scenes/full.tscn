@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://divm3hfp84v1n"]
+[gd_scene load_steps=21 format=3 uid="uid://divm3hfp84v1n"]
 
 [ext_resource type="PackedScene" uid="uid://lflopx50nk2t" path="res://scenes/Arena.tscn" id="1_8xgfm"]
 [ext_resource type="PackedScene" uid="uid://dnfbu6cnjq2l1" path="res://glb/Level1.glb" id="2_emn5n"]
@@ -11,9 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://ha7ayschigmb" path="res://scenes/EnvironmentChanger.tscn" id="8_nk028"]
 [ext_resource type="PackedScene" uid="uid://b0ydpbvs5h33h" path="res://scenes/creature.tscn" id="8_ryswq"]
 [ext_resource type="PackedScene" uid="uid://x3fod0fcnr2b" path="res://scenes/screw_collectable.tscn" id="10_j0jua"]
-[ext_resource type="Script" uid="uid://b504rmuos4of8" path="res://scripts/level/visibility_group_user.gd" id="11_pu7fq"]
-[ext_resource type="Script" uid="uid://c4qs2ck65apjb" path="res://scripts/level/VisibilityGroup.gd" id="12_7wgm6"]
-[ext_resource type="Script" uid="uid://uedccm82yn40" path="res://scripts/level/audio_stream_on_visible.gd" id="14_76qi3"]
+[ext_resource type="Script" uid="uid://b504rmuos4of8" path="res://scripts/level/active_group_user.gd" id="11_pu7fq"]
+[ext_resource type="Script" uid="uid://c4qs2ck65apjb" path="res://scripts/level/ActiveGroup.gd" id="12_7wgm6"]
 [ext_resource type="AudioStream" uid="uid://hoqys6x2esbh" path="res://freesound/269382__lwdickens__room-tone-hallway-ventilation.wav" id="14_w7j6y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_emn5n"]
@@ -34,8 +33,9 @@ ambient_light_source = 3
 sdfgi_use_occlusion = true
 volumetric_fog_enabled = true
 
-[sub_resource type="Resource" id="Resource_flmao"]
+[sub_resource type="Resource" id="Resource_76qi3"]
 script = ExtResource("12_7wgm6")
+active_key = "active"
 metadata/_custom_type_script = "uid://c4qs2ck65apjb"
 
 [node name="Arena" instance=ExtResource("1_8xgfm")]
@@ -402,29 +402,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, 4.3, 23)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 12.5, 22.1)
 item_flag = 1
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="7"]
-transform = Transform3D(0.09295, -0.488386, -0.867663, -0.427142, -0.806731, 0.40833, -0.899394, 0.332661, -0.283596, 0, 0, 0)
+[node name="HubEnvironment" type="Node" parent="." index="7"]
+script = ExtResource("11_pu7fq")
+group = SubResource("Resource_76qi3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="HubEnvironment" index="0"]
+transform = Transform3D(0.09295, -0.488386, -0.867663, -0.427142, -0.806731, 0.408331, -0.899394, 0.332661, -0.283596, 0, 0, 0)
 light_color = Color(0.723498, 0.961027, 0.916198, 1)
 light_energy = 3.0
 shadow_enabled = true
-script = ExtResource("11_pu7fq")
-group = SubResource("Resource_flmao")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="DirectionalLight3D" index="0"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="HubEnvironment" index="1"]
 stream = ExtResource("14_w7j6y")
 volume_db = -6.0
-script = ExtResource("14_76qi3")
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." index="8"]
-transform = Transform3D(0.09295, -0.488386, -0.867663, -0.427142, -0.806731, 0.40833, -0.899394, 0.332661, -0.283596, 0, 0, 0)
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HubEnvironment" index="2"]
+root_node = NodePath("../DirectionalLight3D")
+
+[node name="ShaftEnvironment" type="Node" parent="." index="8"]
+script = ExtResource("11_pu7fq")
+group = SubResource("Resource_76qi3")
+active = false
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="ShaftEnvironment" index="0"]
+transform = Transform3D(0.09295, -0.488386, -0.867663, -0.427142, -0.806731, 0.408331, -0.899394, 0.332661, -0.283596, 0, 0, 0)
 visible = false
 light_color = Color(0.997893, 0.905219, 0.51334, 1)
 shadow_enabled = true
-script = ExtResource("11_pu7fq")
-group = SubResource("Resource_flmao")
 
-[connection signal="any_player_entered" from="Hub/EnvironmentChanger" to="DirectionalLight3D" method="set_visible" binds= [true]]
-[connection signal="any_player_entered" from="Shaft/EnvironmentChanger2" to="DirectionalLight3D2" method="set_visible" binds= [true]]
+[connection signal="player_entered" from="Hub/EnvironmentChanger" to="HubEnvironment" method="_on_player_entered"]
+[connection signal="any_player_entered" from="Shaft/EnvironmentChanger2" to="ShaftEnvironment" method="_on_player_entered"]
+[connection signal="active_changed" from="HubEnvironment" to="HubEnvironment/DirectionalLight3D" method="set_visible"]
+[connection signal="active_changed" from="ShaftEnvironment" to="ShaftEnvironment/DirectionalLight3D2" method="set_visible"]
 
 [editable path="Hub/Level1"]
 [editable path="Hub/Stairs2"]

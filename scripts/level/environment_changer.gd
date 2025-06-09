@@ -1,3 +1,4 @@
+## Unused!
 extends Area3D
 
 @export var sun_color:Color

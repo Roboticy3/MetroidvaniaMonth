@@ -1,18 +1,25 @@
 ## Assign nodes to the same group such that only one will be visible at a given
 ## time.
 extends Resource
-class_name VisibilityGroup
+class_name ActiveGroup
 
+@export var active_key := "active"
 var users:Array[Node] = []
 
-func grab_visibility(with:Node):
-	with.set("visible", true)
+func grab(with:Node):
+	with.set(active_key, true)
+	var found_with := false
 	for u in users:
 		if !is_instance_valid(u):
 			printerr("Group ", self, " could not validate instance ", u)
 			continue
-		if u == with: continue
-		u.set("visible", false)
+		if u == with: 
+			found_with = true
+			continue
+		u.set(active_key, false)
+	
+	if not found_with:
+		add_user(with)
 
 func add_user(new_u:Node) -> bool:
 	for u in users:
