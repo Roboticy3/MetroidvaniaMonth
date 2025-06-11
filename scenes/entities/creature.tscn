@@ -4,13 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://cfyv47q16mhkw" path="res://fbx/Creature.fbx" id="1_upmfi"]
 [ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="2_bvms0"]
 [ext_resource type="Script" uid="uid://ba3hqglxwpvw2" path="res://scripts/ui/readout.gd" id="3_7obff"]
-[ext_resource type="PackedScene" uid="uid://cjcy8xm7n5hca" path="res://scenes/gun_target.tscn" id="4_rl551"]
+[ext_resource type="PackedScene" uid="uid://cjcy8xm7n5hca" path="res://scenes/entities/gun_target.tscn" id="4_rl551"]
 [ext_resource type="Texture2D" uid="uid://b2bfk0iur1hx2" path="res://texture/ScalesDark.png" id="4_ygqry"]
 [ext_resource type="Texture2D" uid="uid://c7vtycfvrfw0x" path="res://texture/mouth.png" id="5_0s51c"]
 [ext_resource type="Script" uid="uid://c12c5nsy54wfk" path="res://scripts/other_entities/wound_tracker.gd" id="5_2b8l4"]
 [ext_resource type="Texture2D" uid="uid://pcoy71nkwoso" path="res://texture/ScalesDarke.png" id="6_k15pb"]
 [ext_resource type="AudioStream" uid="uid://hxsy2ykw45e8" path="res://aud/gunshot.wav" id="8_6dq67"]
-[ext_resource type="PackedScene" uid="uid://dc73mlh2eyoqo" path="res://scenes/creature_hand.tscn" id="8_dun2m"]
+[ext_resource type="PackedScene" uid="uid://dc73mlh2eyoqo" path="res://scenes/entities/creature_hand.tscn" id="8_dun2m"]
 [ext_resource type="Shader" uid="uid://cv66ia2qbdh0j" path="res://tests/dissolve_shader_tutorial.gdshader" id="8_h6uyy"]
 [ext_resource type="Script" uid="uid://bg0cwdc0rvulc" path="res://scripts/other_entities/entity_attacker.gd" id="8_jdfpr"]
 [ext_resource type="AudioStream" uid="uid://bmlh0ry8too1x" path="res://aud/bossfootsteps.wav" id="9_dun2m"]
@@ -41,7 +41,7 @@ albedo_texture = ExtResource("6_k15pb")
 radius = 0.0399016
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_30bw7"]
-size = Vector3(0.05, 0.090918, 0.0720391)
+size = Vector3(0.1, 0.091, 0.072)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_en6n0"]
 random_pitch = 3.0
@@ -54,6 +54,7 @@ radius = 0.0377245
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_atrna"]
 transparency = 1
 cull_mode = 2
+depth_draw_mode = 1
 albedo_texture = ExtResource("5_0s51c")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dq67"]
@@ -529,7 +530,7 @@ script = ExtResource("8_jdfpr")
 force = Vector3(0, 100, -100)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D/Center/AttackBox"]
-transform = Transform3D(1, -1.49012e-08, 0, 0, 1, 0, 1.86265e-09, -3.27826e-07, 1, 9.8953e-10, -0.0308105, 0.00819728)
+transform = Transform3D(1, -1.49012e-08, -1.06581e-14, 7.10543e-15, 1, 0, 1.86263e-09, -2.98023e-07, 1, 3.72529e-09, -0.0622199, -0.00296342)
 shape = SubResource("BoxShape3D_30bw7")
 disabled = true
 debug_color = Color(0.632962, 0.528333, 1.92523e-07, 0.42)

@@ -83,6 +83,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
+		
 		move_and_slide()
 	else:
 		move_and_slide()
@@ -90,7 +91,7 @@ func _physics_process(delta: float) -> void:
 		if col and !is_on_floor():
 			velocity += col.get_normal() * 50.0
 	
-	if target != null and !is_too_close():
+	if (target is Node3D) and (!is_too_close() or get_motion_direction().length() < 1.0):
 		var look_plane := Plane(get_gravity().normalized(), global_position)
 		var new_t := global_transform.looking_at(
 			look_plane.project(target.global_position), 
@@ -101,11 +102,17 @@ func _physics_process(delta: float) -> void:
 		)
 
 func get_motion_direction() -> Vector3:
-	if !(target is Node3D) or get_target_distance() < MIN_TARGET_DISTANCE:
+	if !(target is Node3D):
 		return Vector3.ZERO
+	
 	var desired_motion := to_local(target.global_position)
 	
+	if (get_target_distance() < MIN_TARGET_DISTANCE) \
+		and desired_motion.normalized().dot(Vector3.FORWARD) > 0.5:
+		return Vector3.ZERO
+	
 	desired_motion -= desired_motion.project(get_gravity())
+
 	return desired_motion
 
 func get_target_distance() -> float:
@@ -115,7 +122,14 @@ func get_target_distance() -> float:
 func is_too_close():
 	return get_target_distance() < MIN_TARGET_DISTANCE
 
-func get_rotation_proportion():
+func is_facing_player():
+	return (get_motion_direction() + Vector3.FORWARD).normalized().dot(Vector3.FORWARD) > 0.5
+
+func get_rotation_proportion() -> float:
+	if is_too_close() and !is_facing_player():
+		print("rotating")
+		return 0.1
+	
 	var x := get_target_distance()
 	if is_on_floor():
 		x += GROUND_ROTATION_BOOST

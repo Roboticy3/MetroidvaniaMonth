@@ -2,12 +2,14 @@ extends Node3D
 
 var peer := ENetMultiplayerPeer.new()
 
-@export var player_scene:PackedScene = load("res://scenes/player.tscn")
+@export var player_scene:PackedScene = load("res://scenes/entities/player.tscn")
 
 @export var previous_menu:PackedScene
 
+@export var auto_host := true
+
 func _ready():
-	if ClientState.should_host: 
+	if ClientState.should_host and auto_host: 
 		host()
 	else:
 		join()
@@ -46,7 +48,7 @@ func join() -> void:
 	var error:Error = peer.create_client("localhost", ClientState.port)
 	if error != OK:
 		multiplayer_error.emit("Failed to create client with error: " + error_string(error))
-		
+	
 	multiplayer.multiplayer_peer = peer
 
 #Generate a node name for players so they can be found later.

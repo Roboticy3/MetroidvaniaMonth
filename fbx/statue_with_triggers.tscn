@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://chwi83yaq60wx" path="res://fbx/statue.tscn" id="1_xdwst"]
 [ext_resource type="Script" uid="uid://b0d1fxwhexfyg" path="res://scripts/level/show_anim_names.gd" id="2_6nrga"]
-[ext_resource type="PackedScene" uid="uid://cjcy8xm7n5hca" path="res://scenes/gun_target.tscn" id="2_ae8tc"]
-[ext_resource type="PackedScene" uid="uid://ctqrlvhcyg7qq" path="res://scenes/beacon_collectable.tscn" id="4_pt26b"]
+[ext_resource type="PackedScene" uid="uid://cjcy8xm7n5hca" path="res://scenes/entities/gun_target.tscn" id="2_ae8tc"]
+[ext_resource type="PackedScene" uid="uid://ctqrlvhcyg7qq" path="res://scenes/collectables/beacon_collectable.tscn" id="4_pt26b"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6nrga"]
 radius = 3.0

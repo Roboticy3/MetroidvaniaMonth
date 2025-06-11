@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dnfbu6cnjq2l1" path="res://glb/Level1.glb" id="2_s3opf"]
 [ext_resource type="Script" uid="uid://iuus6x584bd4" path="res://scripts/level/tool_adjust_import.gd" id="3_2u8s4"]
 [ext_resource type="PackedScene" uid="uid://cyg2ghx0047nj" path="res://glb/Level1-props.glb" id="5_ynxwu"]
-[ext_resource type="PackedScene" uid="uid://cjcy8xm7n5hca" path="res://scenes/gun_target.tscn" id="6_s3opf"]
+[ext_resource type="PackedScene" uid="uid://cjcy8xm7n5hca" path="res://scenes/entities/gun_target.tscn" id="6_s3opf"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hpt72"]
 radius = 3.0

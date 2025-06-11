@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cusvwc7xul344"]
+[gd_scene load_steps=5 format=3 uid="uid://cusvwc7xul344"]
 
 [ext_resource type="Script" uid="uid://e2r5jmdul2vr" path="res://scripts/ui/modal_layer.gd" id="1_con2f"]
 [ext_resource type="Script" uid="uid://bkdd8pbtxyrju" path="res://scripts/ui/client_state_name.gd" id="2_mhnvy"]
+[ext_resource type="Script" uid="uid://cypds0yvt6lng" path="res://scripts/ui/join_button.gd" id="2_oosx4"]
 [ext_resource type="Script" uid="uid://cl3vv3ryxw0bn" path="res://scripts/ui/client_state_numeric.gd" id="3_4ytvr"]
 
 [node name="Menu" type="CanvasLayer"]
@@ -58,6 +59,7 @@ text = "Multiplayer Options:"
 [node name="Join" type="Button" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2"]
 layout_mode = 2
 text = "Join"
+script = ExtResource("2_oosx4")
 
 [node name="Text" type="VBoxContainer" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2"]
 layout_mode = 2
@@ -99,3 +101,22 @@ script = ExtResource("3_4ytvr")
 
 [node name="Error" type="Label" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text"]
 layout_mode = 2
+
+[node name="Control" type="Control" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="RestartMsg" type="Label" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -139.0
+offset_right = 139.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Exit to main menu to apply settings."
+
+[connection signal="wants_restart" from="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Name/LineEdit" to="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Control/RestartMsg" method="set_visible"]
+[connection signal="wants_restart" from="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Port/SpinBox" to="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Control/RestartMsg" method="set_visible"]

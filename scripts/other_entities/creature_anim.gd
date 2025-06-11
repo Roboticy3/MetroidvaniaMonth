@@ -23,11 +23,13 @@ signal attack_disabled_set(disabled:bool)
 var dead := false
 func _process(_delta: float) -> void:
 	if dead: return
-	if creature_body.velocity.is_zero_approx():
-		if creature_body.is_too_close():
-			play("Armature|Attack")
-	elif creature_body.is_on_floor():
+	if creature_body.is_too_close() and creature_body.is_facing_player():
+		print("attacking")
+		play("Armature|Attack")
+	elif creature_body.is_on_floor() and current_animation != "Armature|Attack":
 		play("Armature|Walk")
+	else:
+		stop()
 
 func _on_character_body_3d_started_jump(direction: int) -> void:
 	if direction == -1:

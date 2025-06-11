@@ -6,6 +6,11 @@ extends SpinBox
 func _ready() -> void:
 	value_changed.connect(_on_value_changed)
 	value = ClientState.get(state_property)
+	wants_restart.emit(false)
 
+signal wants_restart(yes:bool)
 func _on_value_changed(new_value:float):
 	ClientState.set(state_property, new_value)
+	
+	if multiplayer.has_multiplayer_peer():
+		wants_restart.emit(true)

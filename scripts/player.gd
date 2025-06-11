@@ -1,8 +1,10 @@
 extends Node3D
 
+@export var use_name_auth := true
+
 func _enter_tree() -> void:
 	#print("set authority of ", self, " in ", multiplayer.get_unique_id(), " to ", int(name))
-	set_multiplayer_authority(int(name))
+	if use_name_auth: set_multiplayer_authority(int(name))
 
 func check_health(value:float) -> void:
 	if value <= 0.0:

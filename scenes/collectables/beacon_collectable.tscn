@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ctqrlvhcyg7qq"]
 
-[ext_resource type="PackedScene" uid="uid://lm3u4rwl1xf0" path="res://scenes/collectable.tscn" id="1_mb70y"]
+[ext_resource type="PackedScene" uid="uid://lm3u4rwl1xf0" path="res://scenes/collectables/collectable.tscn" id="1_mb70y"]
 [ext_resource type="ArrayMesh" uid="uid://cl7uv1jdu4yvr" path="res://obj/Beacon.obj" id="2_s6dlw"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_s6dlw"]

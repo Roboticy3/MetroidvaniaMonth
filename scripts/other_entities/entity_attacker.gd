@@ -11,10 +11,11 @@ func _ready():
 signal attacked(target:Node)
 func _on_body_entered(b:Node):
 	if b.is_in_group("Entity"):
-		var rot := Basis.from_euler(global_rotation, rotation_order)
-		#Auto-applies damage on players
-		print("pushing ", b, " on ", rot * force)
-		b.apply_central_impulse_rpc.rpc(rot * force)
-		attacked.emit(b)
-	else: 
-		print("not pushing ", b)
+		get_tree().create_timer(0.2).timeout.connect(attack.bind(b))
+
+func attack(b:Node):
+	var rot := Basis.from_euler(global_rotation, rotation_order)
+	#Auto-applies damage on players
+	print("pushing ", b, " on ", rot * force)
+	b.apply_central_impulse_rpc.rpc(rot * force)
+	attacked.emit(b)

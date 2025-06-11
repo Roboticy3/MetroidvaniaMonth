@@ -1,0 +1,128 @@
+[gd_scene load_steps=10 format=3 uid="uid://bir7oiyqxi3ju"]
+
+[ext_resource type="Script" uid="uid://dr1wskeuyo43t" path="res://scripts/ui/modal_auth.gd" id="1_n2mlg"]
+[ext_resource type="Script" uid="uid://thhqqlwhc3p3" path="res://scripts/ui/fuel.gd" id="2_7vq3w"]
+
+[sub_resource type="Gradient" id="Gradient_smehm"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.881937, 0.881937, 0.881937, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ur7pv"]
+gradient = SubResource("Gradient_smehm")
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ur7pv"]
+properties/0/path = NodePath(".:level")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:efficiency")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+properties/2/path = NodePath(".:value")
+properties/2/spawn = true
+properties/2/replication_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_y4r1p"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(2.40654e-06, 0.729485, 0.729485, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y4r1p"]
+gradient = SubResource("Gradient_y4r1p")
+
+[sub_resource type="Gradient" id="Gradient_ur7pv"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1.44392e-07, 0.535117, 0.535117, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_smehm"]
+gradient = SubResource("Gradient_ur7pv")
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_n2mlg")
+
+[node name="Container" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HUD" type="Control" parent="Container"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Meters" type="Control" parent="Container/HUD"]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 1
+anchors_preset = 0
+offset_right = 335.0
+offset_bottom = 117.0
+
+[node name="Meters" type="VBoxContainer" parent="Container/HUD/Meters"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthWrapper" type="Control" parent="Container/HUD/Meters/Meters"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Health" type="TextureProgressBar" parent="Container/HUD/Meters/Meters/HealthWrapper" groups=["Health"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+max_value = 5.0
+value = 3.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture1D_ur7pv")
+tint_progress = Color(0.875293, 0.247958, 0.274396, 1)
+script = ExtResource("2_7vq3w")
+efficiency = 1.0
+fuel_unit_visual_aspect = 1.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Container/HUD/Meters/Meters/HealthWrapper/Health"]
+replication_config = SubResource("SceneReplicationConfig_ur7pv")
+
+[node name="FuelWrapper" type="Control" parent="Container/HUD/Meters/Meters"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Fuel" type="TextureProgressBar" parent="Container/HUD/Meters/Meters/FuelWrapper" groups=["Fuel"]]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+min_value = -1.0
+max_value = 7.0
+step = 0.0
+value = 2.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture1D_y4r1p")
+script = ExtResource("2_7vq3w")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Container/HUD/Meters/Meters/FuelWrapper/Fuel"]
+replication_config = SubResource("SceneReplicationConfig_ur7pv")
+
+[node name="FuelBottom" type="TextureProgressBar" parent="Container/HUD/Meters/Meters/FuelWrapper"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 3
+min_value = -1.0
+max_value = 7.0
+step = 0.0
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture1D_smehm")

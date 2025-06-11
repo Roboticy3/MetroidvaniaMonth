@@ -1,0 +1,106 @@
+[gd_scene load_steps=18 format=3 uid="uid://d2cdnvbvetnrh"]
+
+[ext_resource type="PackedScene" uid="uid://lflopx50nk2t" path="res://scenes/Arena.tscn" id="1_fsby3"]
+[ext_resource type="ArrayMesh" uid="uid://cl7uv1jdu4yvr" path="res://obj/Beacon.obj" id="2_leamy"]
+[ext_resource type="Shader" uid="uid://cv66ia2qbdh0j" path="res://tests/dissolve_shader_tutorial.gdshader" id="3_721jg"]
+[ext_resource type="Script" uid="uid://bpjop3l0mdxyo" path="res://scripts/other_entities/noise_mover.gd" id="4_geflf"]
+[ext_resource type="FontFile" uid="uid://bbdth12bmwugo" path="res://CASTELAR.TTF" id="5_fkd6t"]
+[ext_resource type="FontFile" uid="uid://1d8fj8dela63" path="res://CascadiaMono.ttf" id="6_keln3"]
+[ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="6_sn5u3"]
+[ext_resource type="Script" uid="uid://x4pq0bvqnwnj" path="res://scripts/other_entities/scene_changer.gd" id="8_cn35j"]
+[ext_resource type="PackedScene" uid="uid://divm3hfp84v1n" path="res://scenes/levels/full.tscn" id="9_cn35j"]
+
+[sub_resource type="Curve" id="Curve_geflf"]
+_data = [Vector2(0, 0.74111), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_fkd6t"]
+texture_mode = 1
+curve = SubResource("Curve_geflf")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_keln3"]
+fractal_gain = 1.06
+fractal_weighted_strength = 0.32
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_crctu"]
+noise = SubResource("FastNoiseLite_keln3")
+
+[sub_resource type="Gradient" id="Gradient_cn35j"]
+colors = PackedColorArray(0.87442, 0.763295, 3.85046e-07, 1, 0.762957, 0.691029, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wko7x"]
+gradient = SubResource("Gradient_cn35j")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sn5u3"]
+render_priority = 0
+shader = ExtResource("3_721jg")
+shader_parameter/base_texture = SubResource("CurveTexture_fkd6t")
+shader_parameter/inside_texture = SubResource("GradientTexture1D_wko7x")
+shader_parameter/dissolve_threshold = 0.213
+shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_crctu")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_keln3"]
+radius = 4.0
+
+[node name="Arena" instance=ExtResource("1_fsby3")]
+
+[node name="Join" parent="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2" index="1"]
+visible = false
+
+[node name="Control" parent="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text" index="3"]
+visible = false
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, -12)
+use_collision = true
+flip_faces = true
+radius = 20.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="CSGSphere3D" index="0"]
+light_color = Color(0.861416, 0.72259, 0.324134, 1)
+light_energy = 10.0
+shadow_enabled = true
+shadow_opacity = 0.78
+omni_range = 26.0
+
+[node name="Beacon" type="MeshInstance3D" parent="." index="4"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -107.455, 4.3)
+mesh = ExtResource("2_leamy")
+surface_material_override/0 = SubResource("ShaderMaterial_sn5u3")
+script = ExtResource("4_geflf")
+noise = SubResource("FastNoiseLite_keln3")
+
+[node name="Label3D" type="Label3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -12)
+billboard = 2
+text = "The Beacon"
+font = ExtResource("5_fkd6t")
+font_size = 487
+
+[node name="Start" type="Area3D" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 4, -12)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("6_sn5u3")
+
+[node name="Label3D2" type="Label3D" parent="Start" index="0"]
+billboard = 2
+text = "Start"
+font = ExtResource("6_keln3")
+font_size = 232
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Start" index="1"]
+shape = SubResource("SphereShape3D_keln3")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Start" index="2"]
+light_color = Color(0.966742, 0.426055, 0.324048, 1)
+shadow_enabled = true
+omni_range = 22.0
+
+[node name="SceneChanger" type="Node" parent="." index="7"]
+script = ExtResource("8_cn35j")
+target = ExtResource("9_cn35j")
+
+[connection signal="any_player_entered" from="Start" to="SceneChanger" method="_on_start_any_player_entered"]
+
+[editable path="Menu"]
