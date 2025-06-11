@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dv83l4nq14nt3"]
+[gd_scene load_steps=10 format=3 uid="uid://dv83l4nq14nt3"]
 
 [ext_resource type="PackedScene" uid="uid://chwi83yaq60wx" path="res://fbx/statue.tscn" id="1_xdwst"]
 [ext_resource type="Script" uid="uid://b0d1fxwhexfyg" path="res://scripts/level/show_anim_names.gd" id="2_6nrga"]
 [ext_resource type="PackedScene" uid="uid://cjcy8xm7n5hca" path="res://scenes/gun_target.tscn" id="2_ae8tc"]
+[ext_resource type="PackedScene" uid="uid://ctqrlvhcyg7qq" path="res://scenes/beacon_collectable.tscn" id="4_pt26b"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6nrga"]
 radius = 3.0
@@ -57,13 +58,10 @@ size = Vector3(2, 9.306, 1.2)
 
 [node name="Statue" instance=ExtResource("1_xdwst")]
 
-[node name="StatueBase" parent="StatueSkeleton/Skeleton3D" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="1"]
 script = ExtResource("2_6nrga")
 
-[node name="PlayerOccluder" type="StaticBody3D" parent="." index="3"]
+[node name="PlayerOccluder" type="StaticBody3D" parent="." index="2"]
 collision_layer = 8
 collision_mask = 8
 
@@ -76,14 +74,17 @@ libraries = {
 &"": SubResource("AnimationLibrary_23y7u")
 }
 
-[node name="GunTarget" parent="." index="4" instance=ExtResource("2_ae8tc")]
+[node name="GunTarget" parent="." index="3" instance=ExtResource("2_ae8tc")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 6.05, 0.8)
 
-[node name="GunOccluder" type="StaticBody3D" parent="." index="5"]
+[node name="GunOccluder" type="StaticBody3D" parent="." index="4"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GunOccluder" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.08616e-07, 4.15308, -0.1)
 shape = SubResource("BoxShape3D_6nrga")
+
+[node name="ScrewCollectable" parent="." index="5" instance=ExtResource("4_pt26b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.09471, -0.885107)
 
 [connection signal="trigger" from="GunTarget" to="AnimationPlayer" method="play" binds= [&"StatueSkeleton|Unguard"]]
 [connection signal="trigger" from="GunTarget" to="PlayerOccluder/AnimationPlayer" method="play" binds= [&"MoveBack"]]

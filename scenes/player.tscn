@@ -336,11 +336,15 @@ stream = SubResource("AudioStreamRandomizer_4r5pv")
 bus = &"LittleSounds"
 doppler_tracking = 1
 script = ExtResource("12_f1ej7")
+player_path = NodePath("..")
 
 [node name="Jetpack" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.6)
 stream = ExtResource("14_a8ls1")
+volume_db = -22.0
 bus = &"Jetpack"
 script = ExtResource("15_qfm1y")
+player_path = NodePath("..")
 
 [node name="Hud" type="CanvasLayer" parent="."]
 script = ExtResource("8_ur7pv")

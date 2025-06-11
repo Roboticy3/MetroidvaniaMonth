@@ -1,20 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://x3fod0fcnr2b"]
+[gd_scene load_steps=10 format=3 uid="uid://lm3u4rwl1xf0"]
 
-[ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="1_4nios"]
-[ext_resource type="ArrayMesh" uid="uid://l8nvrimbk3s5" path="res://obj/Screw.obj" id="1_x1fnu"]
-[ext_resource type="Texture2D" uid="uid://cwbdy3lf7xw5b" path="res://texture/Screw3D.png" id="2_uiku5"]
-[ext_resource type="Script" uid="uid://cys5kcuis8xxu" path="res://scripts/other_entities/bobber.gd" id="3_uiku5"]
-[ext_resource type="Script" uid="uid://btplcopvm0brp" path="res://scripts/other_entities/item_collector.gd" id="5_tdcoo"]
-[ext_resource type="AudioStream" uid="uid://dkdiur0bihv1f" path="res://als/Shimmer.wav" id="6_wm3ex"]
-[ext_resource type="AudioStream" uid="uid://db7xga24vudnp" path="res://aud/collect.wav" id="7_nh8b0"]
-[ext_resource type="Animation" uid="uid://chs8r1rackt8k" path="res://animations/collect.res" id="8_8o7bm"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4nios"]
-transparency = 1
-albedo_texture = ExtResource("2_uiku5")
-metallic = 1.0
-metallic_specular = 0.54
-clearcoat_enabled = true
+[ext_resource type="Script" uid="uid://btplcopvm0brp" path="res://scripts/other_entities/item_collector.gd" id="1_cy7d5"]
+[ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="2_7jhkb"]
+[ext_resource type="Script" uid="uid://cys5kcuis8xxu" path="res://scripts/other_entities/bobber.gd" id="3_ejfto"]
+[ext_resource type="AudioStream" uid="uid://dkdiur0bihv1f" path="res://als/Shimmer.wav" id="4_cooh5"]
+[ext_resource type="AudioStream" uid="uid://db7xga24vudnp" path="res://aud/collect.wav" id="5_ftjwp"]
+[ext_resource type="Animation" uid="uid://chs8r1rackt8k" path="res://animations/collect.res" id="6_cy7d5"]
 
 [sub_resource type="Animation" id="Animation_wm3ex"]
 length = 0.001
@@ -66,10 +57,22 @@ tracks/3/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Screw:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nh8b0"]
 _data = {
-&"Collect": ExtResource("8_8o7bm"),
+&"Collect": ExtResource("6_cy7d5"),
 &"RESET": SubResource("Animation_wm3ex")
 }
 
@@ -77,34 +80,27 @@ _data = {
 radius = 2.0
 
 [node name="ScrewCollectable" type="Node3D"]
-script = ExtResource("5_tdcoo")
+script = ExtResource("1_cy7d5")
 
 [node name="ScrewArea" type="Area3D" parent="."]
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("1_4nios")
+script = ExtResource("2_7jhkb")
 
 [node name="Screw" type="Node3D" parent="ScrewArea"]
-script = ExtResource("3_uiku5")
+script = ExtResource("3_ejfto")
 
 [node name="Shimmer" type="AudioStreamPlayer3D" parent="ScrewArea/Screw"]
-stream = ExtResource("6_wm3ex")
+stream = ExtResource("4_cooh5")
 pitch_scale = 3.0
 autoplay = true
 max_distance = 10.0
 bus = &"LittleSounds"
 
-[node name="Mesh" type="MeshInstance3D" parent="ScrewArea/Screw"]
-layers = 2
-cast_shadow = 0
-mesh = ExtResource("1_x1fnu")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_4nios")
-
 [node name="Pickup" type="AudioStreamPlayer3D" parent="ScrewArea/Screw"]
-stream = ExtResource("7_nh8b0")
+stream = ExtResource("5_ftjwp")
 attenuation_model = 3
-volume_db = -6.0
+volume_db = -8.0
 max_distance = 10.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="ScrewArea"]
@@ -120,7 +116,6 @@ libraries = {
 }
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ScrewArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_tdcoo")
 debug_color = Color(0.370692, 0.61534, 0, 0.42)
 

@@ -37,8 +37,12 @@ sky_material = SubResource("ProceduralSkyMaterial_nk028")
 background_mode = 2
 sky = SubResource("Sky_nk028")
 ambient_light_source = 3
+ssao_enabled = true
 sdfgi_use_occlusion = true
+fog_enabled = true
 volumetric_fog_enabled = true
+volumetric_fog_density = 0.1
+adjustment_contrast = 0.77
 
 [node name="Arena" instance=ExtResource("1_8xgfm")]
 
@@ -126,6 +130,9 @@ script = ExtResource("3_g843x")
 
 [node name="Window-Shaft" parent="Shaft/Shaft2/Scene Collection/Shaft" index="2" groups=["Window"]]
 surface_material_override/0 = ExtResource("4_nk028")
+
+[node name="Arena" parent="Shaft/Shaft2/Scene Collection/Shaft" index="3"]
+cast_shadow = 2
 
 [node name="Window-Shaft_001" parent="Shaft/Shaft2/Scene Collection/Shaft" index="4" groups=["Window"]]
 surface_material_override/0 = ExtResource("4_nk028")
@@ -383,35 +390,32 @@ transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 21, -150.9
 bones/11/rotation = Quaternion(0.989407, -0.0228137, 0.00393287, 0.143309)
 
 [node name="BackRange" parent="Shaft/Creature/CharacterBody3D/Creature/Armature/Skeleton3D" index="0"]
-transform = Transform3D(0.998928, 0.0342056, -0.0311858, -0.0440169, 0.910409, -0.411362, 0.014321, 0.412293, 0.910939, -0.000562561, 0.0409163, 0.0476815)
+transform = Transform3D(0.998928, 0.0342055, -0.0311859, -0.0440168, 0.910408, -0.411363, 0.014321, 0.412294, 0.910939, -0.00056256, 0.0409163, 0.0476815)
 
 [node name="BackRangeInner" parent="Shaft/Creature/CharacterBody3D/Creature/Armature/Skeleton3D" index="1"]
-transform = Transform3D(0.998928, 0.0342056, -0.0311858, -0.0440169, 0.910409, -0.411362, 0.014321, 0.412293, 0.910939, -0.000562561, 0.0409163, 0.0476815)
+transform = Transform3D(0.998928, 0.0342055, -0.0311859, -0.0440168, 0.910408, -0.411363, 0.014321, 0.412294, 0.910939, -0.00056256, 0.0409163, 0.0476815)
 
 [node name="Center" parent="Shaft/Creature/CharacterBody3D/Creature/Armature/Skeleton3D" index="4"]
 transform = Transform3D(0.998928, -0.0462713, 0.0012436, -0.0440169, -0.957884, -0.283762, 0.0143212, 0.283403, -0.958895, -7.33799e-18, 0.0521755, 0.0430473)
 
 [node name="Tail" parent="Shaft/Creature/CharacterBody3D/Creature/Armature/Skeleton3D" index="5"]
-transform = Transform3D(0.998928, 0.0366277, 0.0283019, -0.044017, 0.562498, 0.825626, 0.014321, -0.825987, 0.563507, 0.000844185, 0.0672632, 0.0305368)
+transform = Transform3D(0.998928, 0.0366277, 0.0283018, -0.0440169, 0.562499, 0.825625, 0.014321, -0.825987, 0.563508, 0.000844185, 0.0672632, 0.0305368)
 
 [node name="Hand_R" parent="Shaft/Creature/CharacterBody3D/Creature/Armature/Skeleton3D" index="6"]
-transform = Transform3D(0.999758, -0.0196852, -0.00982094, 0.00997189, 0.00758199, 0.999922, -0.0196092, -0.999778, 0.00777682, -0.0324089, 0.00262721, 0.0163923)
+transform = Transform3D(0.999758, -0.0196843, -0.00982086, 0.00997179, 0.00758298, 0.999922, -0.0196084, -0.999778, 0.00777782, -0.0324089, 0.00262723, 0.0163922)
 
 [node name="Hand_L" parent="Shaft/Creature/CharacterBody3D/Creature/Armature/Skeleton3D" index="7"]
-transform = Transform3D(0.994036, 0.0488725, 0.09749, -0.0978275, 0.00455957, 0.995193, 0.0481932, -0.998795, 0.00931362, 0.0286754, -6.4485e-05, 0.017268)
+transform = Transform3D(0.994036, 0.0488718, 0.0974901, -0.0978277, 0.00455976, 0.995193, 0.0481924, -0.998795, 0.00931368, 0.0286754, -6.44838e-05, 0.017268)
 
 [node name="WoundTargets" parent="Shaft/Creature/CharacterBody3D/Creature/Armature/Skeleton3D" index="10"]
-transform = Transform3D(0.998928, 0.043031, 0.017056, -0.0440169, 0.769076, 0.637639, 0.0143209, -0.637707, 0.770146, 9.31323e-10, 0.0521754, 0.0430473)
+transform = Transform3D(0.998928, 0.043031, 0.0170559, -0.0440168, 0.769077, 0.637638, 0.0143209, -0.637706, 0.770147, 9.31323e-10, 0.0521754, 0.0430473)
 
 [node name="WoundTargets2" parent="Shaft/Creature/CharacterBody3D/Creature/Armature/Skeleton3D" index="11"]
-transform = Transform3D(0.998928, 0.0366277, 0.0283019, -0.044017, 0.562498, 0.825626, 0.014321, -0.825987, 0.563507, 0.000844185, 0.0672632, 0.0305368)
+transform = Transform3D(0.998928, 0.0366277, 0.0283018, -0.0440169, 0.562499, 0.825625, 0.014321, -0.825987, 0.563508, 0.000844185, 0.0672632, 0.0305368)
 
 [node name="Label2" parent="Shaft/Creature/CharacterBody3D/Creature" index="5"]
 offset_top = -11.5
 offset_bottom = 11.5
-
-[node name="JumpSound" parent="Shaft/Creature/CharacterBody3D" index="3"]
-bus = &"Master"
 
 [node name="CollisionShape3D" parent="Shaft/Creature/Range" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 18.389, -18.5)
@@ -435,7 +439,10 @@ item_flag = 1
 [node name="HubEnvironment" parent="." index="7" instance=ExtResource("12_7wgm6")]
 
 [node name="DirectionalLight3D" parent="HubEnvironment" index="0"]
-visible = false
+transform = Transform3D(0.110199, -0.494682, -0.862059, -0.427142, -0.806731, 0.40833, -0.897444, 0.323224, -0.300201, 0, 0, 0)
+
+[node name="Ambient" parent="HubEnvironment" index="1"]
+autoplay = true
 
 [node name="ShaftEnvironment" parent="." index="8" instance=ExtResource("12_7wgm6")]
 active = false
@@ -453,6 +460,7 @@ active = false
 
 [node name="DirectionalLight3D" parent="BossEnvironment" index="0"]
 transform = Transform3D(-0.203358, -0.892682, -0.402198, -0.507515, -0.255183, 0.822988, -0.837302, 0.371483, -0.401157, 0, -130, -68)
+visible = false
 light_color = Color(1, 0.888691, 0.695647, 1)
 light_energy = 1.0
 

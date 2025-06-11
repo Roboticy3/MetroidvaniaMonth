@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://lflopx50nk2t"]
+[gd_scene load_steps=11 format=3 uid="uid://lflopx50nk2t"]
 
 [ext_resource type="Script" uid="uid://cqnwj6wga2hyd" path="res://scripts/level/arena.gd" id="1_uch3s"]
 [ext_resource type="PackedScene" uid="uid://luwvohrk0cnq" path="res://scenes/player.tscn" id="2_ghy8g"]
 [ext_resource type="Texture2D" uid="uid://css5qqywau5tr" path="res://texture/Screw.png" id="4_bw14y"]
 [ext_resource type="Script" uid="uid://c6b4wj2ijgbjr" path="res://scripts/ui/collectable_count.gd" id="5_ghy8g"]
+[ext_resource type="Texture2D" uid="uid://c2uhv88rnwnhp" path="res://texture/Soul.png" id="5_vyqrf"]
 [ext_resource type="Texture2D" uid="uid://bhp2pvh6kdlml" path="res://texture/Gun.png" id="6_gcrh0"]
 [ext_resource type="PackedScene" uid="uid://cusvwc7xul344" path="res://scenes/menu.tscn" id="6_ghy8g"]
+[ext_resource type="Script" uid="uid://bg4ihyh55uuw4" path="res://scripts/ui/collectable_indicator.gd" id="6_i77e3"]
 [ext_resource type="Script" uid="uid://dagpiu4kco0v0" path="res://scripts/ui/collectable_flag.gd" id="6_vyqrf"]
 [ext_resource type="Texture2D" uid="uid://otyg2r25fvp" path="res://texture/Beacon.png" id="7_gcrh0"]
 
@@ -36,12 +38,12 @@ offset_right = 176.0
 offset_bottom = 9.0
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ServerSideUI/Stackables/VBoxContainer"]
+[node name="Screws" type="HBoxContainer" parent="ServerSideUI/Stackables/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="ServerSideUI/Stackables/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="ServerSideUI/Stackables/VBoxContainer/Screws"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -49,30 +51,43 @@ texture = ExtResource("4_bw14y")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="ServerSideUI/Stackables/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="ServerSideUI/Stackables/VBoxContainer/Screws"]
 layout_mode = 2
 text = "x %d
 "
 script = ExtResource("5_ghy8g")
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="ServerSideUI/Stackables/VBoxContainer"]
+[node name="Indicator" type="Sprite2D" parent="ServerSideUI/Stackables/VBoxContainer/Screws/Label"]
+visible = false
+position = Vector2(537, -120)
+texture = ExtResource("4_bw14y")
+script = ExtResource("6_i77e3")
+
+[node name="Souls" type="HBoxContainer" parent="ServerSideUI/Stackables/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="ServerSideUI/Stackables/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="ServerSideUI/Stackables/VBoxContainer/Souls"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-texture = ExtResource("4_bw14y")
+texture = ExtResource("5_vyqrf")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="ServerSideUI/Stackables/VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="ServerSideUI/Stackables/VBoxContainer/Souls"]
 layout_mode = 2
 text = "x %d
 "
 script = ExtResource("5_ghy8g")
+item_type = 1
+
+[node name="Indicator" type="Sprite2D" parent="ServerSideUI/Stackables/VBoxContainer/Souls/Label"]
+visible = false
+position = Vector2(537, -120)
+texture = ExtResource("5_vyqrf")
+script = ExtResource("6_i77e3")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="ServerSideUI/Stackables/VBoxContainer"]
 layout_mode = 2
@@ -88,6 +103,12 @@ stretch_mode = 5
 script = ExtResource("6_vyqrf")
 item_type = 2
 
+[node name="Indicator" type="Sprite2D" parent="ServerSideUI/Stackables/VBoxContainer/HBoxContainer2/Gun"]
+visible = false
+position = Vector2(537, -120)
+texture = ExtResource("6_gcrh0")
+script = ExtResource("6_i77e3")
+
 [node name="Beacon" type="TextureRect" parent="ServerSideUI/Stackables/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -96,6 +117,11 @@ expand_mode = 3
 stretch_mode = 5
 script = ExtResource("6_vyqrf")
 item_type = 3
+
+[node name="Indicator" type="Sprite2D" parent="ServerSideUI/Stackables/VBoxContainer/HBoxContainer2/Beacon"]
+position = Vector2(537, -120)
+texture = ExtResource("7_gcrh0")
+script = ExtResource("6_i77e3")
 
 [node name="Menu" parent="." instance=ExtResource("6_ghy8g")]
 visible = false

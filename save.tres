@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_dvlvu")
-collectables = Array[int]([1, 0, 1, 0])
+collectables = Array[int]([0, 0, 1, 0])
 metadata/_custom_type_script = "uid://dfeer3430afyw"

@@ -3,7 +3,7 @@ extends AudioStreamPlayer3D
 const MIN_SPEED := 5.0
 const SPEED_FACTOR := 4.5
 
-@export_node_path("CharacterBody3D") var player_path := NodePath("..")
+@export_node_path("CharacterBody3D") var player_path := NodePath("../CharacterBody3D")
 @onready var player:CharacterBody3D = get_node(player_path)
 
 # Called when the node enters the scene tree for the first time.
@@ -12,11 +12,16 @@ func _ready() -> void:
 	
 var time_since_last_step := 0.0
 func _process(delta:float) -> void:
+	
 	time_since_last_step += delta
 	if player.is_on_floor():
 		if time_since_last_step > time_between_footsteps():
 			time_since_last_step = 0
-			play()
+			play_rpc.rpc()
+
+@rpc("any_peer", "call_local", "reliable")
+func play_rpc():
+	play()
 
 func time_between_footsteps() -> float:
 	var speed:float = player.velocity_sync.length()
