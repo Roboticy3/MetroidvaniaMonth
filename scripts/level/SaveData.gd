@@ -1,5 +1,5 @@
-## Track save data for the game. Each item type has a bitmask describing which
 ## items are in the possession of the player, and which are not. This reserves 
+## Track save data for the game. Each item type has a bitmask describing which
 ## plenty of each type of item while giving the game a means to identify which
 ## items have been previously collected.
 
@@ -8,7 +8,13 @@ extends Resource
 class_name SaveData
 
 #Change this variable to false to disable saving to disk.
-@export var live := false
+@export var live := true :
+	set(to):
+		live = to
+		if to:
+			print("WARNING: SaveData is now live and will write to disk when changed.")
+		else:
+			print("WARNING: SaveData is no longer live and will not write to disk when changed.")
 
 @export var collectables:Array[int] = [0,0,0,0]
 
@@ -16,7 +22,8 @@ enum ItemType {
 	SCREW = 0,
 	SOUL,
 	GUN,
-	BEACON
+	BEACON,
+	TYPE_MAX,
 }
 
 #Users can connect to this signal to be notified when an item is picked up.

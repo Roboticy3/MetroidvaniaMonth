@@ -316,6 +316,9 @@ player_path = NodePath("..")
 
 [node name="Hud" parent="." instance=ExtResource("16_spk56")]
 
+[node name="Health" parent="Hud/Container/HUD/Meters/Meters/HealthWrapper" index="0"]
+efficiency = 0.5
+
 [connection signal="look" from="CharacterBody3D" to="CharacterBody3D/Camera3D" method="_on_look"]
 [connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/Camera3D/Gun/GunMesh/GPUParticles3D" method="_on_shoot"]
 [connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/PistonAnims" method="_on_shoot"]

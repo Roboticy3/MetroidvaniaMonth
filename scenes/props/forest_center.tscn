@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://db5wj4l134vo3"]
+
+[ext_resource type="PackedScene" uid="uid://cl5dkb04tpak3" path="res://glb/Tree.glb" id="3_xbrmw"]
+
+[node name="Lag Forest" type="Node3D"]
+
+[node name="Tree2" parent="." instance=ExtResource("3_xbrmw")]
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 15, -11, 46)
+
+[node name="Tree3" parent="." instance=ExtResource("3_xbrmw")]
+transform = Transform3D(1.62, 0, 5.96046e-08, 0, 1.62, 0, -5.96046e-08, 0, 1.62, 19, -16, 26)
+
+[node name="Tree4" parent="." instance=ExtResource("3_xbrmw")]
+transform = Transform3D(-2.09606, 0, 0.561637, 0, 2.17, 0, -0.561637, 0, -2.09606, 20, -21.6, 2.1)
+
+[node name="Tree5" parent="." instance=ExtResource("3_xbrmw")]
+transform = Transform3D(-3.8637, 0, 1.03528, 0, 4, 0, -1.03528, 0, -3.8637, 31, -26.6, 35.1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 26, -16.9848, 24.3486)
+use_collision = true
+size = Vector3(33, 9, 72)

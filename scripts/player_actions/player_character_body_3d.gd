@@ -50,7 +50,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 const GROUND_SPEED := 20.0
-const GROUND_ACCEL := 200.0
+const GROUND_ACCEL := 100.0
 const JUMP_ACCEL := 50.0
 const FALL_ACCEL := 30.0
 
@@ -128,11 +128,13 @@ func update_horizontal_velocity(delta:float) -> void:
 	
 	var current_vertical_velocity := velocity.y
 	var accel := get_horizontal_acceleration()
+	if input_dir == Vector2.ZERO:
+		accel *= 3.0
 	velocity = velocity.move_toward(direction * GROUND_SPEED, accel * delta)
 	velocity.y = current_vertical_velocity
 
 func is_flying():
-	if multiplayer.has_multiplayer_peer() and !is_multiplayer_authority():
+	if !is_multiplayer_authority():
 		return false
 	
 	return !fuel.is_empty() and Input.is_action_pressed("Jump")

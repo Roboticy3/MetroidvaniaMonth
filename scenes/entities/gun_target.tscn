@@ -11,7 +11,7 @@
 albedo_color = Color(0, 0, 0, 1)
 emission_enabled = true
 emission = Color(0.414737, 0.821091, 0.278515, 1)
-emission_energy_multiplier = 5.0
+emission_energy_multiplier = 2.63
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_v1snl"]
 streams_count = 3

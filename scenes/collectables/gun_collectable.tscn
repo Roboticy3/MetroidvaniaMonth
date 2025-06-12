@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh3nfelfsa216"]
+
+[ext_resource type="PackedScene" uid="uid://lm3u4rwl1xf0" path="res://scenes/collectables/collectable.tscn" id="1_2g6v8"]
+[ext_resource type="ArrayMesh" uid="uid://wm27j7jm3dvr" path="res://obj/Gun.obj" id="2_fqcdd"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s6dlw"]
+height = 1.7
+radius = 1.1
+
+[node name="ScrewCollectable" instance=ExtResource("1_2g6v8")]
+item_type = 2
+
+[node name="Screw" parent="ScrewArea" index="0"]
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 0, 0, 0)
+
+[node name="Gun" type="MeshInstance3D" parent="ScrewArea/Screw" index="1"]
+transform = Transform3D(-0.168875, 0.0975001, 1.54003e-08, 7.45058e-09, -4.47035e-08, -0.195, -0.0975001, -0.168875, -3.41246e-08, 0, 0, 0)
+mesh = ExtResource("2_fqcdd")
+skeleton = NodePath("../..")
+
+[node name="OmniLight3D" parent="ScrewArea" index="1"]
+visible = false
+
+[node name="CollisionShape3D" parent="ScrewArea" index="3"]
+shape = SubResource("CylinderShape3D_s6dlw")

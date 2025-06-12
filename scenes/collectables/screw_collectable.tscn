@@ -91,7 +91,7 @@ script = ExtResource("3_uiku5")
 stream = ExtResource("6_wm3ex")
 pitch_scale = 3.0
 autoplay = true
-max_distance = 10.0
+max_distance = 7.0
 bus = &"LittleSounds"
 
 [node name="Mesh" type="MeshInstance3D" parent="ScrewArea/Screw"]

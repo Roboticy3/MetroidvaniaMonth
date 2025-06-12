@@ -11,7 +11,7 @@ var inner_maximum := 0.0
 @export var level := 0 : 
 	set(new_level):
 		level = new_level
-		inner_maximum = log(new_level + 1) + 1
+		inner_maximum = new_level + 1
 		print("set max to ", inner_maximum)
 
 func update_visual_length():
@@ -28,6 +28,6 @@ func is_empty() -> bool:
 	return value <= 0.0
 
 func fill(delta):
-	value += delta * efficiency * (level + 1)
+	value += delta * efficiency * (level + 1) * 4.0
 	if value >= inner_maximum:
 		value = inner_maximum

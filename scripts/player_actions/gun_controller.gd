@@ -20,7 +20,9 @@ func _process(delta: float) -> void:
 	time_since_last_shot += delta
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("Shoot") and time_since_last_shot >= SHOOT_TIME:
+	if ClientState.save.has_item(SaveData.ItemType.GUN, 0) and \
+		 event.is_action_pressed("Shoot") and \
+		time_since_last_shot >= SHOOT_TIME:
 		shoot_rpc.rpc()
 
 @rpc("any_peer", "call_local", "reliable")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bw1f5kgfmk4tc"]
+
+[ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="1_f1g4o"]
+[ext_resource type="Script" uid="uid://bbrin0y7tndar" path="res://scenes/levels/kill_player_from_character.gd" id="2_luw7a"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cmctf"]
+size = Vector3(16, 1, 33)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gnry6"]
+albedo_color = Color(0.624094, 0.00421471, 0.990441, 1)
+
+[node name="Area3D" type="Area3D"]
+transform = Transform3D(-5, 0, -7.54979e-07, 0, 5, 0, 7.54979e-07, 0, -5, 0, 0, 0)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_f1g4o")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_luw7a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_cmctf")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(14, 1, 33)
+material = SubResource("StandardMaterial3D_gnry6")
+
+[connection signal="player_entered" from="." to="Node" method="_on_player_entered"]
