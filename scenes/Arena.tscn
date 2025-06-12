@@ -126,6 +126,16 @@ script = ExtResource("6_i77e3")
 [node name="Menu" parent="." instance=ExtResource("6_ghy8g")]
 visible = false
 
+[node name="HSlider" parent="Menu/Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer" index="0"]
+min_value = 0.0
+max_value = 200.0
+value = 100.0
+
+[node name="Error" parent="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text" index="2"]
+text = "Error text"
+
+[connection signal="multiplayer_error" from="." to="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Error" method="set_text"]
+[connection signal="multiplayer_error" from="." to="Menu" method="show" unbinds=1]
 [connection signal="pressed" from="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Join" to="." method="_on_join_pressed"]
 
 [editable path="Menu"]

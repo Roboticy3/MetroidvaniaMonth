@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ha7ayschigmb"]
 
-[ext_resource type="Script" uid="uid://dai304atsh6k6" path="res://scripts/level/environment_changer.gd" id="1_pbwkv"]
+[ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="1_pbwkv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_38jxg"]
 

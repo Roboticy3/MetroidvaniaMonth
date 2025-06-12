@@ -72,12 +72,19 @@ noise = SubResource("FastNoiseLite_keln3")
 
 [node name="Label3D" type="Label3D" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -12)
-billboard = 2
+double_sided = false
 text = "The Beacon"
 font = ExtResource("5_fkd6t")
 font_size = 487
 
-[node name="Start" type="Area3D" parent="." index="6"]
+[node name="Label3D2" type="Label3D" parent="." index="6"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 5, -12)
+double_sided = false
+text = "The Beacon"
+font = ExtResource("5_fkd6t")
+font_size = 487
+
+[node name="Start" type="Area3D" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 4, -12)
 collision_layer = 2
 collision_mask = 2
@@ -97,7 +104,7 @@ light_color = Color(0.966742, 0.426055, 0.324048, 1)
 shadow_enabled = true
 omni_range = 22.0
 
-[node name="SceneChanger" type="Node" parent="." index="7"]
+[node name="SceneChanger" type="Node" parent="." index="8"]
 script = ExtResource("8_cn35j")
 target = ExtResource("9_cn35j")
 

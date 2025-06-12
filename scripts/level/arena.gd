@@ -24,7 +24,14 @@ func host() -> void:
 	
 	var error := peer.create_server(ClientState.port)
 	if error != OK:
-		multiplayer_error.emit("Failed to create server with error: ", error_string(error))
+		print("failed to host! sending error msg...")
+		if error == ERR_CANT_CREATE:
+			multiplayer_error.emit("Can't create server on port {} because a server is already \
+			active on the same port in your network. If you meant to instead join this server, \
+			press Join.".format([ClientState.port], "{}"))
+		else:
+			multiplayer_error.emit("Failed to create server with error: " + \
+			error_string(error))
 		return
 	
 	multiplayer.multiplayer_peer = peer

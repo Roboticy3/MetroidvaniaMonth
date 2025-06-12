@@ -26,7 +26,7 @@ func _process(_delta: float) -> void:
 	if creature_body.is_too_close() and creature_body.is_facing_player():
 		print("attacking")
 		play("Armature|Attack")
-	elif creature_body.is_on_floor() and current_animation != "Armature|Attack":
+	elif creature_body.target is Node3D and creature_body.is_on_floor() and current_animation != "Armature|Attack":
 		play("Armature|Walk")
 	else:
 		stop()

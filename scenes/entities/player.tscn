@@ -226,6 +226,7 @@ shape = SubResource("CapsuleShape3D_u8vuu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+gi_mode = 2
 mesh = SubResource("CapsuleMesh_u8vuu")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
@@ -319,3 +320,6 @@ player_path = NodePath("..")
 [connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/Camera3D/Gun/GunMesh/GPUParticles3D" method="_on_shoot"]
 [connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/PistonAnims" method="_on_shoot"]
 [connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/Camera3D/Gun/GunMesh/GunShot" method="play" unbinds=2]
+[connection signal="value_changed" from="Hud/Container/HUD/Meters/Meters/HealthWrapper/Health" to="." method="check_health"]
+
+[editable path="Hud"]

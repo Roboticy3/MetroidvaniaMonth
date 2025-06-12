@@ -2,8 +2,13 @@
 ## items are in the possession of the player, and which are not. This reserves 
 ## plenty of each type of item while giving the game a means to identify which
 ## items have been previously collected.
+
+## There are also ranges for things like completion percent or volume.
 extends Resource
 class_name SaveData
+
+#Change this variable to false to disable saving to disk.
+@export var live := true
 
 @export var collectables:Array[int] = [0,0,0,0]
 
@@ -25,7 +30,9 @@ func update_collectable(item_type:ItemType, item_flag:int, meta:={}) -> bool:
 		return false
 	collectables[item_type] |= mask
 	collectable_updated.emit(item_type, item_flag, meta)
-	#ResourceSaver.save(self)
+	if live: 
+		print("saving")
+		ResourceSaver.save(self)
 	return true
 
 #Count the number of active flags in a certain `item_type`
@@ -39,3 +46,21 @@ func get_item_total(item_type:ItemType) -> int:
 
 func has_item(item_type:ItemType, item_flag:int):
 	return collectables[item_type] & (1 << item_flag)
+
+
+@export var ranges:PackedFloat32Array =[
+	100.0
+]
+
+enum RangeType {
+	VOLUME = 0
+}
+
+func update_range(type:RangeType, value:float):
+	ranges[type] = value
+	if live: 
+		print("saving")
+		ResourceSaver.save(self)
+
+func get_range(type:RangeType) -> float:
+	return ranges[type]
