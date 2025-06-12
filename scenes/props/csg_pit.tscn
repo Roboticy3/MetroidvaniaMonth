@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4c4osqhew5s5"]
+
+[ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="1_atxap"]
+[ext_resource type="Script" uid="uid://bbrin0y7tndar" path="res://scenes/levels/kill_player_from_character.gd" id="2_vqumy"]
+[ext_resource type="PackedScene" uid="uid://dtb77e23s6gbc" path="res://scenes/props/csg_window.tscn" id="3_v248q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6wj25"]
+size = Vector3(16, 1, 33)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w8yjs"]
+albedo_color = Color(0.624094, 0.00421471, 0.990441, 1)
+
+[node name="Pit" type="CSGBox3D"]
+flip_faces = true
+size = Vector3(15, 25, 33)
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7, 0)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_atxap")
+
+[node name="Node" type="Node" parent="Area3D"]
+script = ExtResource("2_vqumy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_6wj25")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Area3D"]
+size = Vector3(14, 1, 33)
+material = SubResource("StandardMaterial3D_w8yjs")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="Window" parent="CSGCombiner3D" instance=ExtResource("3_v248q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.6, 0)
+
+[connection signal="player_entered" from="Area3D" to="Area3D/Node" method="_on_player_entered"]

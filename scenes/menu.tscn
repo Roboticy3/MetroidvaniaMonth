@@ -1,22 +1,22 @@
 [gd_scene load_steps=10 format=3 uid="uid://cusvwc7xul344"]
 
-[ext_resource type="Script" uid="uid://e2r5jmdul2vr" path="res://scripts/ui/modal_layer.gd" id="1_con2f"]
-[ext_resource type="Script" uid="uid://djq1v2xtal8gi" path="res://scripts/ui/range_repeater.gd" id="2_0cngb"]
-[ext_resource type="Script" uid="uid://dagpiu4kco0v0" path="res://scripts/ui/collectable_flag.gd" id="2_apwh8"]
-[ext_resource type="Script" uid="uid://bkdd8pbtxyrju" path="res://scripts/ui/client_state_name.gd" id="2_mhnvy"]
-[ext_resource type="Script" uid="uid://cypds0yvt6lng" path="res://scripts/ui/join_button.gd" id="2_oosx4"]
-[ext_resource type="Script" uid="uid://cl3vv3ryxw0bn" path="res://scripts/ui/client_state_numeric.gd" id="3_4ytvr"]
-[ext_resource type="Script" uid="uid://dx8lti6o8gjnq" path="res://scripts/ui/audio_bus_volume_setter.gd" id="3_jn8sx"]
-[ext_resource type="AudioStream" uid="uid://di2750svyuocv" path="res://c78/Roland CR-78 Samples/BD/CR78 BD-01.wav" id="4_w6ftq"]
+[ext_resource type="Script" uid="uid://e2r5jmdul2vr" path="res://scripts/ui/modal_layer.gd" id="1_13sgg"]
+[ext_resource type="Script" uid="uid://djq1v2xtal8gi" path="res://scripts/ui/range_repeater.gd" id="2_i6lef"]
+[ext_resource type="Script" uid="uid://dx8lti6o8gjnq" path="res://scripts/ui/audio_bus_volume_setter.gd" id="3_70i5f"]
+[ext_resource type="AudioStream" uid="uid://di2750svyuocv" path="res://c78/Roland CR-78 Samples/BD/CR78 BD-01.wav" id="4_mj5lg"]
+[ext_resource type="Script" uid="uid://dagpiu4kco0v0" path="res://scripts/ui/collectable_flag.gd" id="5_ufwb2"]
+[ext_resource type="Script" uid="uid://cypds0yvt6lng" path="res://scripts/ui/join_button.gd" id="6_6cdou"]
+[ext_resource type="Script" uid="uid://bkdd8pbtxyrju" path="res://scripts/ui/client_state_name.gd" id="7_i42df"]
+[ext_resource type="Script" uid="uid://cl3vv3ryxw0bn" path="res://scripts/ui/client_state_numeric.gd" id="8_7jp70"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6qf5j"]
 playback_mode = 2
 streams_count = 1
-stream_0/stream = ExtResource("4_w6ftq")
+stream_0/stream = ExtResource("4_mj5lg")
 
 [node name="Menu" type="CanvasLayer"]
 layer = 128
-script = ExtResource("1_con2f")
+script = ExtResource("1_13sgg")
 
 [node name="Container" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -64,10 +64,10 @@ layout_mode = 2
 offset_left = 483.0
 offset_right = 484.0
 offset_bottom = 23.0
-script = ExtResource("2_0cngb")
+script = ExtResource("2_i6lef")
 
 [node name="VolumeChanger" type="Node" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider"]
-script = ExtResource("3_jn8sx")
+script = ExtResource("3_70i5f")
 
 [node name="VolumeTester" type="AudioStreamPlayer" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider"]
 stream = SubResource("AudioStreamRandomizer_6qf5j")
@@ -75,7 +75,7 @@ stream = SubResource("AudioStreamRandomizer_6qf5j")
 [node name="MarginContainer2" type="MarginContainer" parent="Container/Panel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-script = ExtResource("2_apwh8")
+script = ExtResource("5_ufwb2")
 item_type = 3
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Container/Panel/HBoxContainer/MarginContainer2"]
@@ -89,7 +89,7 @@ text = "Multiplayer Options:"
 [node name="Join" type="Button" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2"]
 layout_mode = 2
 text = "Join"
-script = ExtResource("2_oosx4")
+script = ExtResource("6_6cdou")
 
 [node name="Text" type="VBoxContainer" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2"]
 layout_mode = 2
@@ -109,7 +109,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 placeholder_text = "Enter player name"
 expand_to_text_length = true
-script = ExtResource("2_mhnvy")
+script = ExtResource("7_i42df")
 
 [node name="Port" type="HBoxContainer" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text"]
 layout_mode = 2
@@ -126,7 +126,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 max_value = 65535.0
 value = 55555.0
-script = ExtResource("3_4ytvr")
+script = ExtResource("8_7jp70")
 
 [node name="Error" type="RichTextLabel" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text"]
 layout_mode = 2

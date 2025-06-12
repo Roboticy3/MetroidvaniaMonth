@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://c6b4wj2ijgbjr" path="res://scripts/ui/collectable_count.gd" id="5_ghy8g"]
 [ext_resource type="Texture2D" uid="uid://c2uhv88rnwnhp" path="res://texture/Soul.png" id="5_vyqrf"]
 [ext_resource type="Texture2D" uid="uid://bhp2pvh6kdlml" path="res://texture/Gun.png" id="6_gcrh0"]
-[ext_resource type="PackedScene" uid="uid://cusvwc7xul344" path="res://scenes/levels/menu.tscn" id="6_ghy8g"]
+[ext_resource type="PackedScene" uid="uid://cusvwc7xul344" path="res://scenes/menu.tscn" id="6_ghy8g"]
 [ext_resource type="Script" uid="uid://bg4ihyh55uuw4" path="res://scripts/ui/collectable_indicator.gd" id="6_i77e3"]
 [ext_resource type="Script" uid="uid://dagpiu4kco0v0" path="res://scripts/ui/collectable_flag.gd" id="6_vyqrf"]
 [ext_resource type="Texture2D" uid="uid://otyg2r25fvp" path="res://texture/Beacon.png" id="7_gcrh0"]

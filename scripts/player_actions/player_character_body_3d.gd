@@ -10,6 +10,10 @@ func _ready():
 	fuel = get_meter("Fuel")
 	health = get_meter("Health")
 	
+	ClientState.save.collectable_updated.connect(_on_collectable_updated)
+	
+	update_fuel_level()
+	
 	#Apply multiplayer authority to this player
 	print("checking body ", self, " with authority ", get_multiplayer_authority(), " against ", multiplayer.get_unique_id())
 	if !is_multiplayer_authority():
@@ -17,6 +21,14 @@ func _ready():
 		set_physics_process(false)
 		return
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+func _on_collectable_updated(type:SaveData.ItemType, flag:int, meta:Dictionary) -> void:
+	if type == SaveData.ItemType.SCREW:
+		update_fuel_level()
+
+func update_fuel_level():
+	fuel.level = ClientState.save.get_item_total(SaveData.ItemType.SCREW) / 4
+	print("set fuel level to ", fuel.level)
 
 func get_meter(group:StringName) -> Range:
 	for f in get_tree().get_nodes_in_group(group):
@@ -120,7 +132,7 @@ func update_horizontal_velocity(delta:float) -> void:
 	velocity.y = current_vertical_velocity
 
 func is_flying():
-	if !is_multiplayer_authority():
+	if multiplayer.has_multiplayer_peer() and !is_multiplayer_authority():
 		return false
 	
 	return !fuel.is_empty() and Input.is_action_pressed("Jump")

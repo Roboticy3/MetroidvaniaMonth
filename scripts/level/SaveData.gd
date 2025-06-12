@@ -8,7 +8,7 @@ extends Resource
 class_name SaveData
 
 #Change this variable to false to disable saving to disk.
-@export var live := true
+@export var live := false
 
 @export var collectables:Array[int] = [0,0,0,0]
 
