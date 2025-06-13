@@ -8,8 +8,11 @@ func _enter_tree() -> void:
 
 func check_health(value:float) -> void:
 	if value <= 0.0:
+		if OS.get_name() == "Web":
+			#Reload handled by ClientState unless offline
+			get_tree().reload_current_scene.call_deferred()
+		
 		# evil magic spell from https://github.com/godotengine/godot/issues/77723 
 		multiplayer.multiplayer_peer.close()
 		
-		#Reload handled by ClientState
-		#get_tree().reload_current_scene.call_deferred()
+		

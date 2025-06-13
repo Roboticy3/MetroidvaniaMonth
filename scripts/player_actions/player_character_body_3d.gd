@@ -82,6 +82,10 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	velocity_sync = velocity
+	
+	#extra check to override broken killbox. Lol.
+	if position.y < -200:
+		get_parent().check_health(-1.0)
 
 func update_time_falling(delta:float) -> void:
 	#If falling for long enough, upgrade to a super fall
