@@ -31,10 +31,10 @@ tracks/1/path = NodePath("../Ambient:volume_db")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0333333, 0.4),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [-50.0, 0.0]
+"values": [-80.0, -20.0]
 }
 
 [sub_resource type="Animation" id="Animation_g36uf"]
@@ -47,7 +47,7 @@ tracks/0/path = NodePath("../Ambient:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.266667, 1.13333),
+"times": PackedFloat32Array(0.266667, 1.93333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -59,10 +59,10 @@ tracks/1/path = NodePath("../Ambient:volume_db")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.21, 1.03333),
+"times": PackedFloat32Array(0.0333333, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [-6.0, -50.0]
+"values": [-20.0, -80.0]
 }
 
 [sub_resource type="Animation" id="Animation_w7j6y"]

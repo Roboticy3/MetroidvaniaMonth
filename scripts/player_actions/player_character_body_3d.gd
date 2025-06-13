@@ -27,8 +27,9 @@ func _on_collectable_updated(type:SaveData.ItemType, flag:int, meta:Dictionary) 
 		update_fuel_level()
 
 func update_fuel_level():
-	fuel.level = ClientState.save.get_item_total(SaveData.ItemType.SCREW) / 4
-	print("set fuel level to ", fuel.level)
+	if fuel:
+		fuel.level = ClientState.save.get_item_total(SaveData.ItemType.SCREW) / 4
+		print("set fuel level to ", fuel.level)
 
 func get_meter(group:StringName) -> Range:
 	for f in get_tree().get_nodes_in_group(group):

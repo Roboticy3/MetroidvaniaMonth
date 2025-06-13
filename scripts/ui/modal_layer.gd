@@ -4,8 +4,8 @@ extends CanvasLayer
 
 func _ready():
 	if control_mouse_mode:
-		update_mouse_mode()
-		visibility_changed.connect(update_mouse_mode)
+		update_mouse_mode.call_deferred()
+		visibility_changed.connect(update_mouse_mode, CONNECT_DEFERRED)
 
 # Called when the node enters the scene tree for the first time.
 func _unhandled_input(event: InputEvent) -> void:

@@ -119,6 +119,7 @@ script = ExtResource("6_vyqrf")
 item_type = 3
 
 [node name="Indicator" type="Sprite2D" parent="ServerSideUI/Stackables/VBoxContainer/HBoxContainer2/Beacon"]
+visible = false
 position = Vector2(537, -120)
 texture = ExtResource("7_gcrh0")
 script = ExtResource("6_i77e3")

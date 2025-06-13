@@ -7,6 +7,8 @@
 extends Resource
 class_name SaveData
 
+const PATH := "user://save.tres"
+
 #Change this variable to false to disable saving to disk.
 @export var live := true :
 	set(to):
@@ -37,9 +39,7 @@ func update_collectable(item_type:ItemType, item_flag:int, meta:={}) -> bool:
 		return false
 	collectables[item_type] |= mask
 	collectable_updated.emit(item_type, item_flag, meta)
-	if live: 
-		print("saving")
-		ResourceSaver.save(self)
+	save()
 	return true
 
 #Count the number of active flags in a certain `item_type`
@@ -65,9 +65,13 @@ enum RangeType {
 
 func update_range(type:RangeType, value:float):
 	ranges[type] = value
-	if live: 
-		print("saving")
-		ResourceSaver.save(self)
+	save()
 
 func get_range(type:RangeType) -> float:
 	return ranges[type]
+
+func save() -> void:
+	if !live: return
+	print("saving to ", PATH)
+	var error := ResourceSaver.save(self, PATH)
+	print("saved with error code ", error_string(error))

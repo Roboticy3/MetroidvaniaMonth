@@ -310,6 +310,7 @@ player_path = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.6)
 stream = ExtResource("14_a8ls1")
 volume_db = -22.0
+unit_size = 100.0
 bus = &"Jetpack"
 script = ExtResource("15_qfm1y")
 player_path = NodePath("..")

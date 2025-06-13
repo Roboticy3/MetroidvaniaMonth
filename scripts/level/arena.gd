@@ -1,6 +1,10 @@
+## Handle hosting and joining multiplayer, and spawning player objects.
+## Previously used ENetMultiplayerPeer, but for web export I'm trying 
+##	WebSocketMultiplayerPeer with this medium tut: https://medium.com/@sourcerize/godot-4-experimenting-with-multiplayer-web-game-capabilities-1a8a23ced481
+
 extends Node3D
 
-var peer := ENetMultiplayerPeer.new()
+var peer = WebSocketMultiplayerPeer.new()
 
 @export var player_scene:PackedScene = load("res://scenes/entities/player.tscn")
 
@@ -20,18 +24,22 @@ signal multiplayer_error(error:String)
 signal player_connected(id:int)
 
 func host() -> void:
-	print("starting server on port ", ClientState.port)
+	print("starting server ", ClientState.url)
 	
-	var error := peer.create_server(ClientState.port)
+	if multiplayer.multiplayer_peer is WebSocketMultiplayerPeer:
+		multiplayer.multiplayer_peer.close()
+	
+	if OS.get_name() == "Web":
+		add_player(1)
+		print("skipping server because we're on a web platform. Lol")
+		return
+	
+	multiplayer.multiplayer_peer = null
+	var error:Error = peer.create_server(ClientState.port, ClientState.url)
 	if error != OK:
 		print("failed to host! sending error msg...")
-		if error == ERR_CANT_CREATE:
-			multiplayer_error.emit("Can't create server on port {} because a server is already \
-			active on the same port in your network. If you meant to instead join this server, \
-			press Join.".format([ClientState.port], "{}"))
-		else:
-			multiplayer_error.emit("Failed to create server with error: " + \
-			error_string(error))
+		multiplayer_error.emit("Failed to create server with error: " + \
+		error_string(error))
 		return
 	
 	multiplayer.multiplayer_peer = peer
@@ -50,9 +58,9 @@ func _on_join_pressed() -> void:
 		return
 
 func join() -> void:
-	print("joining server on port ", ClientState.port)
+	print("joining server ", ClientState.url + ":" + str(ClientState.port))
 	
-	var error:Error = peer.create_client("localhost", ClientState.port)
+	var error:Error = peer.create_client("ws://" + ClientState.url + ":" + str(ClientState.port))
 	if error != OK:
 		multiplayer_error.emit("Failed to create client with error: " + error_string(error))
 	

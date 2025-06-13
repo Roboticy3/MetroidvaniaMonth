@@ -124,8 +124,8 @@ size_flags_horizontal = 3
 
 [node name="SpinBox" type="SpinBox" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Port"]
 layout_mode = 2
-max_value = 65535.0
-value = 55555.0
+max_value = 9999.0
+value = 8060.0
 script = ExtResource("8_7jp70")
 
 [node name="Error" type="RichTextLabel" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text"]
