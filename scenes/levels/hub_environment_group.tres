@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ActiveGroup" load_steps=2 format=3 uid="uid://lswnlxq5pbha"]
+
+[ext_resource type="Script" uid="uid://c4qs2ck65apjb" path="res://scripts/level/ActiveGroup.gd" id="1_s387u"]
+
+[resource]
+script = ExtResource("1_s387u")
+active_key = "active"
+users = Array[Node]([])
+metadata/_custom_type_script = "uid://c4qs2ck65apjb"

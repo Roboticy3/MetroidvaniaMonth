@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=4 uid="uid://divm3hfp84v1n"]
+[gd_scene load_steps=92 format=4 uid="uid://divm3hfp84v1n"]
 
 [ext_resource type="PackedScene" uid="uid://lflopx50nk2t" path="res://scenes/Arena.tscn" id="1_8xgfm"]
 [ext_resource type="PackedScene" uid="uid://dnfbu6cnjq2l1" path="res://glb/Level1.glb" id="2_emn5n"]
@@ -34,8 +34,13 @@
 [ext_resource type="ArrayMesh" uid="uid://dfhq720hgxqx2" path="res://glb/rock_010.res" id="28_d5vep"]
 [ext_resource type="PackedScene" uid="uid://dxopn5oo3hdjt" path="res://scenes/props/Tree.tscn" id="29_ted6q"]
 [ext_resource type="PackedScene" uid="uid://ci7no68rvqmsh" path="res://scenes/props/Tree2.tscn" id="30_skrj0"]
+[ext_resource type="AudioStream" uid="uid://dmtgm5gt8b35b" path="res://aud/forest_footstep_1.wav" id="31_q5uss"]
 [ext_resource type="AudioStream" uid="uid://c8yppv5moo3di" path="res://als/Forest.wav" id="31_xbntm"]
+[ext_resource type="AudioStream" uid="uid://bpgx2ymvjkmc0" path="res://aud/forest_footstep_2.wav" id="32_6nk6q"]
 [ext_resource type="Script" uid="uid://b4dvqch33yx66" path="res://scripts/level/tool_assign_item_flags.gd" id="32_ofu4s"]
+[ext_resource type="AudioStream" uid="uid://rjs2mt3qr4ub" path="res://aud/forest_footstep_3.wav" id="33_8425a"]
+[ext_resource type="AudioStream" uid="uid://pckavl6qbwll" path="res://aud/forest_footstep_4.wav" id="34_jcwor"]
+[ext_resource type="AudioStream" uid="uid://cy5w2b10kq604" path="res://aud/forest_footstep_5.wav" id="35_0aiev"]
 [ext_resource type="ArrayMesh" uid="uid://1vqfalmou7h2" path="res://glb/tree-circle.res" id="35_hrjdp"]
 [ext_resource type="Texture2D" uid="uid://csecnw6gf2ukt" path="res://texture/Cracks.png" id="35_pnlf1"]
 [ext_resource type="PackedScene" uid="uid://cjcy8xm7n5hca" path="res://scenes/entities/gun_target.tscn" id="35_u2l4v"]
@@ -103,6 +108,14 @@ detail_albedo = ExtResource("23_jsf45")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_l10ly"]
 data = PackedVector3Array(-0.3638, -0.365, 0.3667, -0.5168, 0.003, -0.0021, -0.3596, 0.0033, 0.3587, -0.3638, -0.365, 0.3667, -0.0024, -0.0021, 0.6329, 0.0017, -0.4877, 0.491, -0.3638, -0.365, 0.3667, -0.3596, 0.0033, 0.3587, -0.0024, -0.0021, 0.6329, -0.3596, 0.0033, 0.3587, -0.0003, 0.4586, 0.4607, -0.0024, -0.0021, 0.6329, -0.3596, 0.0033, 0.3587, -0.3486, 0.346, 0.346, -0.0003, 0.4586, 0.4607, -0.3596, 0.0033, 0.3587, -0.4162, 0.4135, -0.0019, -0.3486, 0.346, 0.346, -0.3596, 0.0033, 0.3587, -0.5168, 0.003, -0.0021, -0.4162, 0.4135, -0.0019, -0.5168, 0.003, -0.0021, -0.3647, 0.3673, -0.3685, -0.4162, 0.4135, -0.0019, -0.3638, -0.365, 0.3667, -0.4275, -0.4203, -0.0043, -0.5168, 0.003, -0.0021, -0.5168, 0.003, -0.0021, -0.3887, 0.0035, -0.3884, -0.3647, 0.3673, -0.3685, -0.4275, -0.4203, -0.0043, -0.3887, 0.0035, -0.3884, -0.5168, 0.003, -0.0021, -0.4275, -0.4203, -0.0043, -0.3054, -0.3044, -0.3096, -0.3887, 0.0035, -0.3884, -0.3638, -0.365, 0.3667, 0.0007, -0.6191, 0.0035, -0.4275, -0.4203, -0.0043, -0.3638, -0.365, 0.3667, 0.0017, -0.4877, 0.491, 0.0007, -0.6191, 0.0035, -0.4275, -0.4203, -0.0043, 0.0007, -0.6191, 0.0035, 0.0021, -0.3967, -0.3996, -0.4275, -0.4203, -0.0043, 0.0021, -0.3967, -0.3996, -0.3054, -0.3044, -0.3096, 0.0007, -0.6191, 0.0035, 0.3583, -0.3594, -0.3549, 0.0021, -0.3967, -0.3996, 0.0007, -0.6191, 0.0035, 0.5105, -0.504, -0.003, 0.3583, -0.3594, -0.3549, 0.0017, -0.4877, 0.491, 0.5105, -0.504, -0.003, 0.0007, -0.6191, 0.0035, 0.0017, -0.4877, 0.491, 0.3524, -0.3639, 0.3568, 0.5105, -0.504, -0.003, 0.0017, -0.4877, 0.491, 0.3993, -0.0015, 0.3977, 0.3524, -0.3639, 0.3568, 0.0017, -0.4877, 0.491, -0.0024, -0.0021, 0.6329, 0.3993, -0.0015, 0.3977, -0.0024, -0.0021, 0.6329, 0.3273, 0.3294, 0.3264, 0.3993, -0.0015, 0.3977, -0.0024, -0.0021, 0.6329, -0.0003, 0.4586, 0.4607, 0.3273, 0.3294, 0.3264, 0.3942, 0.3918, -0.0025, 0.3993, -0.0015, 0.3977, 0.3273, 0.3294, 0.3264, 0.5151, -0.004, -0.0008, 0.3524, -0.3639, 0.3568, 0.3993, -0.0015, 0.3977, 0.3942, 0.3918, -0.0025, 0.5151, -0.004, -0.0008, 0.3993, -0.0015, 0.3977, 0.3722, 0.3761, -0.3752, 0.5151, -0.004, -0.0008, 0.3942, 0.3918, -0.0025, 0.5151, -0.004, -0.0008, 0.5105, -0.504, -0.003, 0.3524, -0.3639, 0.3568, 0.3722, 0.3761, -0.3752, 0.3851, 0.0001, -0.3851, 0.5151, -0.004, -0.0008, 0.3851, 0.0001, -0.3851, 0.5105, -0.504, -0.003, 0.5151, -0.004, -0.0008, 0.3851, 0.0001, -0.3851, 0.3583, -0.3594, -0.3549, 0.5105, -0.504, -0.003, 0.3722, 0.3761, -0.3752, 0.0005, 0.6256, 0.0005, 0.0001, 0.5024, -0.5068, 0.3722, 0.3761, -0.3752, 0.3942, 0.3918, -0.0025, 0.0005, 0.6256, 0.0005, 0.0001, 0.5024, -0.5068, 0.0005, 0.6256, 0.0005, -0.4162, 0.4135, -0.0019, 0.0001, 0.5024, -0.5068, -0.4162, 0.4135, -0.0019, -0.3647, 0.3673, -0.3685, 0.0005, 0.6256, 0.0005, -0.3486, 0.346, 0.346, -0.4162, 0.4135, -0.0019, 0.0005, 0.6256, 0.0005, -0.0003, 0.4586, 0.4607, -0.3486, 0.346, 0.346, 0.3942, 0.3918, -0.0025, -0.0003, 0.4586, 0.4607, 0.0005, 0.6256, 0.0005, 0.3942, 0.3918, -0.0025, 0.3273, 0.3294, 0.3264, -0.0003, 0.4586, 0.4607, 0.3722, 0.3761, -0.3752, -0.0011, 0.0049, -0.512, 0.3851, 0.0001, -0.3851, 0.3722, 0.3761, -0.3752, 0.0001, 0.5024, -0.5068, -0.0011, 0.0049, -0.512, 0.3851, 0.0001, -0.3851, -0.0011, 0.0049, -0.512, 0.0021, -0.3967, -0.3996, 0.3851, 0.0001, -0.3851, 0.0021, -0.3967, -0.3996, 0.3583, -0.3594, -0.3549, -0.0011, 0.0049, -0.512, -0.3054, -0.3044, -0.3096, 0.0021, -0.3967, -0.3996, -0.0011, 0.0049, -0.512, -0.3887, 0.0035, -0.3884, -0.3054, -0.3044, -0.3096, 0.0001, 0.5024, -0.5068, -0.3887, 0.0035, -0.3884, -0.0011, 0.0049, -0.512, 0.0001, 0.5024, -0.5068, -0.3647, 0.3673, -0.3685, -0.3887, 0.0035, -0.3884)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pe4yd"]
+streams_count = 5
+stream_0/stream = ExtResource("31_q5uss")
+stream_1/stream = ExtResource("32_6nk6q")
+stream_2/stream = ExtResource("33_8425a")
+stream_3/stream = ExtResource("34_jcwor")
+stream_4/stream = ExtResource("35_0aiev")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qj28i"]
 size = Vector3(3.40366, 5.20482, 1)
@@ -306,6 +319,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0537338, 0.429196, 0)
 shape = SubResource("BoxShape3D_w4p0r")
 
 [node name="HubEnvironment" parent="Hub" index="7" instance=ExtResource("12_7wgm6")]
+active = true
 
 [node name="DirectionalLight3D" parent="Hub/HubEnvironment" index="0"]
 transform = Transform3D(0.110199, -0.494682, -0.862059, -0.427142, -0.806731, 0.40833, -0.897444, 0.323224, -0.300201, 0, 0, 0)
@@ -910,6 +924,7 @@ shape = SubResource("ConcavePolygonShape3D_l10ly")
 
 [node name="ForestEnvironment" parent="Forest" index="1" instance=ExtResource("12_7wgm6")]
 active = false
+footstep_sound = SubResource("AudioStreamRandomizer_pe4yd")
 
 [node name="DirectionalLight3D" parent="Forest/ForestEnvironment" index="0"]
 visible = false

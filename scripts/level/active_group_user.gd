@@ -15,11 +15,15 @@ extends Node
 		active = to
 		active_changed.emit(to)
 
+#Since this script is used for environments, use to send a footstep sound to the player
+@export var footstep_sound:AudioStream = AudioStreamWAV.load_from_file("res://c78/Roland CR-78 Samples/BD/CR78 BD-01.wav")
+
 signal active_changed(to:bool)
 signal activated()
 signal deactivated()
 
 func _ready():
+	print(group)
 	if active:
 		activated.emit() 
 		grab()

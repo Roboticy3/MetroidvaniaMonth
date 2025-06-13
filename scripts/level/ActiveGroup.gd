@@ -4,10 +4,14 @@ extends Resource
 class_name ActiveGroup
 
 @export var active_key := "active"
-var users:Array[Node] = []
+@export_storage var users:Array[Node] = []
+
+signal active_changed(to:Node)
 
 func grab(with:Node):
 	with.set(active_key, true)
+	active_changed.emit(with)
+	
 	var found_with := false
 	for u in users:
 		if !is_instance_valid(u):
@@ -20,6 +24,12 @@ func grab(with:Node):
 	
 	if not found_with:
 		add_user(with)
+
+func get_active() -> Node:
+	for u in users:
+		if u.get(active_key):
+			return u
+	return null
 
 func add_user(new_u:Node) -> bool:
 	for u in users:

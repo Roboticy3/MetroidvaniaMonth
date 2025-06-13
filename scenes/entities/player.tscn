@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://luwvohrk0cnq"]
+[gd_scene load_steps=34 format=3 uid="uid://luwvohrk0cnq"]
 
 [ext_resource type="Script" uid="uid://dssggiqvkb7bf" path="res://scripts/player_actions/player_character_body_3d.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dj1mvo2la10dt" path="res://scripts/player.gd" id="1_fjrip"]
@@ -8,11 +8,12 @@
 [ext_resource type="Script" uid="uid://bsmnje1x1cxj0" path="res://scripts/player_animations/character_gun_anims.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://dhg2pmop85g06" path="res://scripts/player_actions/gun_controller.gd" id="4_qlg0r"]
 [ext_resource type="Script" uid="uid://gkthcxywpb02" path="res://scripts/player_animations/particle_explosion.gd" id="4_tuyoq"]
-[ext_resource type="AudioStream" uid="uid://di2750svyuocv" path="res://c78/Roland CR-78 Samples/BD/CR78 BD-01.wav" id="6_f1ej7"]
 [ext_resource type="AudioStream" uid="uid://hxsy2ykw45e8" path="res://aud/gunshot.wav" id="6_oprun"]
 [ext_resource type="Script" uid="uid://bgaoc6hjlc2ak" path="res://scripts/player_animations/follow_shapecast_3d.gd" id="7_y4r1p"]
 [ext_resource type="Script" uid="uid://bmkjfyajyj6ji" path="res://scripts/player_actions/multiplayer_auth_setter.gd" id="10_3v2ag"]
+[ext_resource type="AudioStream" uid="uid://c16lexgnbq3uh" path="res://c78/Roland CR-78 Samples/CB/CR78 CB-01.wav" id="12_1yk18"]
 [ext_resource type="Script" uid="uid://tof4pgh44jmp" path="res://scripts/player_animations/player_footstep_stream.gd" id="12_f1ej7"]
+[ext_resource type="Resource" uid="uid://lswnlxq5pbha" path="res://scenes/levels/hub_environment_group.tres" id="14_1yk18"]
 [ext_resource type="AudioStream" uid="uid://5fslsnudsthm" path="res://aud/jetpack.wav" id="14_a8ls1"]
 [ext_resource type="Script" uid="uid://bfxb8y8fxoaki" path="res://scripts/player_animations/jetpack_stream.gd" id="15_qfm1y"]
 [ext_resource type="PackedScene" uid="uid://bir7oiyqxi3ju" path="res://scenes/entities/player_hud.tscn" id="16_spk56"]
@@ -209,7 +210,7 @@ properties/4/replication_mode = 2
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4r5pv"]
 playback_mode = 2
 streams_count = 1
-stream_0/stream = ExtResource("6_f1ej7")
+stream_0/stream = ExtResource("12_1yk18")
 
 [node name="Player" type="Node3D" groups=["Player"]]
 script = ExtResource("1_fjrip")
@@ -301,10 +302,12 @@ shape = SubResource("BoxShape3D_y4r1p")
 
 [node name="Footsteps" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
 stream = SubResource("AudioStreamRandomizer_4r5pv")
+volume_db = -10.435
 bus = &"LittleSounds"
 doppler_tracking = 1
 script = ExtResource("12_f1ej7")
 player_path = NodePath("..")
+environment_group = ExtResource("14_1yk18")
 
 [node name="Jetpack" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.6)

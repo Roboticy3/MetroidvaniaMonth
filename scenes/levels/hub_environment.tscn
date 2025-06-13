@@ -1,13 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://blvcurj6b7ggs"]
+[gd_scene load_steps=8 format=3 uid="uid://blvcurj6b7ggs"]
 
 [ext_resource type="Script" uid="uid://b504rmuos4of8" path="res://scripts/level/active_group_user.gd" id="1_nytd7"]
-[ext_resource type="Script" uid="uid://c4qs2ck65apjb" path="res://scripts/level/ActiveGroup.gd" id="2_tgsb7"]
+[ext_resource type="Resource" uid="uid://lswnlxq5pbha" path="res://scenes/levels/hub_environment_group.tres" id="2_5epsy"]
 [ext_resource type="AudioStream" uid="uid://hoqys6x2esbh" path="res://freesound/269382__lwdickens__room-tone-hallway-ventilation.wav" id="3_si2jj"]
-
-[sub_resource type="Resource" id="Resource_76qi3"]
-script = ExtResource("2_tgsb7")
-active_key = "active"
-metadata/_custom_type_script = "uid://c4qs2ck65apjb"
 
 [sub_resource type="Animation" id="Animation_76qi3"]
 resource_name = "Enter"
@@ -101,7 +96,7 @@ _data = {
 
 [node name="HubEnvironment" type="Node"]
 script = ExtResource("1_nytd7")
-group = SubResource("Resource_76qi3")
+group = ExtResource("2_5epsy")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.09295, -0.488386, -0.867663, -0.427142, -0.806731, 0.408331, -0.899394, 0.332661, -0.283596, 0, 0, 0)

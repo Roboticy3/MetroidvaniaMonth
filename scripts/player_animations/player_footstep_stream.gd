@@ -6,9 +6,19 @@ const SPEED_FACTOR := 4.5
 @export_node_path("CharacterBody3D") var player_path := NodePath("../CharacterBody3D")
 @onready var player:CharacterBody3D = get_node(player_path)
 
+@export var environment_group:ActiveGroup
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	print("my group: ", environment_group)
+	environment_group.active_changed.connect(_on_environment_changed)
+	_on_environment_changed(environment_group.get_active())
+
+func _on_environment_changed(to:Node):
+	if to == null: return
+	print("changing stream")
+	stop()
+	stream = to.get("footstep_sound")
 	
 var time_since_last_step := 0.0
 func _process(delta:float) -> void:
