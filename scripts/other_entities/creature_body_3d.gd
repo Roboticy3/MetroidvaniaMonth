@@ -30,11 +30,7 @@ func _ready():
 # functions for setting target based off of player detector triggers
 var target:Node3D
 func _on_range_player_entered(new_target:Node3D):
-	if new_target.get_multiplayer_authority() != get_multiplayer_authority(): return
 	target = new_target
-func _on_range_player_exited(old_target:Node3D):
-	if target == old_target:
-		target = null
 
 var last_jump_dir := 0
 #The boss's weak spot is from behind. This area fires a warning telling the boss

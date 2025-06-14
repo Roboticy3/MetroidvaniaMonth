@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://b0ydpbvs5h33h"]
+[gd_scene load_steps=42 format=3 uid="uid://b0ydpbvs5h33h"]
 
 [ext_resource type="Script" uid="uid://dt0jkkxqhms38" path="res://scripts/other_entities/drop_object.gd" id="1_i8tny"]
 [ext_resource type="Script" uid="uid://bydwvyv1segis" path="res://scripts/other_entities/creature_body_3d.gd" id="1_k15pb"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c374f2l86sod4" path="res://scenes/collectables/soul_collectable.tscn" id="2_0quan"]
 [ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="2_bvms0"]
 [ext_resource type="Script" uid="uid://ba3hqglxwpvw2" path="res://scripts/ui/readout.gd" id="3_7obff"]
+[ext_resource type="Script" uid="uid://is2wvkr75gsf" path="res://scripts/other_entities/prioritizer.gd" id="4_kkisv"]
 [ext_resource type="PackedScene" uid="uid://cjcy8xm7n5hca" path="res://scenes/entities/gun_target.tscn" id="4_rl551"]
 [ext_resource type="Texture2D" uid="uid://b2bfk0iur1hx2" path="res://texture/ScalesDark.png" id="4_ygqry"]
 [ext_resource type="Texture2D" uid="uid://c7vtycfvrfw0x" path="res://texture/mouth.png" id="5_0s51c"]
@@ -331,9 +332,9 @@ points = PackedVector3Array(-2.78546, 1, -2.78546, -2.78546, 1, 2.78546, 2.78546
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7obff"]
 points = PackedVector3Array(-0.0100127, -0.01, -0.0101881, -0.460764, 0.999901, -2.26263, 0.0099225, -0.01, -0.0101881, -0.0100127, -0.01, 0.00974512, 0.460764, 1, -2.26263, -0.460764, 0.999901, 2.26263, 0.460674, 1, 2.26263, 0.0099225, -0.01, 0.00974512)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_0s51c"]
-height = 7.0
-radius = 5.4
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kkisv"]
+radius = 4.0
+height = 8.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jdfpr"]
 properties/0/path = NodePath(".:position")
@@ -344,7 +345,7 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k15pb"]
-size = Vector3(109, 50, 99)
+size = Vector3(199.751, 35.7405, 143)
 
 [node name="Creature" type="Node3D"]
 script = ExtResource("1_i8tny")
@@ -353,10 +354,14 @@ object = ExtResource("2_0quan")
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." groups=["Entity"]]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 collision_layer = 0
-collision_mask = 16
+collision_mask = 17
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 script = ExtResource("1_k15pb")
+
+[node name="TargetPrioritizer" type="Node3D" parent="CharacterBody3D"]
+transform = Transform3D(0.666667, 0, 0, 0, 0.666667, 0, 0, 0, 0.666667, 0, 0, 0)
+script = ExtResource("4_kkisv")
 
 [node name="Creature" parent="CharacterBody3D" instance=ExtResource("1_upmfi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.666667, 0)
@@ -490,14 +495,14 @@ bones/59/rotation = Quaternion(-0.0224702, 0.306537, 0.0960686, 0.946732)
 bones/59/scale = Vector3(1, 1, 1)
 
 [node name="BackRange" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="0"]
-transform = Transform3D(1, 2.35459e-08, 6.00297e-08, 2.50689e-09, 0.931975, -0.362521, -5.58311e-08, 0.362521, 0.931976, 4.37211e-10, 0.0411693, 0.0482842)
+transform = Transform3D(1, -6.82379e-08, 4.42381e-08, 9.56391e-08, 0.931975, -0.362522, -1.11277e-08, 0.362521, 0.931976, 1.06435e-09, 0.0411693, 0.0482842)
 bone_idx = 25
 
 [node name="BackRange" parent="CharacterBody3D/Creature/Armature/Skeleton3D/BackRange" index="0"]
 visible = false
 
 [node name="BackRangeInner" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="1"]
-transform = Transform3D(1, 2.35459e-08, 6.00297e-08, 2.50689e-09, 0.931975, -0.362521, -5.58311e-08, 0.362521, 0.931976, 4.37211e-10, 0.0411693, 0.0482842)
+transform = Transform3D(1, -6.82379e-08, 4.42381e-08, 9.56391e-08, 0.931975, -0.362522, -1.11277e-08, 0.362521, 0.931976, 1.06435e-09, 0.0411693, 0.0482842)
 visible = false
 bone_idx = 26
 
@@ -513,7 +518,7 @@ surface_material_override/2 = SubResource("StandardMaterial3D_jdfpr")
 surface_material_override/0 = SubResource("StandardMaterial3D_h6uyy")
 
 [node name="Center" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, 3.55271e-15, 2.38419e-07, 7.98275e-08, -0.942282, -0.334821, 2.24658e-07, 0.334821, -0.942282, -7.33799e-18, 0.0521755, 0.0430473)
+transform = Transform3D(1, -2.8777e-13, 2.3842e-07, 7.98276e-08, -0.942282, -0.334822, 2.24658e-07, 0.334821, -0.942282, -7.33799e-18, 0.0521755, 0.0430473)
 bone_name = "Center"
 bone_idx = 11
 
@@ -546,7 +551,7 @@ volume_db = 6.0
 bus = &"BigSounds"
 
 [node name="Tail" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="5"]
-transform = Transform3D(1, 2.42045e-09, 6.85363e-08, -5.71847e-08, 0.518119, 0.855308, -2.47888e-08, -0.855309, 0.518119, -9.74527e-10, 0.0665878, 0.0297376)
+transform = Transform3D(1, 2.11354e-09, -2.45955e-08, 3.59475e-08, 0.51812, 0.855308, 1.99146e-08, -0.855308, 0.518119, -1.48611e-09, 0.0665878, 0.0297376)
 bone_name = "Bone.003"
 bone_idx = 27
 
@@ -572,7 +577,7 @@ shadow_enabled = true
 omni_range = 20.0
 
 [node name="Hand_R" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="6" instance=ExtResource("8_dun2m")]
-transform = Transform3D(0.997967, -0.0343156, -0.0537125, 0.0520627, -0.0472871, 0.997524, -0.0367706, -0.998293, -0.045404, -0.0305749, -9.34433e-05, 0.0196167)
+transform = Transform3D(0.997967, -0.0343148, -0.0537125, 0.0520626, -0.0472866, 0.997524, -0.0367697, -0.998292, -0.0454035, -0.0305749, -9.34291e-05, 0.0196167)
 
 [node name="Footstep" type="AudioStreamPlayer3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D/Hand_R"]
 stream = ExtResource("9_dun2m")
@@ -580,7 +585,7 @@ volume_db = -5.872
 bus = &"Normal"
 
 [node name="Hand_L" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="7" instance=ExtResource("8_dun2m")]
-transform = Transform3D(0.997967, 0.0343157, 0.0537135, -0.0520636, -0.0472887, 0.997524, 0.0367708, -0.998292, -0.0454055, 0.0305749, -9.35181e-05, 0.0196167)
+transform = Transform3D(0.997967, 0.034315, 0.0537137, -0.0520638, -0.0472891, 0.997524, 0.0367701, -0.998292, -0.045406, 0.0305749, -9.35278e-05, 0.0196168)
 bone_name = "Tentacle.L.004"
 bone_idx = 43
 
@@ -597,7 +602,7 @@ surface_material_override/1 = SubResource("StandardMaterial3D_atrna")
 surface_material_override/0 = SubResource("StandardMaterial3D_6dq67")
 
 [node name="WoundTargets" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="10"]
-transform = Transform3D(1, -8.9407e-08, 1.11759e-07, -7.45058e-09, 0.734649, 0.678447, -1.3411e-07, -0.678447, 0.734649, -9.31323e-10, 0.0521754, 0.0430473)
+transform = Transform3D(1, -1.15484e-07, 2.23517e-08, 8.56817e-08, 0.734649, 0.678447, -8.9407e-08, -0.678447, 0.734649, -9.31323e-10, 0.0521754, 0.0430473)
 bone_name = "Bone.004"
 bone_idx = 24
 
@@ -608,7 +613,7 @@ transform = Transform3D(0.0035967, 0.00281706, 0.00203173, 1.36197e-12, 0.002924
 transform = Transform3D(0.0035967, 0.00281706, 0.00203173, -1.22297e-11, 0.00292479, -0.00405532, -0.00347329, 0.00291715, 0.00210392, 1.02532e-09, 0.014131, -0.00056202)
 
 [node name="WoundTargets2" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="11"]
-transform = Transform3D(1, 2.42045e-09, 6.85363e-08, -5.71847e-08, 0.518119, 0.855308, -2.47888e-08, -0.855309, 0.518119, -9.74527e-10, 0.0665878, 0.0297376)
+transform = Transform3D(1, 2.11354e-09, -2.45955e-08, 3.59475e-08, 0.51812, 0.855308, 1.99146e-08, -0.855308, 0.518119, -1.48611e-09, 0.0665878, 0.0297376)
 bone_name = "Bone.003"
 bone_idx = 27
 
@@ -681,7 +686,7 @@ use_node_path_instead_of_group = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -2)
-shape = SubResource("CylinderShape3D_0s51c")
+shape = SubResource("CapsuleShape3D_kkisv")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="CharacterBody3D"]
 replication_config = SubResource("SceneReplicationConfig_jdfpr")
@@ -716,12 +721,9 @@ property = "players_inside"
 target_group = "../Range"
 use_node_path_instead_of_group = true
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://c374f2l86sod4")
-spawn_path = NodePath("..")
-
 [connection signal="started_jump" from="CharacterBody3D" to="CharacterBody3D/Creature/AnimationPlayer" method="_on_character_body_3d_started_jump"]
 [connection signal="started_jump" from="CharacterBody3D" to="CharacterBody3D/JumpSound" method="play" unbinds=1]
+[connection signal="target_changed" from="CharacterBody3D/TargetPrioritizer" to="CharacterBody3D" method="_on_range_player_entered"]
 [connection signal="attacked" from="CharacterBody3D/Creature/Armature/Skeleton3D/Center/AttackBox" to="CharacterBody3D/Creature/Armature/Skeleton3D/Center/AttackSound" method="play" unbinds=1]
 [connection signal="trigger" from="CharacterBody3D/Creature/Armature/Skeleton3D/WoundTargets/GunTarget" to="CharacterBody3D/Creature/Armature/Skeleton3D/WoundTargets/GunTarget" method="queue_free"]
 [connection signal="trigger" from="CharacterBody3D/Creature/Armature/Skeleton3D/WoundTargets/GunTarget2" to="CharacterBody3D/Creature/Armature/Skeleton3D/WoundTargets/GunTarget2" method="queue_free"]
@@ -734,6 +736,5 @@ spawn_path = NodePath("..")
 [connection signal="wounds_depleted" from="WoundTracker" to="CharacterBody3D" method="set_physics_process" binds= [false]]
 [connection signal="wounds_depleted" from="WoundTracker" to="CharacterBody3D/Creature/AnimationPlayer/MaterialEffects" method="play" binds= [&"MaterialEffects|Death"]]
 [connection signal="player_entered" from="Range" to="CharacterBody3D" method="_on_range_player_entered"]
-[connection signal="player_exited" from="Range" to="CharacterBody3D" method="_on_range_player_exited"]
 
 [editable path="CharacterBody3D/Creature"]

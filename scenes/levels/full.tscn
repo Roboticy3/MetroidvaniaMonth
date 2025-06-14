@@ -1,4 +1,4 @@
-[gd_scene load_steps=107 format=4 uid="uid://divm3hfp84v1n"]
+[gd_scene load_steps=109 format=4 uid="uid://divm3hfp84v1n"]
 
 [ext_resource type="PackedScene" uid="uid://lflopx50nk2t" path="res://scenes/Arena.tscn" id="1_8xgfm"]
 [ext_resource type="PackedScene" uid="uid://dnfbu6cnjq2l1" path="res://glb/Level1.glb" id="2_emn5n"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dv83l4nq14nt3" path="res://fbx/statue_with_triggers.tscn" id="6_6nm83"]
 [ext_resource type="PackedScene" uid="uid://cysgqnkwdgnga" path="res://glb/Shaft.glb" id="7_emn5n"]
 [ext_resource type="PackedScene" uid="uid://b7n4iotn5khu0" path="res://glb/Stairs.glb" id="7_nk028"]
+[ext_resource type="AudioStream" uid="uid://di2750svyuocv" path="res://c78/Roland CR-78 Samples/BD/CR78 BD-01.wav" id="7_s76il"]
 [ext_resource type="PackedScene" uid="uid://ha7ayschigmb" path="res://scenes/EnvironmentChanger.tscn" id="8_nk028"]
 [ext_resource type="PackedScene" uid="uid://b0ydpbvs5h33h" path="res://scenes/entities/creature.tscn" id="8_ryswq"]
 [ext_resource type="PackedScene" uid="uid://x3fod0fcnr2b" path="res://scenes/collectables/screw_collectable.tscn" id="10_j0jua"]
@@ -63,6 +64,10 @@ size = Vector3(1.3891, 1.33539, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w4p0r"]
 size = Vector3(3.05113, 2.63528, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cmc6u"]
+streams_count = 1
+stream_0/stream = ExtResource("7_s76il")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2byfx"]
 resource_name = "Base"
@@ -391,6 +396,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0537338, 0.429196, 0)
 shape = SubResource("BoxShape3D_w4p0r")
 
 [node name="HubEnvironment" parent="Hub" index="6" instance=ExtResource("12_7wgm6")]
+footstep_sound = SubResource("AudioStreamRandomizer_cmc6u")
 
 [node name="DirectionalLight3D" parent="Hub/HubEnvironment" index="0"]
 transform = Transform3D(-0.220004, -0.365112, -0.904595, -0.23833, -0.879095, 0.412783, -0.945937, 0.306406, 0.106387, 1.55732, -0.843461, -0.242926)
@@ -1027,7 +1033,7 @@ size = Vector3(150, 1, 150)
 [node name="Creature" parent="Arena" index="5" instance=ExtResource("8_ryswq")]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 22.7634, -150.9, -65.657)
 
-[node name="Creature" parent="Arena/Creature/CharacterBody3D" index="0"]
+[node name="Creature" parent="Arena/Creature/CharacterBody3D" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.91967, -0.666664, -5.07021)
 
 [node name="Skeleton3D" parent="Arena/Creature/CharacterBody3D/Creature/Armature" index="0"]
@@ -1093,7 +1099,7 @@ offset_top = -11.5
 offset_bottom = 11.5
 
 [node name="CollisionShape3D" parent="Arena/Creature/Range" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.5, 18.389, -18.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.08576, 11.2592, -10.0923)
 
 [node name="Label" parent="Arena/Creature" index="3"]
 offset_top = -11.5

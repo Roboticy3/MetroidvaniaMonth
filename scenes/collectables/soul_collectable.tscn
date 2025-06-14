@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://c374f2l86sod4"]
+[gd_scene load_steps=9 format=3 uid="uid://c374f2l86sod4"]
 
 [ext_resource type="PackedScene" uid="uid://lm3u4rwl1xf0" path="res://scenes/collectables/collectable.tscn" id="1_rss1q"]
 [ext_resource type="ArrayMesh" uid="uid://cl7uv1jdu4yvr" path="res://obj/Beacon.obj" id="2_bqe8l"]
-[ext_resource type="AudioStream" uid="uid://dkdiur0bihv1f" path="res://als/Shimmer.wav" id="3_bqe8l"]
 [ext_resource type="Script" uid="uid://bpjop3l0mdxyo" path="res://scripts/other_entities/noise_mover.gd" id="3_x7oj4"]
 
 [sub_resource type="Gradient" id="Gradient_bqe8l"]
@@ -35,7 +34,7 @@ item_type = 1
 transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 0, 0, 0)
 
 [node name="Shimmer" parent="ScrewArea/Screw" index="0"]
-stream = null
+max_distance = 200.0
 bus = &"BigSounds"
 
 [node name="Beacon" type="MeshInstance3D" parent="ScrewArea/Screw" index="1"]
@@ -56,10 +55,3 @@ visible = false
 
 [node name="CollisionShape3D" parent="ScrewArea" index="3"]
 shape = SubResource("CylinderShape3D_s6dlw")
-
-[node name="Shimmer" type="AudioStreamPlayer3D" parent="." index="1"]
-stream = ExtResource("3_bqe8l")
-pitch_scale = 1.04
-autoplay = true
-stream_paused = true
-max_distance = 200.0
