@@ -1,4 +1,4 @@
-[gd_scene load_steps=104 format=4 uid="uid://divm3hfp84v1n"]
+[gd_scene load_steps=105 format=4 uid="uid://divm3hfp84v1n"]
 
 [ext_resource type="PackedScene" uid="uid://lflopx50nk2t" path="res://scenes/Arena.tscn" id="1_8xgfm"]
 [ext_resource type="PackedScene" uid="uid://dnfbu6cnjq2l1" path="res://glb/Level1.glb" id="2_emn5n"]
@@ -52,6 +52,7 @@
 [ext_resource type="PackedScene" uid="uid://bh3nfelfsa216" path="res://scenes/collectables/gun_collectable.tscn" id="41_isav1"]
 [ext_resource type="ArrayOccluder3D" uid="uid://d24x4sjohu416" path="res://occ/full.occ" id="44_l10ly"]
 [ext_resource type="LightmapGIData" uid="uid://1sgvvfxt7ujd" path="res://lightmaps/forest.lmbake" id="47_0aiev"]
+[ext_resource type="LightmapGIData" uid="uid://chevdbqda1s20" path="res://lightmaps/temple-inner.lmbake" id="49_jsj78"]
 [ext_resource type="LightmapGIData" uid="uid://d3cbi4nhyd7vt" path="res://lightmaps/temple.lmbake" id="49_pe4yd"]
 [ext_resource type="PackedScene" uid="uid://0vv4jtdt4ght" path="res://scenes/levels/Temple.tscn" id="50_jsj78"]
 
@@ -1638,6 +1639,12 @@ script = ExtResource("3_g843x")
 gi_lightmap_texel_scale = 3.0
 mesh = SubResource("ArrayMesh_7ora3")
 
+[node name="LightmapGI" type="LightmapGI" parent="Temple/Temple/CSGBox3D" index="15"]
+quality = 0
+texel_scale = 0.5
+generate_probes_subdiv = 1
+light_data = ExtResource("49_jsj78")
+
 [node name="TempleEnvironment" parent="Temple" index="1" instance=ExtResource("12_7wgm6")]
 active = false
 
@@ -1650,7 +1657,6 @@ light_energy = 1.0
 stream = ExtResource("13_flmao")
 
 [node name="LightmapGI" type="LightmapGI" parent="Temple" index="2"]
-quality = 0
 texel_scale = 0.5
 light_data = ExtResource("49_pe4yd")
 

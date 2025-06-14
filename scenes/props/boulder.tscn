@@ -7,7 +7,6 @@
 size = Vector3(9, 9, 9)
 
 [node name="RigidBody3D" type="RigidBody3D"]
-axis_lock_linear_x = true
 axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true

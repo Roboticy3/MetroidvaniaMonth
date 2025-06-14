@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://be6h1boetu4xb"]
+[gd_scene load_steps=19 format=4 uid="uid://be6h1boetu4xb"]
 
 [ext_resource type="Material" uid="uid://7y3fjtoqw04s" path="res://stone.tres" id="1_8u05n"]
 [ext_resource type="Material" uid="uid://b0paj27esmsp7" path="res://darkmetal.tres" id="2_6af3n"]
@@ -60,6 +60,15 @@ size = Vector3(3, 0.6, 5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uc47x"]
 size = Vector3(11, 10, 11)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xtu4q"]
+size = Vector3(1, 1.5, 21.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qqh63"]
+size = Vector3(1, 1.5, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_86akg"]
+size = Vector3(4, 4, 4)
 
 [node name="Temple-inner" type="Node3D"]
 
@@ -1071,6 +1080,32 @@ spot_range = 50.0
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 13, 17.95, 11)
 light_bake_mode = 1
 spot_range = 48.0
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -11.05, 12.2)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.4)
+shape = SubResource("BoxShape3D_xtu4q")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -11.05, 12.2)
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -9.7)
+shape = SubResource("BoxShape3D_qqh63")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="."]
+transform = Transform3D(0.5, 3.78552e-08, 0.866025, 0.866025, -2.18557e-08, -0.5, 0, 1, -4.37114e-08, 2.6, 13.1, 0)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 8.3, 0)
+shape = SubResource("BoxShape3D_86akg")
 
 [editable path="RigidBody3D5"]
 [editable path="RigidBody3D4"]
