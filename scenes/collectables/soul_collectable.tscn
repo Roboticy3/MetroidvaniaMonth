@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://c374f2l86sod4"]
+
+[ext_resource type="PackedScene" uid="uid://lm3u4rwl1xf0" path="res://scenes/collectables/collectable.tscn" id="1_rss1q"]
+[ext_resource type="ArrayMesh" uid="uid://cl7uv1jdu4yvr" path="res://obj/Beacon.obj" id="2_bqe8l"]
+[ext_resource type="AudioStream" uid="uid://dkdiur0bihv1f" path="res://als/Shimmer.wav" id="3_bqe8l"]
+[ext_resource type="Script" uid="uid://bpjop3l0mdxyo" path="res://scripts/other_entities/noise_mover.gd" id="3_x7oj4"]
+
+[sub_resource type="Gradient" id="Gradient_bqe8l"]
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_x7oj4"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jepw1"]
+seamless = true
+color_ramp = SubResource("Gradient_bqe8l")
+noise = SubResource("FastNoiseLite_x7oj4")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bqe8l"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = SubResource("NoiseTexture2D_jepw1")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s6dlw"]
+height = 1.7
+radius = 1.1
+
+[node name="SoulCollectable" instance=ExtResource("1_rss1q")]
+item_type = 1
+
+[node name="Screw" parent="ScrewArea" index="0"]
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 0, 0, 0)
+
+[node name="Shimmer" parent="ScrewArea/Screw" index="0"]
+stream = null
+bus = &"BigSounds"
+
+[node name="Beacon" type="MeshInstance3D" parent="ScrewArea/Screw" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98023e-08, -6, 0.84)
+layers = 2
+cast_shadow = 0
+mesh = ExtResource("2_bqe8l")
+surface_material_override/0 = SubResource("StandardMaterial3D_bqe8l")
+script = ExtResource("3_x7oj4")
+noise = SubResource("FastNoiseLite_x7oj4")
+
+[node name="Pickup" parent="ScrewArea/Screw" index="2"]
+pitch_scale = 0.6
+bus = &"BigSounds"
+
+[node name="OmniLight3D" parent="ScrewArea" index="1"]
+visible = false
+
+[node name="CollisionShape3D" parent="ScrewArea" index="3"]
+shape = SubResource("CylinderShape3D_s6dlw")
+
+[node name="Shimmer" type="AudioStreamPlayer3D" parent="." index="1"]
+stream = ExtResource("3_bqe8l")
+pitch_scale = 1.04
+autoplay = true
+stream_paused = true
+max_distance = 200.0

@@ -7,7 +7,7 @@
 height = 1.7
 radius = 1.1
 
-[node name="ScrewCollectable" instance=ExtResource("1_mb70y")]
+[node name="BeaconCollectable" instance=ExtResource("1_mb70y")]
 item_type = 3
 
 [node name="Screw" parent="ScrewArea" index="0"]

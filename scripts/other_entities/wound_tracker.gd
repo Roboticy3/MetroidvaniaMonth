@@ -8,6 +8,7 @@ signal wounds_depleted()
 var wounds:Array[Node] = []
 func _process(_delta: float) -> void:
 	wounds = get_tree().get_nodes_in_group("Wound")
+	#print(wounds)
 	if wounds.is_empty():
 		#print("wounds depleted")
 		wounds_depleted.emit()

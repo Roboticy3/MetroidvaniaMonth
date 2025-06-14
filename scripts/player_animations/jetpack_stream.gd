@@ -16,10 +16,10 @@ func _process(delta: float) -> void:
 
 @rpc("any_peer", "call_local", "reliable")
 func play_rpc():
-	print("playing jetpack sound on ", multiplayer.get_unique_id())
+	#print("playing jetpack sound on ", multiplayer.get_unique_id())
 	play()
 
 @rpc("any_peer", "call_local", "reliable")
 func stop_rpc():
-	print("stopping jetpack sound on ", multiplayer.get_unique_id())
+	#print("stopping jetpack sound on ", multiplayer.get_unique_id())
 	stop()

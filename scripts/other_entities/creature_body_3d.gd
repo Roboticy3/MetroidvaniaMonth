@@ -20,6 +20,8 @@ const MIN_FAST_ROTATE_DISTANCE := 100.0
 const GROUND_ROTATION_BOOST := 0.0
 const AERIAL_ROTATION_BOOST := 3.0
 
+var time_scale := 1.0
+
 func _ready():
 	if !is_multiplayer_authority():
 		set_physics_process(false)
@@ -83,9 +85,11 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 			velocity.z = move_toward(velocity.z, 0, SPEED)
-		
-		move_and_slide()
-	else:
+	
+	velocity *= time_scale
+	move_and_slide()
+	
+	if !is_on_floor():
 		move_and_slide()
 		var col := get_last_slide_collision()
 		if col and !is_on_floor():

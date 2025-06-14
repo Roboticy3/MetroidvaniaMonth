@@ -6,3 +6,5 @@ func _process(delta: float) -> void:
 	speed_scale = get_parent().speed_scale
 	if get_parent().current_animation == "Armature|Walk":
 		play("MaterialEffects|Walk")
+	if get_parent().current_animation == "Armature|Death":
+		play("MaterialEffects|Death")

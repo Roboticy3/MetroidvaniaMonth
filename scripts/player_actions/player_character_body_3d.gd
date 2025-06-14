@@ -82,10 +82,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	velocity_sync = velocity
-	
-	#extra check to override broken killbox. Lol.
-	if position.y < -200:
-		get_parent().check_health(-1.0)
 
 func update_time_falling(delta:float) -> void:
 	#If falling for long enough, upgrade to a super fall
@@ -189,5 +185,6 @@ func apply_central_impulse_rpc(impulse:Vector3):
 	#	but, since the value is synced, that's the only place where we need to
 	#	change it.
 	if health and is_multiplayer_authority():
+		print("dealing damage")
 		health.drain(1)
 			
