@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://coikl6b7uccg3"]
+
+[node name="Window" type="CSGBox3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(1, 60, 1)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+size = Vector3(1, 60, 1)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+size = Vector3(1, 60, 1)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 24, -1.09278e-06)
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 54.0
+spot_angle = 35.7264
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 24, 2)
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 54.0
+spot_angle = 35.7264
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 24, -2)
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 54.0
+spot_angle = 35.7264
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -24, 1.04907e-06)
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 54.0
+spot_angle = 35.7264
+
+[node name="SpotLight3D5" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -24, 2)
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 54.0
+spot_angle = 35.7264
+
+[node name="SpotLight3D6" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -24, -2)
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 54.0
+spot_angle = 35.7264

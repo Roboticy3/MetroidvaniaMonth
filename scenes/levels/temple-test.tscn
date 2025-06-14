@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://brbkqhlx5bm5q"]
+
+[ext_resource type="PackedScene" uid="uid://lflopx50nk2t" path="res://scenes/Arena.tscn" id="1_a178d"]
+[ext_resource type="PackedScene" uid="uid://be6h1boetu4xb" path="res://scenes/levels/Temple-inner.tscn" id="2_0hlpg"]
+[ext_resource type="PackedScene" uid="uid://5nbr351bpo45" path="res://scenes/props/up_boulder.tscn" id="3_86mcx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0hlpg"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_86mcx"]
+sky_material = SubResource("ProceduralSkyMaterial_0hlpg")
+
+[sub_resource type="Environment" id="Environment_m435s"]
+background_mode = 2
+sky = SubResource("Sky_86mcx")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m435s"]
+size = Vector3(10, 10, 10)
+
+[node name="Arena" instance=ExtResource("1_a178d")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="0"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." index="1"]
+environment = SubResource("Environment_m435s")
+
+[node name="Temple-inner" parent="." index="6" instance=ExtResource("2_0hlpg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 24.4129, 28.3831)
+
+[node name="RigidBody3D3" parent="." index="7" instance=ExtResource("3_86mcx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 27, -2.6)
+
+[node name="GunTarget" parent="RigidBody3D3" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+
+[node name="CSGBox3D" parent="RigidBody3D3" index="1"]
+size = Vector3(11, 10, 11)
+
+[node name="CollisionShape3D" parent="RigidBody3D3" index="2"]
+shape = SubResource("BoxShape3D_m435s")
+
+[editable path="Menu"]
+[editable path="RigidBody3D3"]

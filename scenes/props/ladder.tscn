@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://caawojt2wictk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ingav"]
+size = Vector3(1.3, 30.1, 1.5)
+
+[node name="Ladder" type="Node3D"]
+
+[node name="Area3D" type="Area3D" parent="." groups=["Ladder"]]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 14.45, 0)
+shape = SubResource("BoxShape3D_ingav")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 14.5, 0)
+use_collision = true
+size = Vector3(1, 30, 1)

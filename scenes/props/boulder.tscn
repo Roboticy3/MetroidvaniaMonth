@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://br6uxrlaivucx"]
+
+[ext_resource type="PackedScene" uid="uid://cjcy8xm7n5hca" path="res://scenes/entities/gun_target.tscn" id="1_fiund"]
+[ext_resource type="Script" uid="uid://dqtpe2ja327rl" path="res://scripts/other_entities/boulder.gd" id="1_p0reh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6af3n"]
+size = Vector3(9, 9, 9)
+
+[node name="RigidBody3D" type="RigidBody3D"]
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_p0reh")
+
+[node name="GunTarget" parent="." instance=ExtResource("1_fiund")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(9, 9, 9)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_6af3n")
+
+[connection signal="relay" from="GunTarget" to="." method="_on_relay"]
+[connection signal="trigger" from="GunTarget" to="GunTarget" method="set_visible" binds= [false]]

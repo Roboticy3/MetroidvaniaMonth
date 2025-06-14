@@ -1,9 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://dv83l4nq14nt3"]
+[gd_scene load_steps=12 format=3 uid="uid://dv83l4nq14nt3"]
 
 [ext_resource type="PackedScene" uid="uid://chwi83yaq60wx" path="res://fbx/statue.tscn" id="1_xdwst"]
 [ext_resource type="Script" uid="uid://b0d1fxwhexfyg" path="res://scripts/level/show_anim_names.gd" id="2_6nrga"]
 [ext_resource type="PackedScene" uid="uid://cjcy8xm7n5hca" path="res://scenes/entities/gun_target.tscn" id="2_ae8tc"]
 [ext_resource type="PackedScene" uid="uid://ctqrlvhcyg7qq" path="res://scenes/collectables/beacon_collectable.tscn" id="4_pt26b"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pt26b"]
+resource_name = "Base"
+cull_mode = 2
+albedo_color = Color(0.773839, 0.742496, 0.690617, 1)
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60pxa"]
+resource_name = "Base"
+cull_mode = 2
+albedo_color = Color(0.773839, 0.742496, 0.690617, 1)
+roughness = 0.5
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6nrga"]
 radius = 3.0
@@ -57,6 +69,21 @@ _data = {
 size = Vector3(2, 9.306, 1.2)
 
 [node name="Statue" instance=ExtResource("1_xdwst")]
+
+[node name="StatueBase" parent="StatueSkeleton/Skeleton3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="StatueBase" parent="StatueSkeleton/Skeleton3D/StatueBase" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_pt26b")
+
+[node name="Dress" parent="StatueSkeleton/Skeleton3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.42109e-14, 0, 1.42109e-14, 1, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_60pxa")
+
+[node name="StatueBody" parent="StatueSkeleton/Skeleton3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, -1.42109e-14, 0, 1.42109e-14, 1, 0, 0, 0)
+surface_material_override/0 = SubResource("StandardMaterial3D_60pxa")
 
 [node name="AnimationPlayer" parent="." index="1"]
 script = ExtResource("2_6nrga")

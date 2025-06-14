@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://db556kgms5ljs"]
+
+[ext_resource type="Material" uid="uid://7y3fjtoqw04s" path="res://stone.tres" id="1_m3pwe"]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D"]
+material_override = ExtResource("1_m3pwe")
+use_collision = true
+radius = 30.0
+height = 68.0
+sides = 7
+cone = true
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -110.145, 0)
+radius = 30.0
+height = 153.122
+sides = 7

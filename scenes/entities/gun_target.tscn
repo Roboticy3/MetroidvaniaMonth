@@ -20,7 +20,7 @@ stream_1/stream = ExtResource("3_iwqwh")
 stream_2/stream = ExtResource("4_njlqc")
 
 [node name="GunTarget" type="StaticBody3D" groups=["Entity"]]
-collision_layer = 2
+collision_layer = 32
 script = ExtResource("1_2eatg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

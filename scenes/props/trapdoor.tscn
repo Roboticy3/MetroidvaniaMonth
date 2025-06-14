@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dm8qxot5oo0nn"]
+
+[node name="Trapdoor" type="CSGBox3D"]
+size = Vector3(10, 1, 10)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+operation = 2
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+size = Vector3(5, 1, 5)

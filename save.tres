@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource("1_dvlvu")
 live = true
-collectables = Array[int]([0, 0, 0, 1])
+collectables = Array[int]([0, 0, 0, 0])
 ranges = [100.0]
 metadata/_custom_type_script = "uid://dfeer3430afyw"

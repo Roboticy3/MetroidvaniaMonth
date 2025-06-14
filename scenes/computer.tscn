@@ -1,0 +1,295 @@
+[gd_scene load_steps=13 format=3 uid="uid://b8oufpc2w553e"]
+
+[ext_resource type="Script" uid="uid://beh7bq8cpykfp" path="res://scripts/ui/computer.gd" id="1_4kmhl"]
+[ext_resource type="Texture2D" uid="uid://vdeodbs3j8uv" path="res://texture/computer.png" id="1_c13y7"]
+[ext_resource type="Texture2D" uid="uid://digjl22li5bg4" path="res://texture/hurrah.png" id="2_ph3nu"]
+[ext_resource type="Texture2D" uid="uid://otyg2r25fvp" path="res://texture/Beacon.png" id="3_4kmhl"]
+[ext_resource type="PackedScene" uid="uid://csce8xafyxnoh" path="res://scenes/computer_tab.tscn" id="5_uiul0"]
+[ext_resource type="Texture2D" uid="uid://dqrn1tjmyvl7i" path="res://texture/Screenshot 2025-06-13 153211.png" id="6_ruko6"]
+
+[sub_resource type="Animation" id="Animation_ur38h"]
+resource_name = "default"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.03333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_k4214"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o4fko"]
+_data = {
+&"RESET": SubResource("Animation_k4214"),
+&"default": SubResource("Animation_ur38h")
+}
+
+[sub_resource type="Animation" id="Animation_c13y7"]
+resource_name = "Open"
+length = 0.11
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.00833333, 0.108333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.79594, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.00871866),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect/MarginContainer/MarginContainer2/Box/TabContainer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect/MarginContainer/MarginContainer2/Box/LoginScreen:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_8ho6b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.03331]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect/MarginContainer/MarginContainer2/Box/TabContainer:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect/MarginContainer/MarginContainer2/Box/LoginScreen:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ho6b"]
+_data = {
+&"Open": SubResource("Animation_c13y7"),
+&"RESET": SubResource("Animation_8ho6b")
+}
+
+[node name="Tutorial" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4kmhl")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -2.03331
+pivot_offset = Vector2(28, 622)
+texture = ExtResource("1_c13y7")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1399, 299)
+
+[node name="MarginContainer2" type="MarginContainer" parent="TextureRect/MarginContainer"]
+show_behind_parent = true
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect/MarginContainer/MarginContainer2"]
+show_behind_parent = true
+layout_mode = 2
+color = Color(0.56, 0.56, 0.56, 1)
+
+[node name="Box" type="Control" parent="TextureRect/MarginContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="LoginScreen" type="Control" parent="TextureRect/MarginContainer/MarginContainer2/Box"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Hurrah" type="Sprite2D" parent="TextureRect/MarginContainer/MarginContainer2/Box/LoginScreen"]
+position = Vector2(404, 389)
+scale = Vector2(0.602941, 0.602941)
+texture = ExtResource("2_ph3nu")
+
+[node name="Beacon" type="Sprite2D" parent="TextureRect/MarginContainer/MarginContainer2/Box/LoginScreen/Hurrah"]
+position = Vector2(77.3903, -77.122)
+scale = Vector2(0.640244, 0.640244)
+texture = ExtResource("3_4kmhl")
+
+[node name="Button" type="Button" parent="TextureRect/MarginContainer/MarginContainer2/Box/LoginScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.5
+offset_top = -15.5
+offset_right = 27.5
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Log In"
+
+[node name="TabContainer" type="TabContainer" parent="TextureRect/MarginContainer/MarginContainer2/Box"]
+visible = false
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -328.0
+offset_top = 12.0
+offset_right = 327.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="Beacon" type="Control" parent="TextureRect/MarginContainer/MarginContainer2/Box/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" parent="TextureRect/MarginContainer/MarginContainer2/Box/TabContainer/Beacon" instance=ExtResource("5_uiul0")]
+layout_mode = 0
+anchors_preset = 0
+
+[node name="RichTextLabel" parent="TextureRect/MarginContainer/MarginContainer2/Box/TabContainer/Beacon/MarginContainer/ScrollContainer/VBoxContainer" index="1"]
+text = "This beacon allows me to connect to services and people over the internet. Once a connection is established, it can even project a ghost of my friend into my surroundings to help out. 
+
+[i]NOTE: The host must be on the desktop version of the game![/i]"
+
+[node name="Tentacle Monsters" type="Control" parent="TextureRect/MarginContainer/MarginContainer2/Box/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" parent="TextureRect/MarginContainer/MarginContainer2/Box/TabContainer/Tentacle Monsters" instance=ExtResource("5_uiul0")]
+layout_mode = 1
+
+[node name="ScrollContainer" parent="TextureRect/MarginContainer/MarginContainer2/Box/TabContainer/Tentacle Monsters/MarginContainer" index="1"]
+scroll_vertical = 11
+
+[node name="TextureRect" parent="TextureRect/MarginContainer/MarginContainer2/Box/TabContainer/Tentacle Monsters/MarginContainer/ScrollContainer/VBoxContainer" index="0"]
+texture = ExtResource("6_ruko6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextureRect/MarginContainer/MarginContainer2/Box/TabContainer/Tentacle Monsters/MarginContainer/ScrollContainer/VBoxContainer/TextureRect" index="0"]
+libraries = {
+&"": SubResource("AnimationLibrary_o4fko")
+}
+autoplay = "default"
+
+[node name="RichTextLabel" parent="TextureRect/MarginContainer/MarginContainer2/Box/TabContainer/Tentacle Monsters/MarginContainer/ScrollContainer/VBoxContainer" index="1"]
+text = "A mound of armored tentacles ending in spiked mouths. These rare and fearsome monsters have a bulletproof outer skin made from the rocks they eat, forming natural cavities. However, they covet flesh the most. 
+
+They also incorporate flesh into their bodies as they eat it, just like stone. This forms a natural weak point. If one has been around for long enough, and seems to be guarding part of its body, it's probably undergone this very process."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8ho6b")
+}
+
+[connection signal="pressed" from="TextureRect/MarginContainer/MarginContainer2/Box/LoginScreen/Button" to="TextureRect/MarginContainer/MarginContainer2/Box/LoginScreen" method="set_visible" binds= [false]]
+[connection signal="pressed" from="TextureRect/MarginContainer/MarginContainer2/Box/LoginScreen/Button" to="TextureRect/MarginContainer/MarginContainer2/Box/TabContainer" method="set_visible" binds= [true]]
+
+[editable path="TextureRect/MarginContainer/MarginContainer2/Box/TabContainer/Beacon/MarginContainer"]
+[editable path="TextureRect/MarginContainer/MarginContainer2/Box/TabContainer/Tentacle Monsters/MarginContainer"]
