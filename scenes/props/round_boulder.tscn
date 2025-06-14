@@ -6,7 +6,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_3uhuw"]
 radius = 1.5
 
-[node name="RoundBoulder" type="RigidBody3D"]
+[node name="RoundBoulder" type="RigidBody3D" groups=["Boulder"]]
 collision_layer = 0
 mass = 0.5
 script = ExtResource("1_7mdb6")

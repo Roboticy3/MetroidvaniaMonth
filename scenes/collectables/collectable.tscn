@@ -79,7 +79,7 @@ _data = {
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_tdcoo"]
 radius = 2.0
 
-[node name="ScrewCollectable" type="Node3D"]
+[node name="ScrewCollectable" type="Node3D" groups=["Collectable"]]
 script = ExtResource("1_cy7d5")
 
 [node name="ScrewArea" type="Area3D" parent="."]

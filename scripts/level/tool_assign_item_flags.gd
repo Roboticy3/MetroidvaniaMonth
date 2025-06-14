@@ -8,7 +8,7 @@ extends Node
 func _on_assign_flags_pressed():
 	var counts:PackedInt32Array = []
 	counts.resize(SaveData.ItemType.TYPE_MAX)
-	for c in get_children():
+	for c in get_tree().get_nodes_in_group("Collectable"):
 		var type = c.get("item_type")
 		if !(type is SaveData.ItemType): continue
 		

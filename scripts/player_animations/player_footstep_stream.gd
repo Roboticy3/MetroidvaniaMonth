@@ -16,9 +16,11 @@ func _ready() -> void:
 
 func _on_environment_changed(to:Node):
 	if to == null: return
+	var new_stream = to.get("footstep_sound")
+	if !(new_stream is AudioStream): return
 	print("changing stream")
 	stop()
-	stream = to.get("footstep_sound")
+	stream = new_stream
 	
 var time_since_last_step := 0.0
 func _process(delta:float) -> void:

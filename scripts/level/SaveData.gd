@@ -21,10 +21,11 @@ const PATH := "user://save.tres"
 @export var collectables:Array[int] = [0,0,0,0]
 
 enum ItemType {
-	SCREW = 0,
-	SOUL,
-	GUN,
-	BEACON,
+	SCREW = 0, #Screws
+	SOUL, #Boss souls
+	GUN, #Weapons
+	BEACON, #Notes beacons
+	LADDER, #Droppable ladder shortcuts
 	TYPE_MAX,
 }
 

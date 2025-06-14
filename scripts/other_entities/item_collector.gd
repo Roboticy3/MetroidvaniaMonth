@@ -9,9 +9,13 @@ extends Node3D
 #A flag uniquely representing this item in the stage.
 @export_range(0, 63) var item_flag:int
 
+signal collected()
+
 func collect():
 	ClientState.save.update_collectable(item_type, item_flag, {"position":global_position})
+	collected.emit()
 
 func _ready():
 	if ClientState.save.has_item(item_type, item_flag):
+		collected.emit()
 		queue_free() 

@@ -1,4 +1,10 @@
+## Shared progress state, including the serialized save resource as well as
+## info on how to manage it and the server data
+
 extends Node
+
+
+var reset_save := true
 
 func _ready():
 	name = "Unnamed"
@@ -6,7 +12,7 @@ func _ready():
 	var user_save := load(SaveData.PATH)
 	print("tried to load ", user_save, " at ", SaveData.PATH)
 
-	if user_save:
+	if user_save and not reset_save:
 		save = user_save
 	else:
 		save = load("res://save.tres")
