@@ -6,6 +6,10 @@ extends Range
 #The horizontal aspect ratio of 1 unit of this range, effects size.x
 @export var fuel_unit_visual_aspect := 2.0
 
+@export var debounce_drain := 0.0
+var invincible := false
+var invincible_timer:Timer
+
 var inner_maximum := 0.0
 
 @export var level := 0 : 
@@ -19,10 +23,27 @@ func update_visual_length():
 	
 func _ready():
 	level = level
+	
+	if debounce_drain > 0.0:
+		var timer = Timer.new()
+		timer.autostart = false
+		timer.wait_time = debounce_drain
+		timer.one_shot = true
+		timer.timeout.connect(func ():
+			invincible = false
+			print("bruh")
+		)
+		add_child(timer)
+		invincible_timer = timer
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func drain(delta: float) -> void:
-	value -= delta / efficiency
+	if !invincible:
+		value -= delta / efficiency
+		if debounce_drain > 0.0:
+			print("debouncing drain with ", debounce_drain, " seconds")
+			invincible = true
+			invincible_timer.start(debounce_drain)
 
 func is_empty() -> bool:
 	return value <= 0.0

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://oh1yh5aapk3o"]
+
+[ext_resource type="ButtonGroup" uid="uid://dx06gsjwigd60" path="res://scenes/ui/sound_attribution.tres" id="1_jbqxb"]
+[ext_resource type="AudioStream" uid="uid://bp1bokfb7rwdv" path="res://freesound/338018__m_delaparra__mug-breaking.wav" id="1_k6733"]
+
+[node name="SoundAttribution" type="HBoxContainer"]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Mug Breaking.wav by m_delaparra -- https://freesound.org/s/338018/ -- License: Creative Commons 0"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+mouse_filter = 1
+toggle_mode = true
+button_group = ExtResource("1_jbqxb")
+text = "▶️"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Button"]
+stream = ExtResource("1_k6733")
+
+[connection signal="toggled" from="Button" to="Button/AudioStreamPlayer" method="set_playing"]

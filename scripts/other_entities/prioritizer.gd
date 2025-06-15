@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 	
 	var temp = null
 	for i in inside:
-		print("evaluating target ",i, " with score ", score_target(i))
+		#print("evaluating target ",i, " with score ", score_target(i))
 		if score_target(i) < score_target(temp):
 			temp = i
 	if temp != target: target = temp

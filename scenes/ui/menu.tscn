@@ -72,6 +72,10 @@ script = ExtResource("3_70i5f")
 [node name="VolumeTester" type="AudioStreamPlayer" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider"]
 stream = SubResource("AudioStreamRandomizer_6qf5j")
 
+[node name="Control" type="Control" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="MarginContainer2" type="MarginContainer" parent="Container/Panel/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3

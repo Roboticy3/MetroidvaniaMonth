@@ -648,6 +648,7 @@ shape = SubResource("ConvexPolygonShape3D_upmfi")
 debug_color = Color(0.816632, 0.40307, 0.128993, 0.42)
 
 [node name="Label" type="Label" parent="CharacterBody3D/Creature"]
+visible = false
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -672,6 +673,7 @@ transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0
 shape = SubResource("ConvexPolygonShape3D_7obff")
 
 [node name="Label2" type="Label" parent="CharacterBody3D/Creature"]
+visible = false
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
@@ -709,6 +711,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.389, 0)
 shape = SubResource("BoxShape3D_k15pb")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5

@@ -1,0 +1,189 @@
+[gd_scene load_steps=14 format=3 uid="uid://b2ayhrdplqg27"]
+
+[ext_resource type="FontFile" uid="uid://bbdth12bmwugo" path="res://CASTELAR.TTF" id="1_43pa1"]
+[ext_resource type="Script" uid="uid://wsosjuptkf4o" path="res://scripts/ui/unlock_mouse.gd" id="1_dsa3x"]
+[ext_resource type="PackedScene" uid="uid://oh1yh5aapk3o" path="res://scenes/ui/sound_attribution.tscn" id="2_o77oi"]
+[ext_resource type="Script" uid="uid://dsy8boae2clkv" path="res://scripts/ui/grow_on_hover.gd" id="2_s0obv"]
+[ext_resource type="AudioStream" uid="uid://b77cqgyu2ds0w" path="res://freesound/545958__cloud-10__gun-cocking-sound.mp3" id="4_clj2x"]
+[ext_resource type="AudioStream" uid="uid://ch5o2rd7a1lrb" path="res://freesound/110390__soundscalpelcom__cartoon_siren_whistle_001.wav" id="5_paw4q"]
+[ext_resource type="AudioStream" uid="uid://cgsiybpioo071" path="res://freesound/95753__3bagbrew__barneys_chimes.mp3" id="6_hooqi"]
+[ext_resource type="AudioStream" uid="uid://blcf6s3ipnulm" path="res://aud/719467__alexarje__ventilation-in-staircase-sonicrhythm-017-fixed.wav" id="7_paw4q"]
+[ext_resource type="AudioStream" uid="uid://crfjbi783bb28" path="res://freesound/765999__sounddesigner0101__walking-in-forest.wav" id="8_hooqi"]
+[ext_resource type="AudioStream" uid="uid://dllmywfdlcpm2" path="res://freesound/726529__klankbeeld__pine-forest-winterday-130-pm-240125_0644.wav" id="9_gp3cf"]
+[ext_resource type="AudioStream" uid="uid://hoqys6x2esbh" path="res://freesound/269382__lwdickens__room-tone-hallway-ventilation.wav" id="10_8np06"]
+[ext_resource type="Texture2D" uid="uid://cr1ehqrkt8tpp" path="res://texture/Sentence.png" id="12_0sjgl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o77oi"]
+font = ExtResource("1_43pa1")
+font_size = 101
+
+[node name="Crebits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dsa3x")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 42.0
+offset_top = 38.0
+offset_right = 537.0
+offset_bottom = 160.0
+text = "The End"
+label_settings = SubResource("LabelSettings_o77oi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(790, 330)
+scale = Vector2(0.646, 0.646)
+texture = ExtResource("12_0sjgl")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -572.0
+offset_top = -125.0
+offset_right = -44.0
+offset_bottom = -76.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Programming, visuals, sound producion and design by Pablo Ibarz.
+Project started 2025-06-01, halfway through Metroidvania Month 28."
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -180.0
+offset_right = 510.0
+grow_vertical = 0
+pivot_offset = Vector2(0, 180)
+script = ExtResource("2_s0obv")
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/Control/Control"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -180.0
+offset_right = 505.0
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Control/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -351.0
+offset_right = 990.0
+grow_vertical = 0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(3.12535, 347.754)
+
+[node name="Label" type="Label" parent="MarginContainer/Control/Control/VBoxContainer"]
+layout_mode = 2
+text = "Sounds Used:"
+
+[node name="SoundAttribution" parent="MarginContainer/Control/Control/VBoxContainer" instance=ExtResource("2_o77oi")]
+layout_mode = 2
+
+[node name="SoundAttribution2" parent="MarginContainer/Control/Control/VBoxContainer" instance=ExtResource("2_o77oi")]
+layout_mode = 2
+
+[node name="Label" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution2" index="0"]
+text = "Gun Cocking Sound.mp3 by Cloud-10 -- https://freesound.org/s/545958/ -- License: Creative Commons 0"
+
+[node name="AudioStreamPlayer" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution2/Button" index="0"]
+stream = ExtResource("4_clj2x")
+
+[node name="SoundAttribution3" parent="MarginContainer/Control/Control/VBoxContainer" instance=ExtResource("2_o77oi")]
+layout_mode = 2
+
+[node name="Label" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution3" index="0"]
+text = "cartoon_siren_whistle_001.wav by soundscalpel.com -- https://freesound.org/s/110390/ -- License: Attribution 3.0"
+
+[node name="AudioStreamPlayer" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution3/Button" index="0"]
+stream = ExtResource("5_paw4q")
+
+[node name="SoundAttribution4" parent="MarginContainer/Control/Control/VBoxContainer" instance=ExtResource("2_o77oi")]
+layout_mode = 2
+
+[node name="Label" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution4" index="0"]
+text = "barneys_chimes.mp3 by 3bagbrew -- https://freesound.org/s/95753/ -- License: Creative Commons 0"
+
+[node name="AudioStreamPlayer" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution4/Button" index="0"]
+stream = ExtResource("6_hooqi")
+
+[node name="SoundAttribution5" parent="MarginContainer/Control/Control/VBoxContainer" instance=ExtResource("2_o77oi")]
+layout_mode = 2
+
+[node name="Label" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution5" index="0"]
+text = "Ventilation in staircase (SonicRhythm 017) by alexarje -- https://freesound.org/s/719467/ -- License: Attribution 4.0"
+
+[node name="AudioStreamPlayer" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution5/Button" index="0"]
+stream = ExtResource("7_paw4q")
+
+[node name="SoundAttribution6" parent="MarginContainer/Control/Control/VBoxContainer" instance=ExtResource("2_o77oi")]
+layout_mode = 2
+
+[node name="Label" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution6" index="0"]
+text = "Walking in forest by SoundDesigner0101 -- https://freesound.org/s/765999/ -- License: Creative Commons 0"
+
+[node name="AudioStreamPlayer" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution6/Button" index="0"]
+stream = ExtResource("8_hooqi")
+
+[node name="SoundAttribution7" parent="MarginContainer/Control/Control/VBoxContainer" instance=ExtResource("2_o77oi")]
+layout_mode = 2
+
+[node name="Label" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution7" index="0"]
+text = "pine forest  winterday 130 pm 240125_0644 by klankbeeld -- https://freesound.org/s/726529/ -- License: Attribution 4.0"
+
+[node name="AudioStreamPlayer" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution7/Button" index="0"]
+stream = ExtResource("9_gp3cf")
+
+[node name="SoundAttribution8" parent="MarginContainer/Control/Control/VBoxContainer" instance=ExtResource("2_o77oi")]
+layout_mode = 2
+
+[node name="Label" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution8" index="0"]
+text = "room tone hallway ventilation.wav by lwdickens -- https://freesound.org/s/269382/ -- License: Attribution NonCommercial 4.0"
+
+[node name="AudioStreamPlayer" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution8/Button" index="0"]
+stream = ExtResource("10_8np06")
+
+[editable path="MarginContainer/Control/Control/VBoxContainer/SoundAttribution"]
+[editable path="MarginContainer/Control/Control/VBoxContainer/SoundAttribution2"]
+[editable path="MarginContainer/Control/Control/VBoxContainer/SoundAttribution3"]
+[editable path="MarginContainer/Control/Control/VBoxContainer/SoundAttribution4"]
+[editable path="MarginContainer/Control/Control/VBoxContainer/SoundAttribution5"]
+[editable path="MarginContainer/Control/Control/VBoxContainer/SoundAttribution6"]
+[editable path="MarginContainer/Control/Control/VBoxContainer/SoundAttribution7"]
+[editable path="MarginContainer/Control/Control/VBoxContainer/SoundAttribution8"]

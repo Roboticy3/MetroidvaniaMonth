@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dr26nk1jo28g7"]
+
+[ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="1_vdw2o"]
+[ext_resource type="Script" uid="uid://dib434o7tj1oh" path="res://scripts/other_entities/item_checker.gd" id="2_spwe1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_spwe1"]
+
+[node name="PlayerDetector" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_vdw2o")
+require_multiplayer_auth = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_spwe1")
+debug_color = Color(0.755055, 0.456058, 0, 0.42)
+
+[node name="ItemChecker" type="Node" parent="."]
+script = ExtResource("2_spwe1")
+
+[connection signal="any_player_entered" from="." to="ItemChecker" method="check"]
