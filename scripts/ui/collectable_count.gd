@@ -17,11 +17,15 @@ func _on_collectable_updated(
 	incoming_type:SaveData.ItemType, _f:int, 
 	meta:={"position":Vector3.ZERO}
 ):
-	if item_type != incoming_type: return
 
-	$Indicator\
-		.reveal_indicator(meta["position"])\
+	var reveal_at = meta.get("position")
+	
+	if incoming_type == item_type and reveal_at is Vector3:
+		$Indicator\
+		.reveal_indicator(reveal_at)\
 		.tween_callback(update_text)
+	else:
+		update_text()
 
 func update_text():
 	text = format % ClientState.save.get_item_total(item_type)

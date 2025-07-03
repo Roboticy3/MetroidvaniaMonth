@@ -74,6 +74,7 @@ func get_flags(item_type:ItemType) -> int:
 func clear_items() -> void:
 	for i in collectables.size():
 		collectables[i] = 0
+	collectable_updated.emit(-1, -1, {})
 	save()
 	
 
