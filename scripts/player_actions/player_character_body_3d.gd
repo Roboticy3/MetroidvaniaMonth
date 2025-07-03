@@ -23,8 +23,7 @@ func _ready():
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _on_collectable_updated(type:SaveData.ItemType, flag:int, meta:Dictionary) -> void:
-	if type == SaveData.ItemType.SCREW:
-		update_fuel_level()
+	update_fuel_level()
 
 func update_fuel_level():
 	if fuel:
