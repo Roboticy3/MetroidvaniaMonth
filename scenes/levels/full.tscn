@@ -1588,6 +1588,17 @@ surface_material_override/0 = ExtResource("14_gvvpn")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Temple/Rock010/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_k3jta")
 
+[node name="Rock011" type="MeshInstance3D" parent="Temple" index="4"]
+transform = Transform3D(23.62, 0, 15.399, 0, 30, 0, -18.4958, 0, 19.6653, 5.54478, 6.56653, 69.0978)
+mesh = ExtResource("28_d5vep")
+skeleton = NodePath("../../Shaft")
+surface_material_override/0 = ExtResource("14_gvvpn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Temple/Rock011" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Temple/Rock011/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_k3jta")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." index="8"]
 environment = SubResource("Environment_nk028")
 

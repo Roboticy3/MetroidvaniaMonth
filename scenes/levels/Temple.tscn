@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://0vv4jtdt4ght"]
+[gd_scene load_steps=13 format=3 uid="uid://0vv4jtdt4ght"]
 
 [ext_resource type="PackedScene" uid="uid://swfk3bgbsemt" path="res://glb/Temple.glb" id="1_3gtcs"]
 [ext_resource type="PackedScene" uid="uid://ha7ayschigmb" path="res://scenes/EnvironmentChanger.tscn" id="2_4fycx"]
 [ext_resource type="PackedScene" uid="uid://db556kgms5ljs" path="res://scenes/props/stalag.tscn" id="3_4fycx"]
 [ext_resource type="PackedScene" uid="uid://be6h1boetu4xb" path="res://scenes/levels/Temple-inner.tscn" id="3_nn437"]
-[ext_resource type="LightmapGIData" uid="uid://b2y7e48xox6bq" path="res://temple.tres" id="4_xowe2"]
 [ext_resource type="Material" uid="uid://7y3fjtoqw04s" path="res://stone.tres" id="5_0ku06"]
 [ext_resource type="PackedScene" uid="uid://dxopn5oo3hdjt" path="res://scenes/props/Tree.tscn" id="5_w3nvt"]
 [ext_resource type="PackedScene" uid="uid://caawojt2wictk" path="res://scenes/props/ladder.tscn" id="6_w3nvt"]
