@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=4 uid="uid://divm3hfp84v1n"]
+[gd_scene load_steps=111 format=4 uid="uid://divm3hfp84v1n"]
 
 [ext_resource type="PackedScene" uid="uid://lflopx50nk2t" path="res://scenes/Arena.tscn" id="1_8xgfm"]
 [ext_resource type="PackedScene" uid="uid://dnfbu6cnjq2l1" path="res://glb/Level1.glb" id="2_emn5n"]
@@ -19,13 +19,11 @@
 [ext_resource type="AudioStream" uid="uid://blcf6s3ipnulm" path="res://aud/719467__alexarje__ventilation-in-staircase-sonicrhythm-017-fixed.wav" id="13_flmao"]
 [ext_resource type="Material" uid="uid://cxn5tliiwexqw" path="res://Wood.tres" id="13_jsj78"]
 [ext_resource type="AudioStream" uid="uid://dx5ygrqfotoqn" path="res://als/StatueSerenade.wav" id="14_76qi3"]
-[ext_resource type="LightmapGIData" uid="uid://ciw24vkoxfv56" path="res://lightmaps/hub.lmbake" id="14_8425a"]
 [ext_resource type="Material" uid="uid://7y3fjtoqw04s" path="res://stone.tres" id="14_gvvpn"]
 [ext_resource type="Texture2D" uid="uid://detfparm6g7yw" path="res://texture/Tutorial.png" id="14_hm3dm"]
 [ext_resource type="AudioStream" uid="uid://crt63ya5826di" path="res://als/BossMusic.wav" id="14_w7j6y"]
 [ext_resource type="Texture2D" uid="uid://css5qqywau5tr" path="res://texture/Screw.png" id="15_rncx0"]
 [ext_resource type="ArrayMesh" uid="uid://2215samdirc5" path="res://glb/rock_002.res" id="17_omffk"]
-[ext_resource type="LightmapGIData" uid="uid://cgxta5q38axfy" path="res://lightmaps/shaft.lmbake" id="18_0aiev"]
 [ext_resource type="Texture2D" uid="uid://u6qsp27kl6i6" path="res://texture/Tutorial2.png" id="18_w4p0r"]
 [ext_resource type="Texture2D" uid="uid://c2uhv88rnwnhp" path="res://texture/Soul.png" id="19_cx4xr"]
 [ext_resource type="PackedScene" uid="uid://cl5dkb04tpak3" path="res://glb/Tree.glb" id="19_juii5"]
@@ -37,7 +35,6 @@
 [ext_resource type="PackedScene" uid="uid://bw1f5kgfmk4tc" path="res://scenes/props/killbox.tscn" id="25_qj28i"]
 [ext_resource type="Texture2D" uid="uid://dccbs5wennk6j" path="res://texture/Parts.png" id="27_rf621"]
 [ext_resource type="ArrayMesh" uid="uid://dfhq720hgxqx2" path="res://glb/rock_010.res" id="28_d5vep"]
-[ext_resource type="LightmapGIData" uid="uid://nnctucqle7f5" path="res://lightmaps/ship.lmbake" id="29_pe4yd"]
 [ext_resource type="PackedScene" uid="uid://dxopn5oo3hdjt" path="res://scenes/props/Tree.tscn" id="29_ted6q"]
 [ext_resource type="PackedScene" uid="uid://dr26nk1jo28g7" path="res://scenes/props/ItemChecker.tscn" id="30_cmc6u"]
 [ext_resource type="PackedScene" uid="uid://ci7no68rvqmsh" path="res://scenes/props/Tree2.tscn" id="30_skrj0"]
@@ -57,8 +54,6 @@
 [ext_resource type="ArrayMesh" uid="uid://dwweu8ityhao5" path="res://glb/rock_004.res" id="38_pnlf1"]
 [ext_resource type="PackedScene" uid="uid://bh3nfelfsa216" path="res://scenes/collectables/gun_collectable.tscn" id="41_isav1"]
 [ext_resource type="ArrayOccluder3D" uid="uid://d24x4sjohu416" path="res://occ/full.occ" id="44_l10ly"]
-[ext_resource type="LightmapGIData" uid="uid://1sgvvfxt7ujd" path="res://lightmaps/forest.lmbake" id="47_0aiev"]
-[ext_resource type="LightmapGIData" uid="uid://d3cbi4nhyd7vt" path="res://lightmaps/temple.lmbake" id="49_pe4yd"]
 [ext_resource type="AudioStream" uid="uid://c16lexgnbq3uh" path="res://c78/Roland CR-78 Samples/CB/CR78 CB-01.wav" id="50_7ora3"]
 [ext_resource type="PackedScene" uid="uid://0vv4jtdt4ght" path="res://scenes/levels/Temple.tscn" id="50_jsj78"]
 [ext_resource type="AudioStream" uid="uid://8f8qaech4drh" path="res://als/Temple.wav" id="51_uo20u"]
@@ -356,8 +351,7 @@ sky = SubResource("Sky_nk028")
 ssr_enabled = true
 sdfgi_use_occlusion = true
 glow_bloom = 0.1
-fog_enabled = true
-volumetric_fog_density = 0.1
+volumetric_fog_enabled = true
 adjustment_contrast = 0.77
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_juii5"]
@@ -372,35 +366,84 @@ radius = 0.429199
 [node name="Hub" type="Node3D" parent="." index="2"]
 script = ExtResource("3_g843x")
 
-[node name="StatueContainer" type="Node3D" parent="Hub" index="0"]
+[node name="Level1" parent="Hub" index="0" instance=ExtResource("2_emn5n")]
+transform = Transform3D(0.999999, 4.76837e-07, -5.81145e-07, 1.78814e-07, 1, 3.57628e-07, 2.23517e-08, -3.72529e-08, 1, 4.17233e-06, -7.7486e-07, -1.41561e-06)
+
+[node name="Window-skylight" parent="Hub/Level1/Scene Collection/HubTerrain" index="1" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_nk028")
+
+[node name="Window-skylight_002" parent="Hub/Level1/Scene Collection/HubTerrain" index="2" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_nk028")
+
+[node name="Window-tunnel" parent="Hub/Level1/Scene Collection/HubTerrain" index="3" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_nk028")
+
+[node name="Window-tunnel_001" parent="Hub/Level1/Scene Collection/HubTerrain" index="4" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_nk028")
+
+[node name="Window-tunnel_002" parent="Hub/Level1/Scene Collection/HubTerrain" index="5" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_nk028")
+
+[node name="Window-001" parent="Hub/Level1/Scene Collection/HubTerrain" index="7" groups=["Window"]]
+material_override = ExtResource("5_hm3dm")
+surface_material_override/0 = ExtResource("4_nk028")
+
+[node name="Window" parent="Hub/Level1/Scene Collection/HubTerrain" index="8" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_nk028")
+
+[node name="Window-002" parent="Hub/Level1/Scene Collection/HubTerrain" index="9" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_nk028")
+
+[node name="Window-003" parent="Hub/Level1/Scene Collection/HubTerrain" index="10" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_nk028")
+
+[node name="Window-004" parent="Hub/Level1/Scene Collection/HubTerrain" index="11" groups=["Window"]]
+surface_material_override/0 = ExtResource("4_nk028")
+
+[node name="Tunnelshadow" parent="Hub/Level1/Scene Collection/HubTerrain" index="13"]
+light_energy = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnelshadow_001" parent="Hub/Level1/Scene Collection/HubTerrain" index="14"]
+light_energy = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="Tunnelshadow_002" parent="Hub/Level1/Scene Collection/HubTerrain" index="15"]
+light_energy = 1.0
+shadow_enabled = true
+omni_range = 5.0
+
+[node name="StatueContainer" type="Node3D" parent="Hub" index="1"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 6, 22)
 
 [node name="Statue" parent="Hub/StatueContainer" index="0" instance=ExtResource("6_6nm83")]
 
-[node name="Stairs2" parent="Hub" index="1" instance=ExtResource("7_nk028")]
+[node name="Stairs2" parent="Hub" index="2" instance=ExtResource("7_nk028")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 0.5, 5.5)
 
-[node name="Stairs3" parent="Hub" index="2" instance=ExtResource("7_nk028")]
+[node name="Stairs3" parent="Hub" index="3" instance=ExtResource("7_nk028")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.5, 0.5, -5.5)
 
-[node name="HubEnvironmentChanger" parent="Hub" index="3" instance=ExtResource("8_nk028")]
+[node name="HubEnvironmentChanger" parent="Hub" index="4" instance=ExtResource("8_nk028")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3.42789, 5.19559, -22.5258)
 
-[node name="HubEnvironmentChanger3" parent="Hub" index="4" instance=ExtResource("8_nk028")]
+[node name="HubEnvironmentChanger3" parent="Hub" index="5" instance=ExtResource("8_nk028")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.0129509, 12.5622, -5.09629)
 
 [node name="CollisionShape3D" parent="Hub/HubEnvironmentChanger3" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0657654, -0.0574646, 0)
 shape = SubResource("BoxShape3D_cx4xr")
 
-[node name="HubEnvironmentChanger4" parent="Hub" index="5" instance=ExtResource("8_nk028")]
+[node name="HubEnvironmentChanger4" parent="Hub" index="6" instance=ExtResource("8_nk028")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -6.50114, 5.53081, -17.6502)
 
 [node name="CollisionShape3D" parent="Hub/HubEnvironmentChanger4" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0537338, 0.429196, 0)
 shape = SubResource("BoxShape3D_w4p0r")
 
-[node name="HubEnvironment" parent="Hub" index="6" instance=ExtResource("12_7wgm6")]
+[node name="HubEnvironment" parent="Hub" index="7" instance=ExtResource("12_7wgm6")]
 footstep_sound = SubResource("AudioStreamRandomizer_cmc6u")
 
 [node name="DirectionalLight3D" parent="Hub/HubEnvironment" index="0"]
@@ -408,61 +451,12 @@ transform = Transform3D(-0.220004, -0.365112, -0.904595, -0.23833, -0.879095, 0.
 light_energy = 1.0
 shadow_reverse_cull_face = true
 
-[node name="Level1" parent="Hub/HubEnvironment/DirectionalLight3D" index="0" instance=ExtResource("2_emn5n")]
-transform = Transform3D(-0.220004, -0.23833, -0.945937, -0.365112, -0.879095, 0.306406, -0.904594, 0.412783, 0.106388, -0.0881975, -0.0984535, 1.78275)
-
-[node name="Window-skylight" parent="Hub/HubEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="1" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-skylight_002" parent="Hub/HubEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="2" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-tunnel" parent="Hub/HubEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="3" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-tunnel_001" parent="Hub/HubEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="4" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-tunnel_002" parent="Hub/HubEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="5" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-001" parent="Hub/HubEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="7" groups=["Window"]]
-material_override = ExtResource("5_hm3dm")
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window" parent="Hub/HubEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="8" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-002" parent="Hub/HubEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="9" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-003" parent="Hub/HubEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="10" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-004" parent="Hub/HubEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="11" groups=["Window"]]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Tunnelshadow" parent="Hub/HubEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="13"]
-light_energy = 1.0
-shadow_enabled = true
-omni_range = 5.0
-
-[node name="Tunnelshadow_001" parent="Hub/HubEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="14"]
-light_energy = 1.0
-shadow_enabled = true
-omni_range = 5.0
-
-[node name="Tunnelshadow_002" parent="Hub/HubEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="15"]
-light_energy = 1.0
-shadow_enabled = true
-omni_range = 5.0
-
-[node name="Shaft" type="MeshInstance3D" parent="Hub/HubEnvironment/DirectionalLight3D" index="1"]
+[node name="Shaft" type="MeshInstance3D" parent="Hub/HubEnvironment/DirectionalLight3D" index="0"]
 transform = Transform3D(-0.220004, -0.23833, -0.945937, -0.365112, -0.879095, 0.306406, -0.904594, 0.412783, 0.106388, 10.4049, -11.8534, -2.65754)
 mesh = SubResource("ArrayMesh_mhhhl")
 skeleton = NodePath("")
 
-[node name="Rock008" type="MeshInstance3D" parent="Hub/HubEnvironment/DirectionalLight3D" index="2"]
+[node name="Rock008" type="MeshInstance3D" parent="Hub/HubEnvironment/DirectionalLight3D" index="1"]
 transform = Transform3D(-0.576411, 2.11538, -1.43434, -0.956593, -1.54206, -1.88982, -2.37004, 0.107927, 1.11161, -16.7176, 3.14809, 22.6165)
 mesh = ExtResource("37_u2l4v")
 skeleton = NodePath("../../../..")
@@ -473,7 +467,7 @@ surface_material_override/0 = ExtResource("14_gvvpn")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hub/HubEnvironment/DirectionalLight3D/Rock008/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_ktcc6")
 
-[node name="Dead-tree" type="MeshInstance3D" parent="Hub/HubEnvironment/DirectionalLight3D" index="3"]
+[node name="Dead-tree" type="MeshInstance3D" parent="Hub/HubEnvironment/DirectionalLight3D" index="2"]
 transform = Transform3D(-0.220004, -0.23833, -0.945937, -0.365112, -0.879095, 0.306406, -0.904594, 0.412783, 0.106388, -0.0881975, -0.0984535, 1.78275)
 mesh = SubResource("ArrayMesh_46lbr")
 skeleton = NodePath("")
@@ -483,24 +477,19 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hub/HubEnvironment/DirectionalLight3D/Dead-tree/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_r14q2")
 
-[node name="HubEnvironmentChanger2" parent="Hub" index="7" instance=ExtResource("8_nk028")]
+[node name="HubEnvironmentChanger2" parent="Hub" index="8" instance=ExtResource("8_nk028")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, 0)
 
 [node name="CollisionShape3D" parent="Hub/HubEnvironmentChanger2" index="0"]
 shape = SubResource("BoxShape3D_hm3dm")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Hub" index="8"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Hub" index="9"]
 transform = Transform3D(0.958073, -0.286525, 0, 0.286525, 0.958073, 0, 0, 0, 1, 1.29192, -23.123, -18.1346)
 size = Vector3(5, 30.298, 5)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Hub" index="9"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Hub" index="10"]
 transform = Transform3D(0.958073, -0.286525, 0, 0.286525, 0.958073, 0, 0, 0, 1, 1.26892, -23.0393, -9.47884)
 size = Vector3(5, 30.298, 5)
-
-[node name="LightmapGI" type="LightmapGI" parent="Hub" index="10"]
-visible = false
-texel_scale = 1.2
-light_data = ExtResource("14_8425a")
 
 [node name="Shaft" type="Node3D" parent="." index="3"]
 script = ExtResource("3_g843x")
@@ -804,20 +793,8 @@ light_color = Color(0.993363, 0.891735, 0.695058, 1)
 light_energy = 0.1
 shadow_enabled = false
 
-[node name="Shaft" type="MeshInstance3D" parent="Shaft/ShaftEnvironment/DirectionalLight3D" index="0"]
-transform = Transform3D(0.09295, -0.427142, -0.899394, -0.488386, -0.806731, 0.332661, -0.867663, 0.408331, -0.283596, 10.5864, -12.428, 1.21435)
-visible = false
-mesh = SubResource("ArrayMesh_mhhhl")
-skeleton = NodePath("")
-
 [node name="Ambient" parent="Shaft/ShaftEnvironment" index="1"]
 stream = ExtResource("13_flmao")
-
-[node name="LightmapGI" type="LightmapGI" parent="Shaft" index="6"]
-visible = false
-quality = 2
-generate_probes_subdiv = 3
-light_data = ExtResource("18_0aiev")
 
 [node name="Ship" type="Node3D" parent="." index="4"]
 script = ExtResource("3_g843x")
@@ -952,54 +929,6 @@ light_color = Color(0.727476, 0.663485, 0.87903, 1)
 light_energy = 0.25
 light_angular_distance = 44.27
 
-[node name="Level1" parent="Ship/ShipEnvironment/DirectionalLight3D" index="0" instance=ExtResource("2_emn5n")]
-transform = Transform3D(0.110199, -0.427142, -0.897444, -0.494682, -0.806732, 0.323224, -0.862059, 0.408331, -0.300201, 0, 0, 0)
-
-[node name="Window-skylight" parent="Ship/ShipEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="1"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-skylight_002" parent="Ship/ShipEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="2"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-tunnel" parent="Ship/ShipEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="3"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-tunnel_001" parent="Ship/ShipEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="4"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-tunnel_002" parent="Ship/ShipEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="5"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-001" parent="Ship/ShipEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="7"]
-surface_material_override/0 = ExtResource("5_hm3dm")
-
-[node name="Window" parent="Ship/ShipEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="8"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-002" parent="Ship/ShipEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="9"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-003" parent="Ship/ShipEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="10"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-004" parent="Ship/ShipEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="11"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Tunnelshadow" parent="Ship/ShipEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="13"]
-light_energy = 1.0
-shadow_enabled = true
-omni_range = 5.0
-
-[node name="Tunnelshadow_001" parent="Ship/ShipEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="14"]
-light_energy = 1.0
-shadow_enabled = true
-omni_range = 5.0
-
-[node name="Tunnelshadow_002" parent="Ship/ShipEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="15"]
-light_energy = 1.0
-shadow_enabled = true
-omni_range = 5.0
-
 [node name="Ambient" parent="Ship/ShipEnvironment" index="1"]
 stream = ExtResource("13_flmao")
 autoplay = true
@@ -1032,12 +961,7 @@ mesh = ExtResource("19_vfxm8")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_jsf45")
 
-[node name="LightmapGI" type="LightmapGI" parent="Ship" index="8"]
-visible = false
-texel_scale = 2.0
-light_data = ExtResource("29_pe4yd")
-
-[node name="PlayerDetector" parent="Ship" index="9" instance=ExtResource("30_cmc6u")]
+[node name="PlayerDetector" parent="Ship" index="8" instance=ExtResource("30_cmc6u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.6822, -2.38419e-07, 5.32527)
 
 [node name="CollisionShape3D" parent="Ship/PlayerDetector" index="0"]
@@ -1077,10 +1001,7 @@ shadow_reverse_cull_face = true
 [node name="Ambient" parent="Arena/BossEnvironment" index="1"]
 stream = ExtResource("14_w7j6y")
 
-[node name="LightmapGI" type="LightmapGI" parent="Arena" index="3"]
-visible = false
-
-[node name="Creature" parent="Arena" index="4" instance=ExtResource("8_ryswq")]
+[node name="Creature" parent="Arena" index="3" instance=ExtResource("8_ryswq")]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 22.7634, -150.9, -65.657)
 
 [node name="Creature" parent="Arena/Creature/CharacterBody3D" index="1"]
@@ -1161,7 +1082,17 @@ offset_bottom = 11.5
 [node name="Forest" type="Node3D" parent="." index="6"]
 script = ExtResource("3_g843x")
 
-[node name="Forest2" parent="Forest" index="0" instance=ExtResource("21_18rsn")]
+[node name="Dead-tree" type="MeshInstance3D" parent="Forest" index="0"]
+transform = Transform3D(1, -2.98023e-07, 5.96046e-08, -1.49012e-07, 1, -5.96046e-08, 1.19209e-07, 7.45058e-09, 1, 0, 0, 0)
+mesh = SubResource("ArrayMesh_46lbr")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Forest/Dead-tree" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Forest/Dead-tree/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_r14q2")
+
+[node name="Forest2" parent="Forest" index="1" instance=ExtResource("21_18rsn")]
 
 [node name="Outer-cliff" parent="Forest/Forest2/Scene Collection/Forest" index="0"]
 surface_material_override/1 = SubResource("StandardMaterial3D_qj28i")
@@ -1188,7 +1119,7 @@ visible = false
 [node name="Outer-cliff_004" parent="Forest/Forest2/Scene Collection/Forest" index="8"]
 surface_material_override/0 = ExtResource("14_gvvpn")
 
-[node name="ForestEnvironment" parent="Forest" index="1" instance=ExtResource("12_7wgm6")]
+[node name="ForestEnvironment" parent="Forest" index="2" instance=ExtResource("12_7wgm6")]
 active = false
 footstep_sound = SubResource("AudioStreamRandomizer_pe4yd")
 
@@ -1197,82 +1128,24 @@ visible = false
 light_color = Color(0.63591, 0.96301, 0.593424, 1)
 light_energy = 1.0
 
-[node name="Level1" parent="Forest/ForestEnvironment/DirectionalLight3D" index="0" instance=ExtResource("2_emn5n")]
-transform = Transform3D(0.09295, -0.427142, -0.899394, -0.488386, -0.806731, 0.332661, -0.867663, 0.408331, -0.283596, 0, 0, 0)
-
-[node name="Window-skylight" parent="Forest/ForestEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="1"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-skylight_002" parent="Forest/ForestEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="2"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-tunnel" parent="Forest/ForestEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="3"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-tunnel_001" parent="Forest/ForestEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="4"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-tunnel_002" parent="Forest/ForestEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="5"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-001" parent="Forest/ForestEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="7"]
-surface_material_override/0 = ExtResource("5_hm3dm")
-
-[node name="Window" parent="Forest/ForestEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="8"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-002" parent="Forest/ForestEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="9"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-003" parent="Forest/ForestEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="10"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Window-004" parent="Forest/ForestEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="11"]
-surface_material_override/0 = ExtResource("4_nk028")
-
-[node name="Tunnelshadow" parent="Forest/ForestEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="13"]
-light_energy = 1.0
-shadow_enabled = true
-omni_range = 5.0
-
-[node name="Tunnelshadow_001" parent="Forest/ForestEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="14"]
-light_energy = 1.0
-shadow_enabled = true
-omni_range = 5.0
-
-[node name="Tunnelshadow_002" parent="Forest/ForestEnvironment/DirectionalLight3D/Level1/Scene Collection/HubTerrain" index="15"]
-light_energy = 1.0
-shadow_enabled = true
-omni_range = 5.0
-
-[node name="Dead-tree" type="MeshInstance3D" parent="Forest/ForestEnvironment/DirectionalLight3D" index="1"]
-transform = Transform3D(0.09295, -0.427142, -0.899394, -0.488386, -0.806731, 0.332661, -0.867663, 0.408331, -0.283596, 0, 0, 0)
-mesh = SubResource("ArrayMesh_46lbr")
-skeleton = NodePath("")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Forest/ForestEnvironment/DirectionalLight3D/Dead-tree" index="0"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Forest/ForestEnvironment/DirectionalLight3D/Dead-tree/StaticBody3D" index="0"]
-shape = SubResource("ConcavePolygonShape3D_r14q2")
-
 [node name="Ambient" parent="Forest/ForestEnvironment" index="1"]
 stream = ExtResource("31_xbntm")
 
-[node name="ForestEnvironmentChanger" parent="Forest" index="2" instance=ExtResource("8_nk028")]
+[node name="ForestEnvironmentChanger" parent="Forest" index="3" instance=ExtResource("8_nk028")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.225079, 14.3514, -8.80882)
 
 [node name="CollisionShape3D" parent="Forest/ForestEnvironmentChanger" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, -0.7, 0)
 shape = SubResource("BoxShape3D_76qi3")
 
-[node name="ForestEnvironmentChanger2" parent="Forest" index="3" instance=ExtResource("8_nk028")]
+[node name="ForestEnvironmentChanger2" parent="Forest" index="4" instance=ExtResource("8_nk028")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -8.15286, 7.85613, -22.7)
 
 [node name="CollisionShape3D" parent="Forest/ForestEnvironmentChanger2" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0513916, 0.670919, 0)
 shape = SubResource("BoxShape3D_qj28i")
 
-[node name="Killbox" parent="Forest" index="4" instance=ExtResource("25_qj28i")]
+[node name="Killbox" parent="Forest" index="5" instance=ExtResource("25_qj28i")]
 transform = Transform3D(-5, 0, -7.54979e-07, 0, 5, 0, 7.54979e-07, 0, -5, -30.644, -60.945, 0)
 
 [node name="CollisionShape3D" parent="Forest/Killbox" index="1"]
@@ -1310,7 +1183,7 @@ surface_material_override/0 = ExtResource("14_gvvpn")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Forest/Killbox/Rock008/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_q5uss")
 
-[node name="Tree" parent="Forest" index="5" instance=ExtResource("29_ted6q")]
+[node name="Tree" parent="Forest" index="6" instance=ExtResource("29_ted6q")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -40.5387, -73.9265, 16.5475)
 
 [node name="TrunkPlatforms" type="Node3D" parent="Forest/Tree" index="1"]
@@ -1510,10 +1383,10 @@ shape = SubResource("ConcavePolygonShape3D_hrjdp")
 [node name="Tree" parent="Forest/Tree/BranchPlatforms" index="10" instance=ExtResource("29_ted6q")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 1.84258, 5.94524, -0.518206)
 
-[node name="Tree3" parent="Forest" index="6" instance=ExtResource("30_skrj0")]
+[node name="Tree3" parent="Forest" index="7" instance=ExtResource("30_skrj0")]
 transform = Transform3D(-0.96516, -0.258819, 0.0384611, -0.258614, 0.965926, 0.0103056, -0.0398178, 0, -0.999207, -13.3773, -7.50228, 2.1477)
 
-[node name="Entry" type="Node3D" parent="Forest" index="7"]
+[node name="Entry" type="Node3D" parent="Forest" index="8"]
 
 [node name="Tree2" parent="Forest/Entry" index="0" instance=ExtResource("30_skrj0")]
 transform = Transform3D(-0.885247, 0, -0.46512, 0, 1, 0, 0.46512, 0, -0.885247, -11.3773, -7.50228, -31.8523)
@@ -1556,10 +1429,10 @@ surface_material_override/0 = ExtResource("14_gvvpn")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Forest/Entry/Rock005/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_xukrk")
 
-[node name="Tree4" parent="Forest" index="8" instance=ExtResource("30_skrj0")]
+[node name="Tree4" parent="Forest" index="9" instance=ExtResource("30_skrj0")]
 transform = Transform3D(-0.788119, -0.0667652, -0.611892, -0.0870866, 0.996195, 0.00347035, 0.609332, 0.0560226, -0.790934, -16.7773, -4.50228, 32.3477)
 
-[node name="OtherSide" type="Node3D" parent="Forest" index="9"]
+[node name="OtherSide" type="Node3D" parent="Forest" index="10"]
 
 [node name="Rock010" type="MeshInstance3D" parent="Forest/OtherSide" index="0"]
 transform = Transform3D(29.5567, 0.682045, 5.09291, -0.174355, 29.8505, -2.98573, -5.13542, 2.91201, 29.4134, -31.5869, -40.2148, 54.9316)
@@ -1626,12 +1499,12 @@ surface_material_override/0 = ExtResource("14_gvvpn")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Forest/OtherSide/Rock005/StaticBody3D" index="0"]
 shape = SubResource("ConcavePolygonShape3D_xrirr")
 
-[node name="Breach" type="Node3D" parent="Forest" index="10"]
+[node name="Breach" type="Node3D" parent="Forest" index="11"]
 
 [node name="Tree2" parent="Forest/Breach" index="0" instance=ExtResource("30_skrj0")]
 transform = Transform3D(1.23029, 0, 3.3076, 0, 3.529, 0, -3.3076, 0, 1.23029, -58.8098, -43.0837, 67.5719)
 
-[node name="Net" type="Node3D" parent="Forest" index="11"]
+[node name="Net" type="Node3D" parent="Forest" index="12"]
 
 [node name="Tree2" parent="Forest/Net" index="0" instance=ExtResource("29_ted6q")]
 transform = Transform3D(2.15274, 0, 2.08943, 0, 3, 0, -2.08943, 0, 2.15274, -33.6618, -85.2259, -5.73905)
@@ -1650,11 +1523,6 @@ transform = Transform3D(1.52473, 0, 1.2943, 0, 2, 0, -1.2943, 0, 1.52473, -5.107
 
 [node name="Tree4" parent="Forest/Net" index="5" instance=ExtResource("30_skrj0")]
 transform = Transform3D(-0.631801, 0, -0.129817, 0, 0.645, 0, 0.129817, 0, -0.631801, -28.0164, -52.5032, -4.39466)
-
-[node name="LightmapGI" type="LightmapGI" parent="Forest" index="12"]
-visible = false
-texel_scale = 0.5
-light_data = ExtResource("47_0aiev")
 
 [node name="Rock008" type="MeshInstance3D" parent="Forest" index="13"]
 transform = Transform3D(2.62, 0, 0, 0, 0.896007, 2.46203, 0, -2.46203, 0.896007, -16.3729, 9.70909, 18.9416)
@@ -1719,15 +1587,10 @@ light_energy = 1.0
 stream = ExtResource("51_uo20u")
 bus = &"MusicBoost"
 
-[node name="LightmapGI" type="LightmapGI" parent="Temple" index="2"]
-visible = false
-texel_scale = 0.5
-light_data = ExtResource("49_pe4yd")
-
-[node name="Tree" parent="Temple" index="3" instance=ExtResource("19_juii5")]
+[node name="Tree" parent="Temple" index="2" instance=ExtResource("19_juii5")]
 transform = Transform3D(0.735, 0, 0, 0, 0.735, 0, 0, 0, 0.735, 6.18647, -51.2831, 120.255)
 
-[node name="Rock010" type="MeshInstance3D" parent="Temple" index="4"]
+[node name="Rock010" type="MeshInstance3D" parent="Temple" index="3"]
 transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 7.67547, -120.832, 107.415)
 mesh = ExtResource("28_d5vep")
 skeleton = NodePath("../../Shaft")
@@ -1845,13 +1708,13 @@ occluder = ExtResource("44_l10ly")
 [connection signal="any_player_entered" from="Temple/Temple/TempleEnvironmentChanger" to="Temple/TempleEnvironment" method="_on_player_entered"]
 [connection signal="finished" from="Music/Statue" to="Music/Statue" method="play" binds= [0.0]]
 
+[editable path="Hub/Level1"]
 [editable path="Hub/Stairs2"]
 [editable path="Hub/Stairs3"]
 [editable path="Hub/HubEnvironmentChanger"]
 [editable path="Hub/HubEnvironmentChanger3"]
 [editable path="Hub/HubEnvironmentChanger4"]
 [editable path="Hub/HubEnvironment"]
-[editable path="Hub/HubEnvironment/DirectionalLight3D/Level1"]
 [editable path="Hub/HubEnvironmentChanger2"]
 [editable path="Shaft/Shaft2"]
 [editable path="Shaft/ShaftEnvironmentChanger"]
@@ -1860,7 +1723,6 @@ occluder = ExtResource("44_l10ly")
 [editable path="Ship/Ship2"]
 [editable path="Ship/ShipEnvironmentChanger"]
 [editable path="Ship/ShipEnvironment"]
-[editable path="Ship/ShipEnvironment/DirectionalLight3D/Level1"]
 [editable path="Ship/PlayerDetector"]
 [editable path="Arena/Arena2"]
 [editable path="Arena/BossEnvironmentChanger"]
@@ -1869,7 +1731,6 @@ occluder = ExtResource("44_l10ly")
 [editable path="Arena/Creature/CharacterBody3D/Creature"]
 [editable path="Forest/Forest2"]
 [editable path="Forest/ForestEnvironment"]
-[editable path="Forest/ForestEnvironment/DirectionalLight3D/Level1"]
 [editable path="Forest/ForestEnvironmentChanger"]
 [editable path="Forest/ForestEnvironmentChanger2"]
 [editable path="Forest/Killbox"]
