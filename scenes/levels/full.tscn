@@ -498,6 +498,7 @@ transform = Transform3D(0.958073, -0.286525, 0, 0.286525, 0.958073, 0, 0, 0, 1, 
 size = Vector3(5, 30.298, 5)
 
 [node name="LightmapGI" type="LightmapGI" parent="Hub" index="10"]
+visible = false
 texel_scale = 1.2
 light_data = ExtResource("14_8425a")
 
@@ -813,6 +814,7 @@ skeleton = NodePath("")
 stream = ExtResource("13_flmao")
 
 [node name="LightmapGI" type="LightmapGI" parent="Shaft" index="6"]
+visible = false
 quality = 2
 generate_probes_subdiv = 3
 light_data = ExtResource("18_0aiev")
@@ -1031,6 +1033,7 @@ skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_jsf45")
 
 [node name="LightmapGI" type="LightmapGI" parent="Ship" index="8"]
+visible = false
 texel_scale = 2.0
 light_data = ExtResource("29_pe4yd")
 
@@ -1075,6 +1078,7 @@ shadow_reverse_cull_face = true
 stream = ExtResource("14_w7j6y")
 
 [node name="LightmapGI" type="LightmapGI" parent="Arena" index="3"]
+visible = false
 
 [node name="Creature" parent="Arena" index="4" instance=ExtResource("8_ryswq")]
 transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 22.7634, -150.9, -65.657)
@@ -1648,6 +1652,7 @@ transform = Transform3D(1.52473, 0, 1.2943, 0, 2, 0, -1.2943, 0, 1.52473, -5.107
 transform = Transform3D(-0.631801, 0, -0.129817, 0, 0.645, 0, 0.129817, 0, -0.631801, -28.0164, -52.5032, -4.39466)
 
 [node name="LightmapGI" type="LightmapGI" parent="Forest" index="12"]
+visible = false
 texel_scale = 0.5
 light_data = ExtResource("47_0aiev")
 
@@ -1715,6 +1720,7 @@ stream = ExtResource("51_uo20u")
 bus = &"MusicBoost"
 
 [node name="LightmapGI" type="LightmapGI" parent="Temple" index="2"]
+visible = false
 texel_scale = 0.5
 light_data = ExtResource("49_pe4yd")
 
