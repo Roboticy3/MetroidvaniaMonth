@@ -16,6 +16,7 @@ local_push_direction = Vector3(0, 0, 0)
 shape = SubResource("SphereShape3D_3uhuw")
 
 [node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+gi_mode = 2
 radius = 1.5
 radial_segments = 8
 

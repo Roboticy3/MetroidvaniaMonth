@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://0vv4jtdt4ght"]
+[gd_scene load_steps=14 format=3 uid="uid://0vv4jtdt4ght"]
 
 [ext_resource type="PackedScene" uid="uid://swfk3bgbsemt" path="res://glb/Temple.glb" id="1_3gtcs"]
 [ext_resource type="PackedScene" uid="uid://ha7ayschigmb" path="res://scenes/EnvironmentChanger.tscn" id="2_4fycx"]
 [ext_resource type="PackedScene" uid="uid://db556kgms5ljs" path="res://scenes/props/stalag.tscn" id="3_4fycx"]
 [ext_resource type="PackedScene" uid="uid://be6h1boetu4xb" path="res://scenes/levels/Temple-inner.tscn" id="3_nn437"]
+[ext_resource type="LightmapGIData" uid="uid://b2y7e48xox6bq" path="res://temple.tres" id="4_xowe2"]
 [ext_resource type="Material" uid="uid://7y3fjtoqw04s" path="res://stone.tres" id="5_0ku06"]
 [ext_resource type="PackedScene" uid="uid://dxopn5oo3hdjt" path="res://scenes/props/Tree.tscn" id="5_w3nvt"]
 [ext_resource type="PackedScene" uid="uid://caawojt2wictk" path="res://scenes/props/ladder.tscn" id="6_w3nvt"]
@@ -43,6 +44,11 @@ shape = SubResource("ConcavePolygonShape3D_xowe2")
 
 [node name="Inner" parent="." instance=ExtResource("3_nn437")]
 transform = Transform3D(0.168024, 0, -0.985783, 0, 1, 0, 0.985783, 0, 0.168024, -40.8871, -82.9651, 144.243)
+
+[node name="LightmapGI" type="LightmapGI" parent="Inner"]
+quality = 0
+generate_probes_subdiv = 0
+light_data = ExtResource("4_xowe2")
 
 [node name="CSGCylinder3D" parent="." instance=ExtResource("3_4fycx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.0972, -31.7055, 86.0918)
@@ -127,4 +133,9 @@ shape = SubResource("BoxShape3D_kl0ww")
 [editable path="Temple2"]
 [editable path="ForestEnvironmentChanger"]
 [editable path="TempleEnvironmentChanger"]
+[editable path="Inner"]
+[editable path="Inner/RigidBody3D5"]
+[editable path="Inner/RigidBody3D4"]
+[editable path="Inner/RigidBody3D3"]
+[editable path="Inner/RigidBody3D2"]
 [editable path="CSGCylinder3D5"]

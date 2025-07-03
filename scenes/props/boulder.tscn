@@ -17,6 +17,7 @@ script = ExtResource("1_p0reh")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+gi_mode = 2
 size = Vector3(9, 9, 9)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
