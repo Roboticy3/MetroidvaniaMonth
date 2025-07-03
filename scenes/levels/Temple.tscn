@@ -45,10 +45,11 @@ shape = SubResource("ConcavePolygonShape3D_xowe2")
 [node name="Inner" parent="." instance=ExtResource("3_nn437")]
 transform = Transform3D(0.168024, 0, -0.985783, 0, 1, 0, 0.985783, 0, 0.168024, -40.8871, -82.9651, 144.243)
 
-[node name="LightmapGI" type="LightmapGI" parent="Inner"]
-quality = 0
-generate_probes_subdiv = 0
-light_data = ExtResource("4_xowe2")
+[node name="Temple-col" parent="Inner" index="0"]
+visible = false
+
+[node name="Windows" parent="Inner" index="19"]
+visible = true
 
 [node name="CSGCylinder3D" parent="." instance=ExtResource("3_4fycx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.0972, -31.7055, 86.0918)

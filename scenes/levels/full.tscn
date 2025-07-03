@@ -449,8 +449,12 @@ footstep_sound = SubResource("AudioStreamRandomizer_cmc6u")
 
 [node name="DirectionalLight3D" parent="Hub/HubEnvironment" index="0"]
 transform = Transform3D(-0.220004, -0.365112, -0.904595, -0.23833, -0.879095, 0.412783, -0.945937, 0.306406, 0.106387, 1.55732, -0.843461, -0.242926)
+visible = false
 light_energy = 1.0
 shadow_reverse_cull_face = true
+
+[node name="Ambient" parent="Hub/HubEnvironment" index="1"]
+stream = null
 
 [node name="HubEnvironmentChanger2" parent="Hub" index="8" instance=ExtResource("8_nk028")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, 0)
@@ -767,9 +771,6 @@ visible = false
 light_color = Color(0.993363, 0.891735, 0.695058, 1)
 light_energy = 0.1
 shadow_enabled = false
-
-[node name="Ambient" parent="Shaft/ShaftEnvironment" index="1"]
-stream = ExtResource("13_flmao")
 
 [node name="Shaft" type="MeshInstance3D" parent="Shaft" index="6"]
 transform = Transform3D(0.999999, 4.76837e-07, -5.81145e-07, 1.78814e-07, 1, 3.57628e-07, 2.23517e-08, -3.72529e-08, 1, 6.00002, 6.00002, -14)
@@ -1551,6 +1552,9 @@ surface_material_override/0 = ExtResource("14_gvvpn")
 [node name="CSGBakedMeshInstance3D" parent="Temple/Temple/Inner" index="1"]
 gi_lightmap_texel_scale = 2.0
 
+[node name="Windows" parent="Temple/Temple/Inner" index="19"]
+visible = false
+
 [node name="DroppableLadder" parent="Temple/Temple" index="12"]
 item_flag = 1
 
@@ -1563,7 +1567,6 @@ footstep_sound = SubResource("AudioStreamRandomizer_7ora3")
 
 [node name="DirectionalLight3D" parent="Temple/TempleEnvironment" index="0"]
 transform = Transform3D(0.30175, 0.874031, 0.380811, 0.392612, -0.477908, 0.785786, 0.868794, -0.0875997, -0.487364, -49.1231, 0, 123.695)
-visible = false
 light_color = Color(0.98998, 0.844704, 0.563572, 1)
 light_energy = 1.0
 
