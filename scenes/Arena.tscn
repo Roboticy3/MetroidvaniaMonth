@@ -87,7 +87,7 @@ item_type = 5
 [node name="Indicator" type="Sprite2D" parent="ServerSideUI/Stackables/VBoxContainer/Parts/Label"]
 visible = false
 position = Vector2(537, -120)
-texture = ExtResource("5_vyqrf")
+texture = ExtResource("7_1qh50")
 script = ExtResource("6_i77e3")
 
 [node name="Souls" type="HBoxContainer" parent="ServerSideUI/Stackables/VBoxContainer"]
@@ -112,7 +112,7 @@ item_type = 1
 [node name="Indicator" type="Sprite2D" parent="ServerSideUI/Stackables/VBoxContainer/Souls/Label"]
 visible = false
 position = Vector2(537, -120)
-texture = ExtResource("7_1qh50")
+texture = ExtResource("5_vyqrf")
 script = ExtResource("6_i77e3")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="ServerSideUI/Stackables/VBoxContainer"]
