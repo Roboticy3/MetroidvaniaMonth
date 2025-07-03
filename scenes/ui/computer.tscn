@@ -205,6 +205,7 @@ text = "Press C to toggle the computer
 "
 
 [node name="TabContainer" type="TabContainer" parent="NinePatchRect/MarginContainer/MarginContainer2/Box"]
+visible = false
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5

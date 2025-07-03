@@ -8,10 +8,11 @@ func _ready() -> void:
 	set_enabled(ClientState.save.has_item(item_type, item_flag))
 	ClientState.save.collectable_updated.connect(_on_collectable_updated)
 
-func _on_collectable_updated(incoming_type:SaveData.ItemType, incoming_flag:int, meta:Dictionary):
-	if item_type == incoming_type and item_flag == incoming_flag:
-		set_enabled(true)
-	
+func _on_collectable_updated(_in_t:int, _in_f:int, meta:Dictionary):
+	var enabled_old = get("visible")
+	set_enabled(ClientState.save.has_item(item_type, item_flag))
+	if !enabled_old and get("visible"):
+		
 		if $Indicator:
 			$Indicator.reveal_indicator(meta["position"])
 
