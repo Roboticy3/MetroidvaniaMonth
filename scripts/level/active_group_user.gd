@@ -23,12 +23,7 @@ signal activated()
 signal deactivated()
 
 func _ready():
-	print(group)
-	if active:
-		activated.emit() 
-		grab()
-	else:
-		deactivated.emit()
+	active = active
 
 func _on_player_entered():
 	print(self, " grabbing environment for player ?")

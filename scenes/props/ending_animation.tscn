@@ -1,0 +1,210 @@
+[gd_scene load_steps=7 format=3 uid="uid://b06hiupyjh8h6"]
+
+[ext_resource type="Texture2D" uid="uid://c2uhv88rnwnhp" path="res://texture/Soul.png" id="1_hcjkj"]
+[ext_resource type="Script" uid="uid://x4pq0bvqnwnj" path="res://scripts/other_entities/scene_changer.gd" id="2_n8bkr"]
+[ext_resource type="PackedScene" uid="uid://b2ayhrdplqg27" path="res://scenes/levels/Crebits.tscn" id="3_gvv0k"]
+
+[sub_resource type="Animation" id="Animation_cmc6u"]
+resource_name = "Ending"
+length = 2.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Soul:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.66, 1.08469, 1.49, 2.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.779346, -2.38419e-07, -1.30566), Vector3(0.436443, 1.84252, -0.812036), Vector3(0.0279674, 2.33056, -0.224009), Vector3(-0.404839, 2.11375, 0.399042), Vector3(-0.721853, 1.06079, 0.855403)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Soul:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.525, 0.525, 0.525)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Soul:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 2.45, 2.53),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, true, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.66, 1.08, 1.47, 2.46),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.0309946, -1.67889, 0.029971), Vector3(0.521037, -1.91815, -0.0289566), Vector3(0.705113, -2.36318, -0.0296706), Vector3(0.574213, -2.65116, -0.0296706), Vector3(0.338594, -2.58134, -0.0296706)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Soul:no_depth_test")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Camera3D:fov")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.92),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [75.0, 30.1]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Camera3D:current")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.02),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_lba4l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Soul:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.779346, -2.38419e-07, -1.30566)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Soul:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Soul:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0309946, -1.67889, 0.029971)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Soul:no_depth_test")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Camera3D:fov")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [75.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Camera3D:current")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lba4l"]
+_data = {
+&"Ending": SubResource("Animation_cmc6u"),
+&"RESET": SubResource("Animation_lba4l")
+}
+
+[node name="EndingAnimation" type="Node3D"]
+
+[node name="Soul" type="Sprite3D" parent="."]
+transform = Transform3D(0.821289, 0, -0.570513, 0, 1, 0, 0.570513, 0, 0.821289, 0.779346, -2.38419e-07, -1.30566)
+visible = false
+billboard = 2
+no_depth_test = true
+texture = ExtResource("1_hcjkj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lba4l")
+}
+autoplay = "Ending"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.108758, -0.0275621, -0.993686, 0.0299521, 0.999071, -0.0309896, 0.993617, -0.0331334, -0.107831, -1.84426, 0.538754, -1.05158)
+
+[node name="SceneChanger" type="Node" parent="."]
+script = ExtResource("2_n8bkr")
+target = ExtResource("3_gvv0k")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="SceneChanger" method="_on_start_any_player_entered" unbinds=1]

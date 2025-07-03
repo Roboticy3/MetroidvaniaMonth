@@ -26,6 +26,7 @@ enum ItemType {
 	GUN, #Weapons
 	BEACON, #Notes beacons
 	LADDER, #Droppable ladder shortcuts
+	PARTS, #Ship parts
 	TYPE_MAX,
 }
 
@@ -36,6 +37,9 @@ signal collectable_updated(item_type:ItemType, item_flag:int, meta:Dictionary)
 func update_collectable(item_type:ItemType, item_flag:int, meta:={}) -> bool:
 	#Check if `item_flag` is already collected in `item_type`
 	var mask = 1 << item_flag
+	if item_type >= collectables.size():
+		collectables.resize(item_type + 1)
+	
 	if collectables[item_type] & mask:
 		return false
 	collectables[item_type] |= mask
@@ -45,6 +49,9 @@ func update_collectable(item_type:ItemType, item_flag:int, meta:={}) -> bool:
 
 #Count the number of active flags in a certain `item_type`
 func get_item_total(item_type:ItemType) -> int:
+	if item_type >= collectables.size():
+		collectables.resize(item_type + 1)
+	
 	var count = 0
 	var shift = collectables[item_type]
 	while shift:
@@ -52,16 +59,36 @@ func get_item_total(item_type:ItemType) -> int:
 		shift = shift >> 1
 	return count
 
-func has_item(item_type:ItemType, item_flag:int):
+func has_item(item_type:ItemType, item_flag:int) -> int:
+	if item_type >= collectables.size():
+		collectables.resize(item_type + 1)
+	
 	return collectables[item_type] & (1 << item_flag)
 
+func get_flags(item_type:ItemType) -> int:
+	if item_type >= collectables.size():
+		collectables.resize(item_type + 1)
+	
+	return collectables[item_type]
+
+func clear_items() -> void:
+	for i in collectables.size():
+		collectables[i] = 0
+	save()
+	
 
 @export var ranges:PackedFloat32Array =[
-	100.0
+	100.0,
+	0.0, #spawn x
+	0.0, #spawn y
+	0.0  #spawn z
 ]
 
 enum RangeType {
-	VOLUME = 0
+	VOLUME = 0,
+	SPAWNX,
+	SPAWNY,
+	SPAWNZ
 }
 
 func update_range(type:RangeType, value:float):

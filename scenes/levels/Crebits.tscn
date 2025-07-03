@@ -44,11 +44,6 @@ offset_bottom = 160.0
 text = "The End"
 label_settings = SubResource("LabelSettings_o77oi")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(790, 330)
-scale = Vector2(0.646, 0.646)
-texture = ExtResource("12_0sjgl")
-
 [node name="Label2" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 3
@@ -178,6 +173,21 @@ text = "room tone hallway ventilation.wav by lwdickens -- https://freesound.org/
 
 [node name="AudioStreamPlayer" parent="MarginContainer/Control/Control/VBoxContainer/SoundAttribution8/Button" index="0"]
 stream = ExtResource("10_8np06")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 506.0
+offset_top = 168.0
+offset_right = -11.0
+offset_bottom = -123.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_0sjgl")
+expand_mode = 1
+stretch_mode = 4
 
 [editable path="MarginContainer/Control/Control/VBoxContainer/SoundAttribution"]
 [editable path="MarginContainer/Control/Control/VBoxContainer/SoundAttribution2"]

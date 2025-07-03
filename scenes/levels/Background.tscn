@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://dq0m3a76l7rk2"]
+
+[ext_resource type="Script" uid="uid://cpu1trtwk0rap" path="res://scripts/other_entities/noise_mover_cyclic.gd" id="1_tj7xk"]
+[ext_resource type="Script" uid="uid://bfbe82wrmq2u2" path="res://scripts/ui/texture_saver.gd" id="2_okfht"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ex8ab"]
+
+[sub_resource type="Gradient" id="Gradient_ex8ab"]
+offsets = PackedFloat32Array(0.394309, 0.463415)
+colors = PackedColorArray(1, 1, 0.458824, 1, 0.419608, 0.0352941, 0.0352941, 1)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tj7xk"]
+width = 1152
+height = 648
+in_3d_space = true
+seamless = true
+color_ramp = SubResource("Gradient_ex8ab")
+noise = SubResource("FastNoiseLite_ex8ab")
+
+[node name="Background" type="Node2D"]
+script = ExtResource("1_tj7xk")
+noise = SubResource("FastNoiseLite_ex8ab")
+speed = 10.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_tj7xk")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+script = ExtResource("2_okfht")
+
+[connection signal="timeout" from="Timer" to="Timer" method="save"]

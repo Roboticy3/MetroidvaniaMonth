@@ -30,7 +30,7 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
-text = "This beacon allows me to connect to services and people over the internet. Once a connection is established, their ghost can come visit to help me out.
+text = "This beacon allows me to connect to services and people over the internet. Once a connection is established, I can even send a ghost of myself to their world to help out!
 
-[i]NOTE: The host must be on the desktop version of the game![/i]"
+[i]NOTE: Only works on the desktop version of the game. To see your ip on Windows, open a terminal and type in \"ipconfig\". To see your ip on Linux, I'm sure you can figure it out :) [/i]"
 fit_content = true

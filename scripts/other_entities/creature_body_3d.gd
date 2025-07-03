@@ -37,12 +37,8 @@ var last_jump_dir := 0
 #	to jump out of the way.
 func _on_partially_exposed_player_entered(b: Node) -> void:
 	
-	#Crucial to the puzzle is that the boss only jumps out of the way if the 
-	#	*host* is in this zone.
-	if b.get_multiplayer_authority() != get_multiplayer_authority(): return
-	#print("I should jump now. Lol.")
-	
-	jump()
+	if b == target:
+		jump()
 
 signal started_jump(direction:int)
 func jump():

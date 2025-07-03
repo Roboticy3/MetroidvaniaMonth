@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1hukywsr5tko"]
+
+[ext_resource type="PackedScene" uid="uid://lm3u4rwl1xf0" path="res://scenes/collectables/collectable.tscn" id="1_txvpn"]
+[ext_resource type="PackedScene" uid="uid://bv45w2msyck26" path="res://ShipParts.blend" id="2_dyhav"]
+
+[node name="PartsCollectable" instance=ExtResource("1_txvpn")]
+item_type = 5
+
+[node name="Screw" parent="ScrewArea" index="0"]
+tilt = 0.0
+
+[node name="Shimmer" parent="ScrewArea/Screw" index="0"]
+max_distance = 20.0
+
+[node name="ShipParts" parent="ScrewArea/Screw" index="1" instance=ExtResource("2_dyhav")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)

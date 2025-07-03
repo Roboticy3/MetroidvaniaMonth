@@ -4,12 +4,12 @@
 extends Node
 
 
-var reset_save := true
+var reset_save := false
 
 func _ready():
 	name = "Unnamed"
 	
-	var user_save := load(SaveData.PATH)
+	var user_save:SaveData = load(SaveData.PATH)
 	print("tried to load ", user_save, " at ", SaveData.PATH)
 
 	if user_save and not reset_save:

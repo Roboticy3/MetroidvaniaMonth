@@ -19,4 +19,4 @@ func _on_text_changed(new_string:String):
 		wants_restart.emit(true)
 
 func validate_string(new_string) -> String:
-	return StringName(new_string).validate_node_name().validate_filename()
+	return new_string

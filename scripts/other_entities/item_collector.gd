@@ -9,6 +9,8 @@ extends Node3D
 #A flag uniquely representing this item in the stage.
 @export_range(0, 63) var item_flag:int
 
+@export var free_if_collected := true
+
 signal collected()
 
 func collect():
@@ -18,4 +20,4 @@ func collect():
 func _ready():
 	if ClientState.save.has_item(item_type, item_flag):
 		collected.emit()
-		queue_free() 
+		if free_if_collected: queue_free()

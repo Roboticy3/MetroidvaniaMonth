@@ -154,9 +154,10 @@ shape = SubResource("BoxShape3D_3uhuw")
 
 [node name="RigidBody3D2" parent="." instance=ExtResource("7_uc47x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, -9, 18.5)
+local_push_direction = Vector3(0, 0.3, 0)
 
 [node name="GunTarget" parent="RigidBody3D2" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.5, 0)
 
 [node name="CSGBox3D" parent="RigidBody3D2" index="1"]
 size = Vector3(11, 10, 11)

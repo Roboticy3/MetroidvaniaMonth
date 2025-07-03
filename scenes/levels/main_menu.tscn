@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="6_sn5u3"]
 [ext_resource type="Script" uid="uid://x4pq0bvqnwnj" path="res://scripts/other_entities/scene_changer.gd" id="8_cn35j"]
 [ext_resource type="PackedScene" uid="uid://divm3hfp84v1n" path="res://scenes/levels/full.tscn" id="9_cn35j"]
-[ext_resource type="PackedScene" uid="uid://df4k3q2duvr2n" path="res://scenes/levels/dummy.tscn" id="10_wko7x"]
+[ext_resource type="Script" uid="uid://btyyr1lhpbt6q" path="res://scripts/level/save_data_clearer.gd" id="10_wko7x"]
 
 [sub_resource type="Curve" id="Curve_geflf"]
 _data = [Vector2(0, 0.74111), 0.0, 0.0, 0, 0]
@@ -99,22 +99,38 @@ light_color = Color(0.966742, 0.426055, 0.324048, 1)
 shadow_enabled = true
 omni_range = 22.0
 
-[node name="SceneChanger" type="Node" parent="." index="8"]
+[node name="Start2" type="Area3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13, 4, -12)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("6_sn5u3")
+
+[node name="Label3D2" type="Label3D" parent="Start2" index="0"]
+billboard = 2
+text = "Clear
+Save Data"
+font = ExtResource("6_keln3")
+font_size = 232
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Start2" index="1"]
+shape = SubResource("SphereShape3D_keln3")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Start2" index="2"]
+light_color = Color(0.966742, 0.426055, 0.324048, 1)
+shadow_enabled = true
+omni_range = 22.0
+
+[node name="SceneChanger" type="Node" parent="." index="9"]
 script = ExtResource("8_cn35j")
 target = ExtResource("9_cn35j")
 
-[node name="Join" parent="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2" index="1"]
-visible = false
+[node name="SaveDataClearer" type="Node" parent="." index="10"]
+script = ExtResource("10_wko7x")
 
 [node name="Control" parent="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text" index="3"]
 visible = false
 
-[node name="Control" parent="Menu/Container" index="1"]
-visible = false
-
-[node name="ToMainMenu" parent="Menu/Container/Control" index="0"]
-target = ExtResource("10_wko7x")
-
 [connection signal="any_player_entered" from="Start" to="SceneChanger" method="_on_start_any_player_entered"]
+[connection signal="any_player_entered" from="Start2" to="SaveDataClearer" method="clear"]
 
 [editable path="Menu"]

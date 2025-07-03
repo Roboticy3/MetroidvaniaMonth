@@ -314,13 +314,17 @@ environment_group = ExtResource("14_1yk18")
 [node name="Jetpack" type="AudioStreamPlayer3D" parent="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.6)
 stream = ExtResource("14_a8ls1")
-volume_db = -22.0
+volume_db = -26.0
 unit_size = 100.0
+pitch_scale = 0.2
 bus = &"Jetpack"
 script = ExtResource("15_qfm1y")
 player_path = NodePath("..")
 
 [node name="Hud" parent="." instance=ExtResource("16_spk56")]
+
+[node name="Container" parent="Hud" index="0"]
+mouse_filter = 2
 
 [node name="Health" parent="Hud/Container/HUD/Meters/Meters/HealthWrapper" index="0"]
 efficiency = 0.5

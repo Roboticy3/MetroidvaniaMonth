@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://lflopx50nk2t"]
+[gd_scene load_steps=13 format=3 uid="uid://lflopx50nk2t"]
 
 [ext_resource type="Script" uid="uid://cqnwj6wga2hyd" path="res://scripts/level/arena.gd" id="1_uch3s"]
 [ext_resource type="PackedScene" uid="uid://luwvohrk0cnq" path="res://scenes/entities/player.tscn" id="2_ghy8g"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cusvwc7xul344" path="res://scenes/ui/menu.tscn" id="6_ghy8g"]
 [ext_resource type="Script" uid="uid://bg4ihyh55uuw4" path="res://scripts/ui/collectable_indicator.gd" id="6_i77e3"]
 [ext_resource type="Script" uid="uid://dagpiu4kco0v0" path="res://scripts/ui/collectable_flag.gd" id="6_vyqrf"]
+[ext_resource type="Texture2D" uid="uid://dccbs5wennk6j" path="res://texture/Parts.png" id="7_1qh50"]
 [ext_resource type="Texture2D" uid="uid://otyg2r25fvp" path="res://texture/Beacon.png" id="7_gcrh0"]
 [ext_resource type="PackedScene" uid="uid://b8oufpc2w553e" path="res://scenes/ui/computer.tscn" id="11_otdxd"]
 
@@ -27,21 +28,21 @@ layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
+offset_left = 18.0
 offset_top = -265.0
-offset_right = 221.0
+offset_right = 239.0
 grow_vertical = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ServerSideUI/Stackables"]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_right = 176.0
+offset_right = 170.0
 offset_bottom = 9.0
 grow_vertical = 2
 
 [node name="Screws" type="HBoxContainer" parent="ServerSideUI/Stackables/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
 size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="ServerSideUI/Stackables/VBoxContainer/Screws"]
@@ -49,7 +50,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("4_bw14y")
-expand_mode = 2
+expand_mode = 1
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="ServerSideUI/Stackables/VBoxContainer/Screws"]
@@ -64,9 +65,33 @@ position = Vector2(537, -120)
 texture = ExtResource("4_bw14y")
 script = ExtResource("6_i77e3")
 
+[node name="Parts" type="HBoxContainer" parent="ServerSideUI/Stackables/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="ServerSideUI/Stackables/VBoxContainer/Parts"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("7_1qh50")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ServerSideUI/Stackables/VBoxContainer/Parts"]
+layout_mode = 2
+text = "x %d
+"
+script = ExtResource("5_ghy8g")
+item_type = 5
+
+[node name="Indicator" type="Sprite2D" parent="ServerSideUI/Stackables/VBoxContainer/Parts/Label"]
+visible = false
+position = Vector2(537, -120)
+texture = ExtResource("5_vyqrf")
+script = ExtResource("6_i77e3")
+
 [node name="Souls" type="HBoxContainer" parent="ServerSideUI/Stackables/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
 size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="ServerSideUI/Stackables/VBoxContainer/Souls"]
@@ -74,7 +99,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("5_vyqrf")
-expand_mode = 2
+expand_mode = 1
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="ServerSideUI/Stackables/VBoxContainer/Souls"]
@@ -87,7 +112,7 @@ item_type = 1
 [node name="Indicator" type="Sprite2D" parent="ServerSideUI/Stackables/VBoxContainer/Souls/Label"]
 visible = false
 position = Vector2(537, -120)
-texture = ExtResource("5_vyqrf")
+texture = ExtResource("7_1qh50")
 script = ExtResource("6_i77e3")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="ServerSideUI/Stackables/VBoxContainer"]
@@ -142,6 +167,6 @@ text = "Error text"
 
 [connection signal="multiplayer_error" from="." to="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text/Error" method="set_text"]
 [connection signal="multiplayer_error" from="." to="Menu" method="show" unbinds=1]
-[connection signal="pressed" from="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/JoinFlag/Join" to="." method="_on_join_pressed"]
 
 [editable path="Menu"]
