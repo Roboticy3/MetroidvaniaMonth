@@ -18,6 +18,11 @@ extends Node
 #Since this script is used for environments, use to send a footstep sound to the player
 @export var footstep_sound:AudioStream
 
+#Only accept environment changes from these users of the active group.
+#Does nothing if left empty.
+@export var accept_from_paths:Array[NodePath] = []
+@onready var accept_from := accept_from_paths.map(get_node)
+
 signal active_changed(to:bool)
 signal activated()
 signal deactivated()
@@ -27,6 +32,10 @@ func _ready():
 
 func _on_player_entered():
 	print(self, " grabbing environment for player ?")
+	
+	if !accept_from.is_empty() and !(group.get_active() in accept_from):
+		return
+	
 	grab()
 
 func grab():
