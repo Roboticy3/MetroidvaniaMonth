@@ -1026,9 +1026,6 @@ transform = Transform3D(1, 5.5129e-08, -1.23538e-07, -6.82737e-08, 0.931975, -0.
 [node name="BackRangeInner" parent="Arena/Creature/CharacterBody3D/Creature/Armature/Skeleton3D" index="1"]
 transform = Transform3D(1, 5.5129e-08, -1.23538e-07, -6.82737e-08, 0.931975, -0.362522, 1.00631e-07, 0.362521, 0.931976, -1.45514e-09, 0.0411693, 0.0482842)
 
-[node name="Center" parent="Arena/Creature/CharacterBody3D/Creature/Armature/Skeleton3D" index="4"]
-transform = Transform3D(1, -2.8777e-13, 2.3842e-07, 7.98276e-08, -0.942282, -0.334822, 2.24658e-07, 0.334821, -0.942282, -7.33799e-18, 0.0521755, 0.0430473)
-
 [node name="Tail" parent="Arena/Creature/CharacterBody3D/Creature/Armature/Skeleton3D" index="5"]
 transform = Transform3D(1, 1.83409e-07, 7.03754e-08, -1.2733e-07, 0.51812, 0.855308, 1.25891e-07, -0.855308, 0.518119, 2.53344e-09, 0.0665878, 0.0297376)
 

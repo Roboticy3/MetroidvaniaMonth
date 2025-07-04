@@ -45,7 +45,7 @@ func _physics_process(_delta: float) -> void:
 		var collider := p.get_collider(i)
 		
 		#print(collider)
-		if collider and collider.is_in_group("Entity") and collider != shooter_owner:
+		if collider and collider.is_in_group("Entity"):
 			#Unless the target is a boss wound, whose access is managed by the 
 			#	boss to get around their colliders, cast a ray to the 
 			#	target and don't add it to the push list if there's something 
