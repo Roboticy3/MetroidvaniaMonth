@@ -7,6 +7,7 @@ var health:Range
 @onready var player_area:Area3D = get_node(player_area_path)
 
 func _ready():
+	
 	fuel = get_meter("Fuel")
 	health = get_meter("Health")
 	

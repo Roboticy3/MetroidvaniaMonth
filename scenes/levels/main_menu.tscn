@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d2cdnvbvetnrh"]
+[gd_scene load_steps=20 format=3 uid="uid://d2cdnvbvetnrh"]
 
 [ext_resource type="PackedScene" uid="uid://lflopx50nk2t" path="res://scenes/Arena.tscn" id="1_fsby3"]
 [ext_resource type="ArrayMesh" uid="uid://cl7uv1jdu4yvr" path="res://obj/Beacon.obj" id="2_leamy"]
@@ -7,8 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bbdth12bmwugo" path="res://CASTELAR.TTF" id="5_fkd6t"]
 [ext_resource type="FontFile" uid="uid://1d8fj8dela63" path="res://CascadiaMono.ttf" id="6_keln3"]
 [ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="6_sn5u3"]
-[ext_resource type="Script" uid="uid://x4pq0bvqnwnj" path="res://scripts/other_entities/scene_changer.gd" id="8_cn35j"]
-[ext_resource type="PackedScene" uid="uid://divm3hfp84v1n" path="res://scenes/levels/full.tscn" id="9_cn35j"]
+[ext_resource type="Script" uid="uid://dxme7x8vql8ag" path="res://scripts/other_entities/sub_scene_changer.gd" id="8_wko7x"]
 [ext_resource type="Script" uid="uid://btyyr1lhpbt6q" path="res://scripts/level/save_data_clearer.gd" id="10_wko7x"]
 [ext_resource type="PackedScene" uid="uid://ctqrlvhcyg7qq" path="res://scenes/collectables/beacon_collectable.tscn" id="11_pwqr4"]
 
@@ -125,8 +124,7 @@ shadow_enabled = true
 omni_range = 22.0
 
 [node name="SceneChanger" type="Node" parent="." index="9"]
-script = ExtResource("8_cn35j")
-target = ExtResource("9_cn35j")
+script = ExtResource("8_wko7x")
 
 [node name="SaveDataClearer" type="Node" parent="." index="10"]
 script = ExtResource("10_wko7x")
@@ -146,7 +144,7 @@ max_distance = 5.0
 [node name="CollisionShape3D" parent="BeaconCollectable/ScrewArea" index="3"]
 shape = SubResource("SphereShape3D_pwqr4")
 
-[connection signal="any_player_entered" from="Start" to="SceneChanger" method="_on_start_any_player_entered"]
+[connection signal="any_player_entered" from="Start" to="SceneChanger" method="change"]
 [connection signal="any_player_entered" from="Start2" to="SaveDataClearer" method="clear"]
 
 [editable path="Menu"]
