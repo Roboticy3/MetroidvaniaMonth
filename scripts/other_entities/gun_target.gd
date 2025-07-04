@@ -6,7 +6,9 @@ extends PhysicsBody3D
 signal trigger()
 signal relay(impulse:Vector3)
 
+@export var amplification := 1.0
+
 @rpc("any_peer", "call_local", "reliable")
 func apply_central_impulse_rpc(_impulse:Vector3):
 	trigger.emit()
-	relay.emit(_impulse)
+	relay.emit(_impulse * amplification)

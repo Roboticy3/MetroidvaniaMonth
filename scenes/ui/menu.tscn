@@ -134,6 +134,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 max_value = 9999.0
 value = 8060.0
+select_all_on_focus = true
 script = ExtResource("8_7jp70")
 
 [node name="Error" type="RichTextLabel" parent="Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text"]

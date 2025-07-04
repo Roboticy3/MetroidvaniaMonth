@@ -178,7 +178,10 @@ func _on_shoot(_p, _id):
 	pass
 
 @rpc("any_peer", "call_local", "reliable")
-func apply_central_impulse_rpc(impulse:Vector3):
+func apply_central_impulse_rpc(impulse:Vector3) -> void:
+	_on_gun_target_relay(impulse)
+
+func _on_gun_target_relay(impulse: Vector3) -> void:
 	velocity += impulse
 	#health will exist only on individual clients,
 	#	but, since the value is synced, that's the only place where we need to
@@ -186,4 +189,3 @@ func apply_central_impulse_rpc(impulse:Vector3):
 	if health and is_multiplayer_authority():
 		print("dealing damage")
 		health.drain(1)
-			

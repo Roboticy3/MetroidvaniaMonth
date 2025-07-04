@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://luwvohrk0cnq"]
+[gd_scene load_steps=35 format=3 uid="uid://luwvohrk0cnq"]
 
 [ext_resource type="Script" uid="uid://dssggiqvkb7bf" path="res://scripts/player_actions/player_character_body_3d.gd" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://dj1mvo2la10dt" path="res://scripts/player.gd" id="1_fjrip"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://hxsy2ykw45e8" path="res://aud/gunshot.wav" id="6_oprun"]
 [ext_resource type="Script" uid="uid://bgaoc6hjlc2ak" path="res://scripts/player_animations/follow_shapecast_3d.gd" id="7_y4r1p"]
 [ext_resource type="Script" uid="uid://bmkjfyajyj6ji" path="res://scripts/player_actions/multiplayer_auth_setter.gd" id="10_3v2ag"]
+[ext_resource type="PackedScene" uid="uid://cxmlwg7reb31v" path="res://scenes/entities/repeating_gun_target.tscn" id="11_b4o2o"]
 [ext_resource type="AudioStream" uid="uid://c16lexgnbq3uh" path="res://c78/Roland CR-78 Samples/CB/CR78 CB-01.wav" id="12_1yk18"]
 [ext_resource type="Script" uid="uid://tof4pgh44jmp" path="res://scripts/player_animations/player_footstep_stream.gd" id="12_f1ej7"]
 [ext_resource type="Resource" uid="uid://lswnlxq5pbha" path="res://scenes/levels/hub_environment_group.tres" id="14_1yk18"]
@@ -268,7 +269,7 @@ script = ExtResource("4_tuyoq")
 [node name="BulletEmitter" type="Node3D" parent="CharacterBody3D/Camera3D/Gun"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("4_qlg0r")
-shooter_owner_path = NodePath("../../..")
+ignore_paths = Array[NodePath]([NodePath("../../GunTarget")])
 
 [node name="Kickback" type="ShapeCast3D" parent="CharacterBody3D/Camera3D/Gun/BulletEmitter"]
 shape = SubResource("BoxShape3D_tuyoq")
@@ -286,6 +287,10 @@ material = SubResource("StandardMaterial3D_y4r1p")
 [node name="AudioListener3D" type="AudioListener3D" parent="CharacterBody3D/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
 script = ExtResource("10_3v2ag")
+
+[node name="GunTarget" parent="CharacterBody3D/Camera3D" instance=ExtResource("11_b4o2o")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+amplification = 2.0
 
 [node name="PistonAnims" type="AnimationPlayer" parent="CharacterBody3D"]
 root_node = NodePath("../..")
@@ -328,13 +333,13 @@ player_path = NodePath("..")
 mouse_filter = 2
 
 [node name="Health" parent="Hud/Container/HUD/Meters/Meters/HealthWrapper" index="0"]
-efficiency = 0.5
 debounce_drain = 1.0
 
 [connection signal="look" from="CharacterBody3D" to="CharacterBody3D/Camera3D" method="_on_look"]
 [connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/Camera3D/Gun/GunMesh/GPUParticles3D" method="_on_shoot"]
 [connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/PistonAnims" method="_on_shoot"]
 [connection signal="shoot" from="CharacterBody3D/Camera3D/Gun/BulletEmitter" to="CharacterBody3D/Camera3D/Gun/GunMesh/GunShot" method="play" unbinds=2]
+[connection signal="relay" from="CharacterBody3D/Camera3D/GunTarget" to="CharacterBody3D" method="_on_gun_target_relay"]
 [connection signal="value_changed" from="Hud/Container/HUD/Meters/Meters/HealthWrapper/Health" to="." method="check_health"]
 
 [editable path="Hud"]

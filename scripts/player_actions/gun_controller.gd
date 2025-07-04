@@ -32,8 +32,8 @@ func shoot_rpc():
 
 signal shoot(caster, id:int)
 
-@export_node_path var shooter_owner_path := NodePath("../..")
-@onready var shooter_owner = get_node(shooter_owner_path)
+@export var ignore_paths:Array[NodePath] = []
+@onready var ignore_nodes := ignore_paths.map(get_node)
 
 const PUSH_FORCE := 50.0
 var push_list:Array[Node3D] = []
@@ -45,7 +45,7 @@ func _physics_process(_delta: float) -> void:
 		var collider := p.get_collider(i)
 		
 		#print(collider)
-		if collider and collider.is_in_group("Entity"):
+		if collider and collider.is_in_group("Entity") and !(collider in ignore_nodes):
 			#Unless the target is a boss wound, whose access is managed by the 
 			#	boss to get around their colliders, cast a ray to the 
 			#	target and don't add it to the push list if there's something 

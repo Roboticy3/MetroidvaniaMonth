@@ -31,7 +31,6 @@ func _ready():
 		timer.one_shot = true
 		timer.timeout.connect(func ():
 			invincible = false
-			print("bruh")
 		)
 		add_child(timer)
 		invincible_timer = timer
