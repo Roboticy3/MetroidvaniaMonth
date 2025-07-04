@@ -508,13 +508,16 @@ bone_idx = 26
 
 [node name="BackRangeInner" parent="CharacterBody3D/Creature/Armature/Skeleton3D/BackRangeInner" index="0"]
 transform = Transform3D(1, -1.77636e-15, 8.88178e-16, 7.10543e-15, 1, 2.98023e-08, -8.88178e-16, 0, 1, 0, 0, 0)
+layers = 2
 
 [node name="Base2" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="2"]
+layers = 2
 surface_material_override/0 = SubResource("ShaderMaterial_6dq67")
 surface_material_override/1 = SubResource("ShaderMaterial_6dq67")
 surface_material_override/2 = SubResource("StandardMaterial3D_jdfpr")
 
 [node name="Base-Armor" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="3"]
+layers = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_h6uyy")
 
 [node name="Center" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="4"]
@@ -595,10 +598,12 @@ volume_db = -5.872
 bus = &"Normal"
 
 [node name="Limbs" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="8"]
+layers = 2
 surface_material_override/0 = SubResource("ShaderMaterial_6dq67")
 surface_material_override/1 = SubResource("StandardMaterial3D_atrna")
 
 [node name="Limbs-Armor" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="9"]
+layers = 2
 surface_material_override/0 = SubResource("StandardMaterial3D_6dq67")
 
 [node name="WoundTargets" type="BoneAttachment3D" parent="CharacterBody3D/Creature/Armature/Skeleton3D" index="10"]
