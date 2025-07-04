@@ -131,6 +131,9 @@ target = ExtResource("9_cn35j")
 [node name="SaveDataClearer" type="Node" parent="." index="10"]
 script = ExtResource("10_wko7x")
 
+[node name="MarginContainer2" parent="Menu/Container/Panel/HBoxContainer" index="1"]
+visible = false
+
 [node name="Control" parent="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text" index="3"]
 visible = false
 
