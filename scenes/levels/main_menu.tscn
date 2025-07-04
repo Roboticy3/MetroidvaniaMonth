@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d2cdnvbvetnrh"]
+[gd_scene load_steps=21 format=3 uid="uid://d2cdnvbvetnrh"]
 
 [ext_resource type="PackedScene" uid="uid://lflopx50nk2t" path="res://scenes/Arena.tscn" id="1_fsby3"]
 [ext_resource type="ArrayMesh" uid="uid://cl7uv1jdu4yvr" path="res://obj/Beacon.obj" id="2_leamy"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://x4pq0bvqnwnj" path="res://scripts/other_entities/scene_changer.gd" id="8_cn35j"]
 [ext_resource type="PackedScene" uid="uid://divm3hfp84v1n" path="res://scenes/levels/full.tscn" id="9_cn35j"]
 [ext_resource type="Script" uid="uid://btyyr1lhpbt6q" path="res://scripts/level/save_data_clearer.gd" id="10_wko7x"]
+[ext_resource type="PackedScene" uid="uid://ctqrlvhcyg7qq" path="res://scenes/collectables/beacon_collectable.tscn" id="11_pwqr4"]
 
 [sub_resource type="Curve" id="Curve_geflf"]
 _data = [Vector2(0, 0.74111), 0.0, 0.0, 0, 0]
@@ -42,6 +43,9 @@ shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_crctu")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_keln3"]
 radius = 4.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pwqr4"]
+radius = 2.0
 
 [node name="Arena" instance=ExtResource("1_fsby3")]
 
@@ -130,7 +134,17 @@ script = ExtResource("10_wko7x")
 [node name="Control" parent="Menu/Container/Panel/HBoxContainer/MarginContainer2/VBoxContainer2/Text" index="3"]
 visible = false
 
+[node name="BeaconCollectable" parent="." index="12" instance=ExtResource("11_pwqr4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.3, -12.4)
+
+[node name="Shimmer" parent="BeaconCollectable/ScrewArea/Screw" index="0"]
+max_distance = 5.0
+
+[node name="CollisionShape3D" parent="BeaconCollectable/ScrewArea" index="3"]
+shape = SubResource("SphereShape3D_pwqr4")
+
 [connection signal="any_player_entered" from="Start" to="SceneChanger" method="_on_start_any_player_entered"]
 [connection signal="any_player_entered" from="Start2" to="SaveDataClearer" method="clear"]
 
 [editable path="Menu"]
+[editable path="BeaconCollectable"]
