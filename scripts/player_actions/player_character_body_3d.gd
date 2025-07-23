@@ -20,6 +20,7 @@ func _ready():
 	if !is_multiplayer_authority():
 		set_process_unhandled_input(false)
 		set_physics_process(false)
+		set_process(false)
 		return
 	#Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
@@ -39,16 +40,30 @@ func get_meter(group:StringName) -> Range:
 	return null
 
 const LOOK_SENS := 0.005
+const LOOK_SENS_JOY := 3.0
 var look_rotation := Vector2.ZERO
 signal look(scaled_relative:Vector2)
 
 func _unhandled_input(event: InputEvent) -> void:
+	var look_vector := Vector2.ZERO
 	if event is InputEventMouseMotion:
-		look_rotation.x += -event.relative.y * LOOK_SENS
-		look_rotation.y += -event.relative.x * LOOK_SENS
-		rotation.y = look_rotation.y
-		look.emit(look_rotation)
+		look_vector = Vector2(
+			-event.relative.y,
+			-event.relative.x
+		) * LOOK_SENS
+		
+	look_rotation += look_vector
+	update_look()
 
+func update_look():
+	rotation.y = look_rotation.y
+	look.emit(look_rotation)
+	
+func _process(delta: float) -> void:
+	look_rotation += Input.get_vector(
+		"LookDown", "LookUp", "LookRight", "LookLeft"
+	) * LOOK_SENS_JOY * delta
+	update_look()
 
 const GROUND_SPEED := 20.0
 const GROUND_ACCEL := 100.0

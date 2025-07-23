@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://cypds0yvt6lng" path="res://scripts/ui/join_button.gd" id="6_6cdou"]
 [ext_resource type="Script" uid="uid://bkdd8pbtxyrju" path="res://scripts/ui/client_state_name.gd" id="7_1pxh0"]
 [ext_resource type="Script" uid="uid://cl3vv3ryxw0bn" path="res://scripts/ui/client_state_numeric.gd" id="8_7jp70"]
-[ext_resource type="Script" uid="uid://dxme7x8vql8ag" path="res://scripts/other_entities/sub_scene_changer.gd" id="9_e11en"]
+[ext_resource type="Script" uid="uid://x4pq0bvqnwnj" path="res://scripts/other_entities/scene_changer.gd" id="9_e11en"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_6qf5j"]
 playback_mode = 2
@@ -73,9 +73,9 @@ script = ExtResource("3_70i5f")
 [node name="VolumeTester" type="AudioStreamPlayer" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider"]
 stream = SubResource("AudioStreamRandomizer_6qf5j")
 
-[node name="Control" type="Control" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Controls" type="Label" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 3
+text = "Controls:"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Container/Panel/HBoxContainer"]
 layout_mode = 2

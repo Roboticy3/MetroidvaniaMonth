@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bbdth12bmwugo" path="res://CASTELAR.TTF" id="5_fkd6t"]
 [ext_resource type="FontFile" uid="uid://1d8fj8dela63" path="res://CascadiaMono.ttf" id="6_keln3"]
 [ext_resource type="Script" uid="uid://lh4hh44d02pg" path="res://scripts/other_entities/player_detector.gd" id="6_sn5u3"]
-[ext_resource type="Script" uid="uid://dxme7x8vql8ag" path="res://scripts/other_entities/sub_scene_changer.gd" id="8_wko7x"]
+[ext_resource type="Script" uid="uid://x4pq0bvqnwnj" path="res://scripts/other_entities/scene_changer.gd" id="8_wko7x"]
 [ext_resource type="Script" uid="uid://btyyr1lhpbt6q" path="res://scripts/level/save_data_clearer.gd" id="10_wko7x"]
 [ext_resource type="PackedScene" uid="uid://ctqrlvhcyg7qq" path="res://scenes/collectables/beacon_collectable.tscn" id="11_pwqr4"]
 
