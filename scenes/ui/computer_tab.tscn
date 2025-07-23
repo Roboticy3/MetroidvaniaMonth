@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://csce8xafyxnoh"]
+[gd_scene load_steps=3 format=3 uid="uid://csce8xafyxnoh"]
 
 [ext_resource type="Texture2D" uid="uid://otyg2r25fvp" path="res://texture/Beacon.png" id="1_0h4pv"]
+[ext_resource type="Script" uid="uid://cpttfrafjaxrh" path="res://scripts/ui/scroll_container_controls.gd" id="1_htnr7"]
 
 [node name="MarginContainer" type="MarginContainer"]
 anchors_preset = 15
@@ -16,6 +17,7 @@ color = Color(0.56, 0.56, 0.56, 1)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
 layout_mode = 2
+script = ExtResource("1_htnr7")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
 layout_mode = 2

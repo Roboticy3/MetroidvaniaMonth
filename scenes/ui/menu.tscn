@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cusvwc7xul344"]
+[gd_scene load_steps=12 format=3 uid="uid://cusvwc7xul344"]
 
 [ext_resource type="Script" uid="uid://e2r5jmdul2vr" path="res://scripts/ui/modal_layer.gd" id="1_13sgg"]
+[ext_resource type="Script" uid="uid://xt3crw47n50" path="res://scripts/ui/grab_focus.gd" id="2_288ov"]
 [ext_resource type="Script" uid="uid://djq1v2xtal8gi" path="res://scripts/ui/range_repeater.gd" id="2_i6lef"]
 [ext_resource type="Script" uid="uid://dx8lti6o8gjnq" path="res://scripts/ui/audio_bus_volume_setter.gd" id="3_70i5f"]
 [ext_resource type="AudioStream" uid="uid://di2750svyuocv" path="res://c78/Roland CR-78 Samples/BD/CR78 BD-01.wav" id="4_mj5lg"]
@@ -59,6 +60,7 @@ size_flags_horizontal = 3
 min_value = -72.0
 max_value = 6.0
 ticks_on_borders = true
+script = ExtResource("2_288ov")
 
 [node name="Label" type="Label" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider"]
 layout_mode = 2

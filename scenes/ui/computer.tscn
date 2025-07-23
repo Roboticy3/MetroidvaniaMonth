@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://b8oufpc2w553e"]
+[gd_scene load_steps=15 format=3 uid="uid://b8oufpc2w553e"]
 
 [ext_resource type="Script" uid="uid://beh7bq8cpykfp" path="res://scripts/ui/computer.gd" id="1_4kmhl"]
 [ext_resource type="Texture2D" uid="uid://vdeodbs3j8uv" path="res://texture/computer.png" id="1_c13y7"]
 [ext_resource type="Texture2D" uid="uid://digjl22li5bg4" path="res://texture/hurrah.png" id="2_ph3nu"]
 [ext_resource type="Texture2D" uid="uid://otyg2r25fvp" path="res://texture/Beacon.png" id="3_4kmhl"]
+[ext_resource type="Script" uid="uid://xt3crw47n50" path="res://scripts/ui/grab_focus.gd" id="5_u0gnr"]
 [ext_resource type="PackedScene" uid="uid://csce8xafyxnoh" path="res://scenes/ui/computer_tab.tscn" id="5_uiul0"]
+[ext_resource type="Script" uid="uid://mf6mb2hk543b" path="res://scripts/ui/grab_focus_tab.gd" id="6_70dfd"]
 [ext_resource type="Texture2D" uid="uid://dqrn1tjmyvl7i" path="res://texture/Screenshot 2025-06-13 153211.png" id="6_ruko6"]
 
 [sub_resource type="Animation" id="Animation_c13y7"]
@@ -198,6 +200,7 @@ grow_vertical = 2
 [node name="Button" type="Button" parent="NinePatchRect/MarginContainer/MarginContainer2/Box/LoginScreen/VBoxContainer"]
 layout_mode = 2
 text = "Log In"
+script = ExtResource("5_u0gnr")
 
 [node name="Label" type="Label" parent="NinePatchRect/MarginContainer/MarginContainer2/Box/LoginScreen/VBoxContainer"]
 layout_mode = 2
@@ -217,6 +220,7 @@ offset_right = 327.0
 grow_horizontal = 2
 grow_vertical = 2
 current_tab = 0
+script = ExtResource("6_70dfd")
 
 [node name="Beacon" type="Control" parent="NinePatchRect/MarginContainer/MarginContainer2/Box/TabContainer"]
 layout_mode = 2
