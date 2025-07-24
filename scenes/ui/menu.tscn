@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cusvwc7xul344"]
+[gd_scene load_steps=14 format=3 uid="uid://cusvwc7xul344"]
 
 [ext_resource type="Script" uid="uid://e2r5jmdul2vr" path="res://scripts/ui/modal_layer.gd" id="1_13sgg"]
 [ext_resource type="Script" uid="uid://xt3crw47n50" path="res://scripts/ui/grab_focus.gd" id="2_288ov"]
@@ -7,7 +7,9 @@
 [ext_resource type="AudioStream" uid="uid://di2750svyuocv" path="res://c78/Roland CR-78 Samples/BD/CR78 BD-01.wav" id="4_mj5lg"]
 [ext_resource type="Script" uid="uid://dagpiu4kco0v0" path="res://scripts/ui/collectable_flag.gd" id="5_ufwb2"]
 [ext_resource type="Script" uid="uid://cypds0yvt6lng" path="res://scripts/ui/join_button.gd" id="6_6cdou"]
+[ext_resource type="Script" uid="uid://t1d3e4v6o6hu" path="res://scripts/ui/input_setting_controller.gd" id="6_tub5d"]
 [ext_resource type="Script" uid="uid://bkdd8pbtxyrju" path="res://scripts/ui/client_state_name.gd" id="7_1pxh0"]
+[ext_resource type="PackedScene" uid="uid://cqc66u382w1q2" path="res://scenes/ui/control_setting.tscn" id="7_dnmb1"]
 [ext_resource type="Script" uid="uid://cl3vv3ryxw0bn" path="res://scripts/ui/client_state_numeric.gd" id="8_7jp70"]
 [ext_resource type="Script" uid="uid://x4pq0bvqnwnj" path="res://scripts/other_entities/scene_changer.gd" id="9_e11en"]
 
@@ -78,6 +80,40 @@ stream = SubResource("AudioStreamRandomizer_6qf5j")
 [node name="Controls" type="Label" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Controls:"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("6_tub5d")
+input_config_entry = ExtResource("7_dnmb1")
+
+[node name="Button" type="Button" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Button"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Button/HBoxContainer"]
+layout_mode = 2
+text = "adiusfhsiaduhdhf"
+
+[node name="Control" type="Control" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Button/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Button/HBoxContainer"]
+layout_mode = 2
+text = "oidjfdgoijfodgij"
 
 [node name="MarginContainer2" type="MarginContainer" parent="Container/Panel/HBoxContainer"]
 layout_mode = 2

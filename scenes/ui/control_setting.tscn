@@ -1,9 +1,38 @@
-[gd_scene format=3 uid="uid://cqc66u382w1q2"]
+[gd_scene load_steps=2 format=3 uid="uid://cqc66u382w1q2"]
 
-[node name="ControlSetting" type="Control"]
-layout_mode = 3
-anchors_preset = 15
+[ext_resource type="Script" uid="uid://bvpdkkxp3fd1n" path="res://scripts/ui/input_setting.gd" id="1_iivox"]
+
+[node name="ControlSetting" type="Button"]
+custom_minimum_size = Vector2(0, 32)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 8.0
+grow_horizontal = 2
+script = ExtResource("1_iivox")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 4.5
+offset_right = -20.0
+offset_bottom = -4.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Action Name"
+
+[node name="Control" type="Control" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Action Binding"
+
+[connection signal="set_action_label" from="." to="HBoxContainer/Label" method="set_text"]
+[connection signal="set_input_label" from="." to="HBoxContainer/Label2" method="set_text"]

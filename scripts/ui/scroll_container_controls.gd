@@ -5,4 +5,4 @@ func _process(delta: float) -> void:
 	scroll_horizontal += Input.get_axis("LookLeft","LookRight")
 	scroll_vertical += Input.get_axis("LookUp","LookDown")
 	
-	print("scrolling ", scroll_vertical)
+	#print("scrolling ", scroll_vertical)
