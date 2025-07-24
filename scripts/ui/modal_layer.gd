@@ -12,8 +12,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		toggle()
 
+signal hidden
+signal shown
 func toggle():
 	visible = !visible
+	if visible:
+		shown.emit()
+	else:
+		hidden.emit()
 
 func update_mouse_mode():
 	if visible:

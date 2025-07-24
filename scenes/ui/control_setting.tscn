@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cqc66u382w1q2"]
 
-[ext_resource type="Script" uid="uid://bvpdkkxp3fd1n" path="res://scripts/ui/input_setting.gd" id="1_iivox"]
+[ext_resource type="Script" uid="uid://bvpdkkxp3fd1n" path="res://scripts/input/input_ui.gd" id="1_iivox"]
 
 [node name="ControlSetting" type="Button"]
 custom_minimum_size = Vector2(0, 32)

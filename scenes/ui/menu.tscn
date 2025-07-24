@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://di2750svyuocv" path="res://c78/Roland CR-78 Samples/BD/CR78 BD-01.wav" id="4_mj5lg"]
 [ext_resource type="Script" uid="uid://dagpiu4kco0v0" path="res://scripts/ui/collectable_flag.gd" id="5_ufwb2"]
 [ext_resource type="Script" uid="uid://cypds0yvt6lng" path="res://scripts/ui/join_button.gd" id="6_6cdou"]
-[ext_resource type="Script" uid="uid://t1d3e4v6o6hu" path="res://scripts/ui/input_setting_controller.gd" id="6_tub5d"]
+[ext_resource type="Script" uid="uid://t1d3e4v6o6hu" path="res://scripts/input/input_ui_controller.gd" id="6_tub5d"]
 [ext_resource type="Script" uid="uid://bkdd8pbtxyrju" path="res://scripts/ui/client_state_name.gd" id="7_1pxh0"]
 [ext_resource type="PackedScene" uid="uid://cqc66u382w1q2" path="res://scenes/ui/control_setting.tscn" id="7_dnmb1"]
 [ext_resource type="Script" uid="uid://cl3vv3ryxw0bn" path="res://scripts/ui/client_state_numeric.gd" id="8_7jp70"]
@@ -90,7 +90,7 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("6_tub5d")
-input_config_entry = ExtResource("7_dnmb1")
+input_ui = ExtResource("7_dnmb1")
 
 [node name="Button" type="Button" parent="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
 layout_mode = 2
@@ -209,6 +209,7 @@ text = "Exit to Main Menu"
 script = ExtResource("9_e11en")
 target = 0
 
+[connection signal="hidden" from="." to="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" method="save"]
 [connection signal="value_changed" from="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider" to="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider/Label" method="_on_value_changed"]
 [connection signal="value_changed" from="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider" to="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider/VolumeChanger" method="_on_value_changed"]
 [connection signal="value_changed" from="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider" to="Container/Panel/HBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/HSlider/VolumeTester" method="play" unbinds=1]
