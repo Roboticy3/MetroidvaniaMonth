@@ -16,6 +16,8 @@ func _create_action_list():
 		
 		#Initialize the setting for this control
 		var button := input_config_entry.instantiate()
+		if !(button is InputSetting): return
+		
 		button.set("action", action)
 		
 		var events := InputMap.action_get_events(action)
@@ -31,7 +33,7 @@ func _create_action_list():
 #action being rebound
 var rebinding:StringName
 #button that was pressed to rebind the action
-var rebinding_button:Node
+var rebinding_button:InputSetting
 func start_rebind(action:StringName, button:Node):
 	if is_instance_valid(rebinding_button):
 		end_rebind(rebinding_button)
@@ -47,10 +49,27 @@ func end_rebind(button:Node):
 
 func _input(event:InputEvent) -> void:
 	if rebinding == &"" or !event.is_pressed(): return
-	
+
 	if rebinding_button.is_keyboard_event(event):
+		var key := rebinding_button.get_keyboard_event()
+		#print("found existing keybind ", key, " for ", rebinding)
+		if InputMap.action_has_event(rebinding, key):
+			#print("erasing ", key) 
+			InputMap.action_erase_event(rebinding, key)
+		#print("binding ", event, " to ", rebinding)
+		InputMap.action_add_event(rebinding, event)
 		rebinding_button.set_keyboard_event(event)
+		print("inputs synced? ", InputMap.action_get_events(rebinding), rebinding_button.inputs)
 		end_rebind(rebinding_button)
+	
 	elif rebinding_button.is_controller_event(event):
+		var joy := rebinding_button.get_controller_event()
+		#print("found existing keybind ", key, " for ", rebinding)
+		if InputMap.action_has_event(rebinding, joy):
+			#print("erasing ", key) 
+			InputMap.action_erase_event(rebinding, joy)
+		#print("binding ", event, " to ", rebinding)
+		InputMap.action_add_event(rebinding, event)
 		rebinding_button.set_controller_event(event)
+		print("inputs synced? ", InputMap.action_get_events(rebinding), rebinding_button.inputs)
 		end_rebind(rebinding_button)

@@ -1,4 +1,4 @@
-extends Button
+class_name InputSetting extends Button
 
 @export var action:StringName : 
 	set(new_action):
@@ -8,8 +8,13 @@ extends Button
 	set(new_inputs):
 		inputs = new_inputs
 		var key := get_keyboard_event()
+		var label := ""
 		if key:
-			set_input_label.emit(get_event_string(key))
+			label += get_event_string(key)
+		var joy := get_controller_event()
+		if joy:
+			label += ", " + get_event_string(joy)
+		set_input_label.emit(label)
 		#stop the user from auto-clicking the button after setting it
 		if get_tree():
 			disabled = true
@@ -30,6 +35,16 @@ func get_event_string(e:InputEvent) -> String:
 		return e.as_text().trim_suffix(" (Physical)")
 	if e is InputEventMouseButton:
 		return e.as_text()
+	if e is InputEventJoypadButton:
+		var full := e.as_text()
+		var start := full.find("(") + 1
+		var end := full.find(",", start)
+		return full.substr(start, end - start)
+	if e is InputEventJoypadMotion:
+		var full := e.as_text()
+		var start := full.find("(") + 1
+		var end := full.find(",", start)
+		return full.substr(start, end - start)
 	return ""
 
 #Check if input is suitable for binding via a keyboard
@@ -48,7 +63,8 @@ func set_keyboard_event(new_e:InputEvent) -> bool:
 	for i in inputs.size():
 		var e := inputs[i]
 		if is_keyboard_event(e):
-			inputs[i] = new_e
+			inputs.remove_at(i)
+			break
 	inputs.append(new_e)
 	inputs = inputs
 	return true
@@ -68,7 +84,8 @@ func set_controller_event(new_e:InputEvent):
 	for i in inputs.size():
 		var e := inputs[i]
 		if is_controller_event(e):
-			inputs[i] = new_e
+			inputs.remove_at(i)
+			break
 	inputs.append(new_e)
 	inputs = inputs
 	return true
