@@ -49,7 +49,7 @@ func end_rebind(button:InputSetting):
 	rebinding_button = null
 
 func _input(event:InputEvent) -> void:
-	if rebinding == &"" or !event.is_pressed(): return
+	if rebinding == &"" or !event.is_pressed() or event.is_action("ui_cancel"): return
 
 	if rebinding_button.is_keyboard_event(event):
 		var key := rebinding_button.get_keyboard_event()

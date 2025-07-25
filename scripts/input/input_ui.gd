@@ -12,6 +12,7 @@ class_name InputSetting extends Button
 		if key:
 			label += get_event_string(key)
 		var joy := get_controller_event()
+		print("setting label controller button ", joy)
 		if joy:
 			label += ", " + get_event_string(joy)
 		set_input_label.emit(label)
@@ -35,15 +36,13 @@ func get_event_string(e:InputEvent) -> String:
 		return e.as_text().trim_suffix(" (Physical)")
 	if e is InputEventMouseButton:
 		return e.as_text()
-	if e is InputEventJoypadButton:
+	if e is InputEventJoypadButton or e is InputEventJoypadMotion:
 		var full := e.as_text()
 		var start := full.find("(") + 1
 		var end := full.find(",", start)
-		return full.substr(start, end - start)
-	if e is InputEventJoypadMotion:
-		var full := e.as_text()
-		var start := full.find("(") + 1
-		var end := full.find(",", start)
+		var end2 := full.find(")", start)
+		if end2 != -1 and (end2 < end or end == -1):
+			end = end2
 		return full.substr(start, end - start)
 	return ""
 
@@ -79,7 +78,7 @@ func get_controller_event() -> InputEvent:
 	return null
 
 func set_controller_event(new_e:InputEvent):
-	if !is_keyboard_event(new_e):
+	if !is_controller_event(new_e):
 		return false
 	for i in inputs.size():
 		var e := inputs[i]
